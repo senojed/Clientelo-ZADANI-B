@@ -1,0 +1,11 @@
+# Co se nemá dostat do veřejného repozitáře: závislosti, build, tajné klíče, lokální nastavení Vercelu.
+node_modules/
+.next/
+out/
+.vercel/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
