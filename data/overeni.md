@@ -24,7 +24,7 @@ Záznam toho, co je ověřené ze zdroje, s datem. Sem se zapisuje průběžně,
 
 ## Dvojice 2: VOO ↔ Vanguard S&P 500 UCITS ETF (USD) Accumulating
 
-**Čeká na kontrolu Janem.**
+**Zkontroloval Jan 9. 10. 2026: OK.**
 
 | Údaj | Hodnota | Zdroj | Datum ověření |
 |---|---|---|---|
@@ -42,7 +42,7 @@ Záznam toho, co je ověřené ze zdroje, s datem. Sem se zapisuje průběžně,
 
 ## Dvojice 3: DIA ↔ iShares Dow Jones Industrial Average UCITS ETF (DE)
 
-**Čeká na kontrolu Janem.** Otevřená otázka výběru UCITS, viz poznámka pod tabulkou.
+**Zkontroloval Jan 9. 10. 2026: OK.** Jan schválil pravidlo výběru při více UCITS na stejný index (nižší náklady podle KID, při shodě větší fond), viz poznámka pod tabulkou.
 
 | Údaj | Hodnota | Zdroj | Datum ověření |
 |---|---|---|---|
@@ -58,9 +58,40 @@ Záznam toho, co je ověřené ze zdroje, s datem. Sem se zapisuje průběžně,
 | UCITS náklady | 0,51 % ročně (Verwaltungsgebühren und sonstige Verwaltungs- oder Betriebskosten) | tamtéž, KID vytvořen 1. 5. 2026 | 9. 10. 2026 |
 | UCITS KID pro EU retail | ano, PRIIPs KID (Basisinformationsblatt) z 1. 5. 2026, cílová skupina "Kleinanleger" | https://www.ishares.com/gls-download/literature/kiid/eu-priips-ishares-dow-jones-industrial-average-ucits-etf-de-de0006289390-de.pdf | 9. 10. 2026 |
 
-**Otevřená otázka (k rozhodnutí Jana):** na stejný index existuje i Amundi Dow Jones Industrial Average UCITS ETF Dist (FR0007056841), stránka Amundi uvádí ongoing charges 0,50 % (ověřeno jen z výsledku vyhledávání, ne z KID). Algoritmus v PLAN.md (stejný index, pak stejný správce, pak nejbližší index) nemá pravidlo pro více fondů na stejný index od jiných správců. Návrh pravidla: nižší průběžné náklady podle KID, při shodě větší fond. Pak by vyšel Amundi a bylo by potřeba ověřit jeho KID.
+**Rozhodnutí podle pravidla 2b (schválil Jan 9. 10.): UCITS alternativou k DIA je Amundi, ne iShares.** Oba fondy sledují stejný index, stejný správce jako DIA (State Street) v nabídce nebyl nalezen, Amundi má nižší průběžné náklady podle KID (0,50 % vs. 0,51 %). iShares výše zůstává jako doložená druhá možnost.
+
+| Údaj | Hodnota | Zdroj | Datum ověření |
+|---|---|---|---|
+| UCITS název | Amundi Dow Jones Industrial Average UCITS ETF Dist | EU PRIIPs KID `dukazy/2026-10-09-amundi-djia-eu-priips-kid-en.pdf` | 9. 10. 2026 |
+| UCITS ISIN | FR0007056841 (měna fondu EUR) | tamtéž | 9. 10. 2026 |
+| UCITS index | DOW JONES INDUSTRIAL AVERAGE Net Total Return Index (stejný index, krok 1; krok 2b) | tamtéž | 9. 10. 2026 |
+| UCITS replikace | nepřímá (syntetická) přes OTC swapy, na rozdíl od fyzické replikace u iShares | tamtéž | 9. 10. 2026 |
+| UCITS náklady | 0,50 % ročně (Management fees and other administrative or operating costs); transakční náklady žádné | tamtéž | 9. 10. 2026 |
+| UCITS KID pro EU retail | ano, PRIIPs KID vytvořen 5. 6. 2026, cílová skupina retail | https://www.amundietf.lu/pdfDocuments/kid-priips/FR0007056841/ENG/LUX/20260605 (odkaz z produktové stránky Amundi) | 9. 10. 2026 |
+
+Pozn.: "stejný správce není v nabídce" je zjištění jen z vyhledávání, ne z úplného seznamu fondů State Street; pokud by se SPDR UCITS na DJIA našel, pravidlo 2 by mělo přednost.
 
 Pozn. k nákladům: UCITS na DJIA stojí kolem 0,5 % ročně, DIA 0,16 %. Rozdíl je výrazně větší než u S&P 500 (0,03 % vs. 0,07 %), to je pro stránku zajímavý fakt.
+
+## Dvojice 4: VT ↔ Vanguard FTSE Global All-Cap UCITS ETF (USD) Accumulating
+
+**Čeká na kontrolu Janem.**
+
+| Údaj | Hodnota | Zdroj | Datum ověření |
+|---|---|---|---|
+| VT burza | NYSE Arca (nyse.com; správce: "listed for trading on NYSE Arca") | `dukazy/2026-10-09-nyse-kotovani.md`, `dukazy/2026-10-09-vt-vanguard-produktova-stranka.md` | 9. 10. 2026 |
+| VT název | Vanguard Total World Stock ETF | https://investor.vanguard.com/investment-products/etfs/profile/vt | 9. 10. 2026 |
+| VT index | FTSE Global All Cap Index | tamtéž | 9. 10. 2026 |
+| VT náklady | expense ratio 0,06 % (as of 02/27/2026) | tamtéž | 9. 10. 2026 |
+| VT CUSIP | 922042742 | tamtéž | 9. 10. 2026 |
+| VT KID pro EU retail | **KID pro EU retail nenalezen k 9. 10. 2026.** Na stránce správce jen prospekt a zprávy, žádný KID/KIID/PRIIPs. Rozsah: jen stránka správce. | `dukazy/2026-10-09-vt-vanguard-produktova-stranka.md` | 9. 10. 2026 |
+| UCITS název | Vanguard FTSE Global All-Cap UCITS ETF, (USD) Accumulating Shares | EU PRIIPs KID `dukazy/2026-10-09-vgla-eu-priips-kid-en.pdf` | 9. 10. 2026 |
+| UCITS ISIN | IE000VAHT5T0 | tamtéž | 9. 10. 2026 |
+| UCITS index | FTSE Global All Cap Index (stejný index, krok 1; stejný správce Vanguard, krok 2) | tamtéž | 9. 10. 2026 |
+| UCITS náklady | 0,07 % ročně (Management fees and other administrative or operating costs); transakční náklady navíc 0,02 % | tamtéž | 9. 10. 2026 |
+| UCITS KID pro EU retail | ano, PRIIPs KID ze dne 29. 9. 2026; "registered for sale in other EEA Member States" | https://fund-docs.vanguard.com/ie000vaht5t0_priipskid_en.pdf | 9. 10. 2026 |
+
+Pozn.: původní předpoklad v `kandidati.md` byl, že u "světa" půjde jen o nejbližší index. Ověření ukázalo, že UCITS na stejný index existuje.
 
 ## Ostatní kandidáti: stav
 
