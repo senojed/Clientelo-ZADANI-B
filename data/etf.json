@@ -1,0 +1,131 @@
+{
+  "_popis": "Ověřená data pro stránku a PDF přehled. Každý údaj má zdroj a datum ověření; podrobnosti a důkazy v data/overeni.md a data/dukazy/. Řazení abecedně podle US tickeru (neutrální, bez doporučení).",
+  "verze": "2026-10-09-v1",
+  "overeno": "2026-10-09",
+  "pary": [
+    {
+      "us": {
+        "ticker": "DIA",
+        "nazev": "State Street SPDR Dow Jones Industrial Average ETF Trust",
+        "isin": "US78467X1090",
+        "burza": "NYSE Arca",
+        "index": "Dow Jones Industrial Average",
+        "naklady_pct": 0.16,
+        "naklady_typ": "gross expense ratio",
+        "naklady_k_datu": null,
+        "replikace": "fyzická",
+        "kid_eu_retail": "nenalezen",
+        "kid_overeno": "2026-10-09",
+        "zdroj": "https://www.ssga.com/us/en/intermediary/etfs/state-street-spdr-dow-jones-industrial-average-etf-trust-dia"
+      },
+      "ucits": {
+        "nazev": "iShares Dow Jones Industrial Average UCITS ETF (DE)",
+        "isin": "DE0006289390",
+        "index": "Dow Jones Industrial Average (Net Total Return)",
+        "naklady_pct": 0.51,
+        "naklady_typ": "průběžné náklady podle KID",
+        "replikace": "fyzická",
+        "kid_datum": "2026-05-01",
+        "kid_url": "https://www.ishares.com/gls-download/literature/kiid/eu-priips-ishares-dow-jones-industrial-average-ucits-etf-de-de0006289390-de.pdf",
+        "vyber": "stejný index (1), stejná replikace jako DIA (2b)"
+      },
+      "ucits_dalsi": [
+        {
+          "nazev": "Amundi Dow Jones Industrial Average UCITS ETF Dist",
+          "isin": "FR0007056841",
+          "index": "Dow Jones Industrial Average (Net Total Return)",
+          "naklady_pct": 0.5,
+          "naklady_typ": "průběžné náklady podle KID",
+          "replikace": "syntetická (swapy)",
+          "kid_datum": "2026-06-05",
+          "kid_url": "https://www.amundietf.lu/pdfDocuments/kid-priips/FR0007056841/ENG/LUX/20260605"
+        }
+      ],
+      "zkontroloval_jan": true
+    },
+    {
+      "us": {
+        "ticker": "IVV",
+        "nazev": "iShares Core S&P 500 ETF",
+        "isin": null,
+        "cusip": "464287200",
+        "burza": "NYSE Arca",
+        "index": "S&P 500",
+        "naklady_pct": 0.03,
+        "naklady_typ": "expense ratio (podle prospektu)",
+        "naklady_k_datu": null,
+        "kid_eu_retail": "nenalezen",
+        "kid_overeno": "2026-10-09",
+        "zdroj": "https://www.ishares.com/us/products/239726/ishares-core-sp-500-etf"
+      },
+      "ucits": {
+        "nazev": "iShares Core S&P 500 UCITS ETF (USD Acc)",
+        "isin": "IE00B5BMR087",
+        "index": "S&P 500",
+        "naklady_pct": 0.07,
+        "naklady_typ": "průběžné náklady podle KID",
+        "replikace": "fyzická",
+        "kid_datum": "2026-09-03",
+        "kid_url": "https://www.ishares.com/gls-download/literature/kiid/eu-priips-ishares-core-sp-500-ucits-etf-usd-acc-ie00b5bmr087-de.pdf",
+        "vyber": "stejný index (1), stejný správce (2)"
+      },
+      "zkontroloval_jan": true
+    },
+    {
+      "us": {
+        "ticker": "VOO",
+        "nazev": "Vanguard S&P 500 ETF",
+        "isin": null,
+        "cusip": "922908363",
+        "burza": "NYSE Arca",
+        "index": "S&P 500",
+        "naklady_pct": 0.03,
+        "naklady_typ": "expense ratio",
+        "naklady_k_datu": "2026-04-28",
+        "kid_eu_retail": "nenalezen",
+        "kid_overeno": "2026-10-09",
+        "zdroj": "https://investor.vanguard.com/investment-products/etfs/profile/voo"
+      },
+      "ucits": {
+        "nazev": "Vanguard S&P 500 UCITS ETF (USD) Accumulating",
+        "isin": "IE00BFMXXD54",
+        "index": "S&P 500",
+        "naklady_pct": 0.07,
+        "naklady_typ": "průběžné náklady podle KID",
+        "replikace": "fyzická",
+        "kid_datum": "2026-09-29",
+        "kid_url": "https://fund-docs.vanguard.com/ie00bfmxxd54_priipskid_en.pdf",
+        "vyber": "stejný index (1), stejný správce (2)"
+      },
+      "zkontroloval_jan": true
+    },
+    {
+      "us": {
+        "ticker": "VT",
+        "nazev": "Vanguard Total World Stock ETF",
+        "isin": null,
+        "cusip": "922042742",
+        "burza": "NYSE Arca",
+        "index": "FTSE Global All Cap",
+        "naklady_pct": 0.06,
+        "naklady_typ": "expense ratio",
+        "naklady_k_datu": "2026-02-27",
+        "kid_eu_retail": "nenalezen",
+        "kid_overeno": "2026-10-09",
+        "zdroj": "https://investor.vanguard.com/investment-products/etfs/profile/vt"
+      },
+      "ucits": {
+        "nazev": "Vanguard FTSE Global All-Cap UCITS ETF (USD) Accumulating",
+        "isin": "IE000VAHT5T0",
+        "index": "FTSE Global All Cap",
+        "naklady_pct": 0.07,
+        "naklady_typ": "průběžné náklady podle KID",
+        "replikace": "fyzická (reprezentativní vzorek)",
+        "kid_datum": "2026-09-29",
+        "kid_url": "https://fund-docs.vanguard.com/ie000vaht5t0_priipskid_en.pdf",
+        "vyber": "stejný index (1), stejný správce (2)"
+      },
+      "zkontroloval_jan": false
+    }
+  ]
+}
