@@ -60,7 +60,7 @@ Záznam toho, co je ověřené ze zdroje, s datem. Sem se zapisuje průběžně,
 
 **Rozhodnutí podle opraveného pravidla 2b (9. 10.): UCITS alternativou k DIA na stránce je iShares (fyzická replikace jako DIA). V PDF přehledu se ukážou obě: iShares (fyzicky, 0,51 %) i Amundi (synteticky, 0,50 %).**
 
-Historie: první verze pravidla rozhodovala jen podle nákladů a vybrala Amundi kvůli rozdílu 0,01 procentního bodu. Jan při kontrole (s vlastní druhou kontrolou přes AI) upozornil, že podstatnější je rozdíl fyzická / syntetická replikace. Pravidlo opraveno v PLAN.md.
+Historie: první verze pravidla rozhodovala jen podle nákladů a vybrala Amundi kvůli rozdílu 0,01 procentního bodu. Druhá kontrola přes AI, kterou Jan spouští po své ruční kontrole, upozornila, že podstatnější je rozdíl fyzická / syntetická replikace. Pravidlo opraveno v PLAN.md.
 
 | Údaj | Hodnota | Zdroj | Datum ověření |
 |---|---|---|---|
