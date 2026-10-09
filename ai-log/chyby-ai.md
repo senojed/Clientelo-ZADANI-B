@@ -1,0 +1,10 @@
+# Kde se AI pomýlila (průběžný záznam pro README)
+
+Zapisuje se hned, jak se chyba objeví. Formát: co AI udělala, jak se na to přišlo, co se změnilo. "AI" je Claude Code, pokud není uvedeno jinak.
+
+1. **První doporučení zadání ignorovalo regulaci (9. 10.).** Claude doporučil zadání B bez upozornění, že většina amerických ETF nemá KID pro EU retail. Zachytil Codex při nezávislé druhé radě. Ověřeno vyhledáváním (justETF, Interactive Brokers) a celé pojetí stránky se postavilo na tomhle zjištění.
+2. **Neúplně provedený postup (9. 10.).** Při LLM council Claude oznámil 5 recenzentů, ale spustil jen 1. Sám to přiznal ve výstupu a na Janův pokyn spustil zbylé 4.
+3. **Chybná příčina chyby nástroje (1. a 9. 10.).** Chyba "model is not supported" u Codex CLI byla připsána účtu. Skutečná příčina: stará npm verze CLI. Zjištěno po Janově námitce ("v Codexu ho normálně používám") a aktualizaci CLI.
+4. **Předpoklady o fondech z paměti (9. 10.).** Claude v návrhu kandidátů předpokládal, že VTI sleduje index CRSP a že pro VT existuje jen "nejbližší" evropský index. Ověření ve zdrojích ukázalo index Morningstar u VTI a UCITS na stejný index u VT. Proto se do dat nedostane nic bez zdroje.
+5. **Špatně navržené pravidlo výběru (9. 10.).** Claude navrhl vybírat mezi více UCITS na stejný index podle nižších nákladů. U DIA to vybralo syntetický fond kvůli rozdílu 0,01 p. b. a přehlédlo podstatný rozdíl fyzická / syntetická replikace. Zachytil Jan při kontrole (s vlastní druhou kontrolou přes AI, "double check jako při lezení"). Pravidlo opraveno.
+6. **Nepřesný tip na hledání klíče (9. 10.).** Token ve Vercelu byl klíč AI Gateway, ne přístupový token účtu; Claude nejdřív nevěděl, proč ho CLI odmítá, a hodnotu nekontroloval. Příčina zjištěna až ze snímku obrazovky. (Spíš chyba v komunikaci než v AI, ponecháno pro úplnost.)

@@ -58,7 +58,14 @@ Záznam toho, co je ověřené ze zdroje, s datem. Sem se zapisuje průběžně,
 | UCITS náklady | 0,51 % ročně (Verwaltungsgebühren und sonstige Verwaltungs- oder Betriebskosten) | tamtéž, KID vytvořen 1. 5. 2026 | 9. 10. 2026 |
 | UCITS KID pro EU retail | ano, PRIIPs KID (Basisinformationsblatt) z 1. 5. 2026, cílová skupina "Kleinanleger" | https://www.ishares.com/gls-download/literature/kiid/eu-priips-ishares-dow-jones-industrial-average-ucits-etf-de-de0006289390-de.pdf | 9. 10. 2026 |
 
-**Rozhodnutí podle pravidla 2b (schválil Jan 9. 10.): UCITS alternativou k DIA je Amundi, ne iShares.** Oba fondy sledují stejný index, stejný správce jako DIA (State Street) v nabídce nebyl nalezen, Amundi má nižší průběžné náklady podle KID (0,50 % vs. 0,51 %). iShares výše zůstává jako doložená druhá možnost.
+**Rozhodnutí podle opraveného pravidla 2b (9. 10.): UCITS alternativou k DIA na stránce je iShares (fyzická replikace jako DIA). V PDF přehledu se ukážou obě: iShares (fyzicky, 0,51 %) i Amundi (synteticky, 0,50 %).**
+
+Historie: první verze pravidla rozhodovala jen podle nákladů a vybrala Amundi kvůli rozdílu 0,01 procentního bodu. Jan při kontrole (s vlastní druhou kontrolou přes AI) upozornil, že podstatnější je rozdíl fyzická / syntetická replikace. Pravidlo opraveno v PLAN.md.
+
+| Údaj | Hodnota | Zdroj | Datum ověření |
+|---|---|---|---|
+| DIA replikace | fyzická: factsheet uvádí, že pasivní fondy drží cenné papíry ("holding a range of securities that, in the aggregate, approximates the full Index"); jde o obecnou formulaci factsheetu, o swapech se nezmiňuje | `dukazy/2026-10-09-dia-factsheet.pdf` (factsheet k 30. 6. 2026) | 9. 10. 2026 |
+| iShares replikace | fyzická ("Produktstruktur: Physisch", "Methodik: Replikation"); KID: duplikační poměr nejméně 95 % | stránka iShares DE 251770, `dukazy/2026-10-09-exi3-eu-priips-kid-de.pdf` | 9. 10. 2026 |
 
 | Údaj | Hodnota | Zdroj | Datum ověření |
 |---|---|---|---|

@@ -1,0 +1,17 @@
+# Časový log (kolik co trvalo)
+
+Přibližné časy podle časových razítek v konverzaci, 9. 10. 2026. Slouží pro README a pro odhad nákladů.
+
+| Čas | Trvání | Činnost |
+|---|---|---|
+| 13:01 až 13:53 | ~50 min | Výběr zadání: rozbor A/B, druhý názor Codexu, ověření PRIIPs/KID, LLM council (5 poradců, 5 recenzentů) |
+| 13:53 až 14:24 | ~30 min | Compliance rešerše, drátěný model stránky, první verze plánu |
+| 14:24 až 14:54 | ~30 min | Úpravy plánu podle Jana a Codexu, založení repozitářů |
+| 15:02 až 16:08 | ~65 min | Revize plánu Claude + Codex (18 kol plan-consensus) |
+| 16:08 až 16:34 | ~25 min | Export konverzace, struktura repa, první commit |
+| 16:42 až 17:15 | ~35 min | Ověřování dat: kótování na NYSE, první dvě dvojice (ladění postupu) |
+| 17:07 až 17:41 | ~35 min | Technický základ: Next.js, Neon, API, testy, nasazení na Vercel (souběžně s Janovým nastavením účtů) |
+| 17:41 až 18:18 | ~35 min | Další dvojice ETF (DIA, VT), propojení GitHub a Vercel |
+| 18:18 až 18:35 | ~15 min | Oprava pravidla výběru UCITS po Janově kontrole |
+
+Celkem zhruba 5,5 hodiny od přečtení zadání. Velkou část času zabraly revize a kontroly (council, 18 kol plan-consensus, ruční kontrola dat).
