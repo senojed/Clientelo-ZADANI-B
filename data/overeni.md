@@ -42,7 +42,7 @@ Záznam toho, co je ověřené ze zdroje, s datem. Sem se zapisuje průběžně,
 
 ## Dvojice 3: DIA ↔ iShares Dow Jones Industrial Average UCITS ETF (DE)
 
-**Zkontroloval Jan 9. 10. 2026: OK.** Jan schválil pravidlo výběru při více UCITS na stejný index (nižší náklady podle KID, při shodě větší fond), viz poznámka pod tabulkou.
+**Zkontroloval Jan 9. 10. 2026: OK.** Platí opravené pravidlo výběru 2b (stejná replikace jako US ETF), viz rozhodnutí pod tabulkou.
 
 | Údaj | Hodnota | Zdroj | Datum ověření |
 |---|---|---|---|
@@ -103,5 +103,5 @@ Pozn.: původní předpoklad v `kandidati.md` byl, že u "světa" půjde jen o n
 ## Ostatní kandidáti: stav
 
 - Kótování na NYSE Arca ověřeno u VOO, IVV, VTI, DIA, SCHD, VYM, VT, VNQ. SPY neověřeno (stránka se nenačetla).
-- VOO: expense ratio 0,03 % viditelné na investor.vanguard.com (čteno ze snímku obrazovky, datum u poplatku nečitelné), **neuzavřeno**.
+- VOO: uzavřeno, viz dvojice 2 (zdroj Firecrawl, datum poplatku 28. 4. 2026).
 - VTI: název na NYSE zmiňuje index Morningstar, ověřit index v dokumentech správce.

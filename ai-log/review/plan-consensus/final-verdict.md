@@ -15,4 +15,4 @@
 - Skutečné odesílání e-mailu jako priorita (kolo 4).
 
 ## Otevřené mimo revizi
-- Marketingové políčko: Jan navrhl předem zaškrtnuté; plán ho drží nezaškrtnuté (předem zaškrtnuté políčko není platný souhlas podle GDPR). Čeká na potvrzení.
+- Marketingové políčko: Jan navrhl předem zaškrtnuté; plán ho drží nezaškrtnuté (předem zaškrtnuté políčko není platný souhlas podle GDPR). **Vyřešeno 9. 10.: Jan souhlasil s nezaškrtnutým políčkem.**

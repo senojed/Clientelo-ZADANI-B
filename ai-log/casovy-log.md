@@ -12,6 +12,6 @@ Přibližné časy podle časových razítek v konverzaci, 9. 10. 2026. Slouží
 | 16:42 až 17:15 | ~35 min | Ověřování dat: kótování na NYSE, první dvě dvojice (ladění postupu) |
 | 17:07 až 17:41 | ~35 min | Technický základ: Next.js, Neon, API, testy, nasazení na Vercel (souběžně s Janovým nastavením účtů) |
 | 17:41 až 18:18 | ~35 min | Další dvojice ETF (DIA, VT), propojení GitHub a Vercel |
-| 18:18 až 18:35 | ~15 min | Oprava pravidla výběru UCITS po Janově kontrole |
+| 18:18 až 18:35 | ~15 min | Oprava pravidla výběru UCITS po druhé kontrole v nezávislém chatu Claude Code |
 
 Celkem zhruba 5,5 hodiny od přečtení zadání. Velkou část času zabraly revize a kontroly (council, 18 kol plan-consensus, ruční kontrola dat).

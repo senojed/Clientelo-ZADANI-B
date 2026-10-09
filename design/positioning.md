@@ -1,47 +1,69 @@
-# Positioning, tón a texty (koncept k Janově kontrole)
+# Positioning, tón a texty (koncept v2 po kontrolách)
 
 Pracovní podklad pro stránku a reklamy. Čísla jsou z `data/etf.json` (ověřeno 9. 10. 2026). Nic tu není investiční doporučení.
 
+Verze 2 (9. 10. večer) zapracovává nezávislý audit (subagent) a připomínky Codexu: "UCITS alternativa" místo "evropská verze", srovnání amerických ETF mezi sebou jako hlavní tabulka, jasnější nabídka za e-mail, přesnější pojmenování nákladů, sliby jen v rozsahu ověřených dat.
+
 ## Pro koho
 
-Český drobný investor, typicky 25 až 40 let, na mobilu. Slyšel na YouTube, Redditu nebo od kamaráda "kup VOO / S&P 500", u svého brokera ho ale nenajde nebo nemůže koupit a neví proč. Nechce číst regulaci, chce rychlou a ověřenou odpověď.
+Člověk, který slyšel (YouTube, podcast, kamarád) "kup VOO / S&P 500" a hledá to u svého brokera. Na mobilu, má pár sekund, nechce číst regulaci. Chce rychle vědět, co daný fond je, kolik stojí a co ověřit.
+
+Věk 25 až 40 let a zdroje (YouTube, Reddit) jsou **hypotéza**, ne doložená data; podstatná je popsaná situace.
 
 ## Positioning jednou větou
 
-Ověřený přehled, který převede známé americké ETF na jejich evropské (UCITS) verze: náklady, KID a ISIN na jednom místě, se zdrojem u každého čísla.
+Srovnání 4 známých amerických ETF z NYSE Arca a jejich UCITS alternativ na stejný index: zaměření, roční náklady a co si ověřit u brokera, se zdrojem a datem u každého údaje.
 
 ## Fakta, na kterých stránka stojí (všechna doložená)
 
-- U všech 4 sledovaných amerických ETF (DIA, IVV, VOO, VT) jsme k 9. 10. 2026 na stránkách správců nenašli KID pro EU retail.
-- Ke všem 4 existuje evropská (UCITS) verze **na stejný index** s platným KID.
-- Rozdíl ročních nákladů: S&P 500 0,03 % (US) vs. 0,07 % (UCITS); celý svět 0,06 % vs. 0,07 %; Dow Jones 0,16 % vs. 0,51 %.
-- Model: 100 000 Kč, roční rozdíl poplatku fondu: S&P 500 cca 40 Kč, Dow Jones cca 350 Kč (vzorec částka × rozdíl TER; bez kurzů, spreadů, daní a poplatků brokera).
+- Hlavní srovnání: 4 americká ETF mezi sebou. DIA (Dow Jones, 30 firem), IVV a VOO (S&P 500, 500 firem), VT (celý svět). Roční náklady fondu: DIA 0,16 %, IVV 0,03 %, VOO 0,03 %, VT 0,06 %.
+- U všech 4 jsme k 9. 10. 2026 na stránce správce nenašli KID pro EU retail. To neznamená, že je nekoupí žádný broker.
+- Ke všem 4 existuje UCITS alternativa na stejný index s KID: S&P 500 a celý svět se stejným indexem; u Dow Jones sleduje UCITS variantu indexu s reinvesticí dividend (DIA sleduje cenový index).
+- Roční náklady UCITS alternativ: S&P 500 0,07 %, celý svět 0,07 %, Dow Jones 0,51 % (fyzicky) nebo 0,50 % (synteticky).
+- Pojmenování nákladů: u amerických fondů "expense ratio" podle správce, u UCITS "průběžné náklady" podle KID. Na stránce jednotně "roční náklady fondu", v metodice vysvětleno.
+- Model: 100 000 Kč, roční rozdíl nákladů fondu: S&P 500 cca 40 Kč, Dow Jones cca 350 Kč (vzorec částka × rozdíl ročních nákladů; nejde o celkové náklady investora: bez kurzů, spreadů, daní a poplatků brokera).
+
+## Co zatím ověřené není (nesmí být na stránce, dokud se neověří)
+
+- Registrace UCITS alternativ k prodeji v ČR a dostupnost KID v češtině.
+- US ISIN u IVV, VOO a VT (máme jen CUSIP).
+- Tickery, burzy a měny UCITS alternativ na evropských burzách (pro PDF).
 
 ## Tón
 
-Tykání, krátké věty, věcně, bez slibů výnosů a bez "nejlepší". Vysvětlit lidsky, co je KID a UCITS, jednou větou. Důvěru staví data se zdrojem a datem, ne superlativy.
+Tykání, krátké věty, věcně, bez slibů výnosů a bez "nejlepší". Zkratky (KID, UCITS) vysvětlit jednou větou až pod první obrazovkou. Důvěru staví data se zdrojem a datem, ne superlativy.
 
-## Texty první obrazovky (varianty)
+## První obrazovka (varianty, navázané na reklamy)
 
-- **Nadpis A (věcný):** Americké ETF: náklady, KID a evropská alternativa
-- **Nadpis B (ostřejší, k A/B testu):** Americké ETF z YouTube: co v Česku ověřit dřív, než je začneš hledat
-- **Podnadpis:** Porovnali jsme 4 známé americké ETF s jejich evropskými verzemi na stejný index. Náklady, KID a ISIN se zdrojem u každého čísla.
-- **Hlavní tlačítko:** Zobrazit srovnání
-- **Vedlejší odkaz:** Co obsahuje celý přehled
-- **Drobný text pod tlačítkem:** Informační přehled, ne investiční doporučení. Údaje ověřeny 9. 10. 2026.
+- **Nadpis A (k reklamě A, `v=a`):** Znáš VOO nebo IVV? Porovnej náklady a najdi evropskou alternativu.
+- **Nadpis B (k reklamě B, `v=b`):** 4 americká ETF a jejich evropské alternativy na jednom místě
+- **Podnadpis:** Srovnali jsme 4 známá americká ETF a jejich UCITS alternativy na stejný index. Část srovnání hned, celý přehled s kontrolním seznamem zdarma v PDF.
+- **Hlavní tlačítko:** Zobrazit srovnání (otevře veřejný náhled)
+- **Vedlejší odkaz:** Co obsahuje PDF
+- **Drobný text:** Informační přehled, ne investiční doporučení. Údaje ověřeny 9. 10. 2026.
+
+## Veřejná část (před formulářem)
+
+Tabulka 4 amerických ETF mezi sebou (ticker, zaměření, roční náklady), řazeno abecedně. Počet firem jen tam, kde je doložený (DJIA 30, S&P 500 500 největších firem podle KID); u VT neověřeno. U každého řádku vedle: "UCITS alternativa: ano, na stejný index" a její roční náklady. Pod tím výpočet rozdílu ročních nákladů s předvyplněnou částkou.
 
 ## Lead magnet (PDF)
 
-**Název:** Americké ETF a jejich evropské verze: přehled 4 fondů
+**Název:** Americká ETF a jejich UCITS alternativy: přehled 4 fondů a co ověřit u brokera
 
-Obsah: tabulka 4 dvojic (index, náklady, KID, ISIN, burza, zdroj a datum), u Dow Jones obě evropské verze (fyzická a syntetická replikace) s vysvětlením rozdílu, kontrolní seznam "jak ověřit ETF u svého brokera" (KID, ISIN, burza), vysvětlení KID, PRIIPs a UCITS lidskou řečí.
+Obsah (co na stránce není):
+1. úplná tabulka s ISIN UCITS alternativ ke zkopírování do vyhledávání u brokera, zdrojem a datem u každého údaje,
+2. u Dow Jones obě alternativy (fyzická a synteticky přes swapy) s vysvětlením rozdílu,
+3. kontrolní seznam krok za krokem "jak si ETF ověřit u svého brokera" (ISIN, KID, burza, měna, typ klienta), bez názvů brokerů,
+4. KID, PRIIPs a UCITS vysvětlené lidsky,
+5. k ověření a doplnění: burzy, tickery a měny UCITS alternativ, registrace v ČR.
 
-## Text u formuláře
+## Formulář
 
-- **Nadpis:** Celý přehled v PDF
+- **Nadpis:** Celý přehled v PDF zdarma
 - **Pole:** tvuj@email.cz
-- **Tlačítko:** Zobrazit celý přehled
-- **Pod tlačítkem:** Odesláním potvrzuješ, že ses seznámil/a se zásadami zpracování. E-mail uložíme jako kontakt a hned ti zobrazíme celý přehled.
+- **Tlačítko:** Získat PDF zdarma
+- **Pod tlačítkem:** PDF otevřeme hned po odeslání.
+- **Drobně (informace o zpracování):** Odesláním potvrzuješ, že ses seznámil/a se zásadami zpracování. E-mail uložíme jako kontakt k tomuto přehledu.
 - **Nepovinné políčko (nezaškrtnuté):** Chci občas dostat novinky o ETF
 
 ## Upozornění v patičce (pracovně)
