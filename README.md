@@ -94,7 +94,7 @@ Lighthouse na mobilu (produkční URL, 10. 10. 2026): výkon 96, přístupnost 9
 - PDF z designového nástroje (teď tisk stránky do PDF z prohlížeče).
 - Skutečné odesílání e-mailů (přehled se ukáže hned, e-mail se jen uloží).
 - Rate limit na API (je kontrola původu, honeypot a idempotence).
-- Právní kontrola textů a zásad.
+- Právní kontrola textů a zásad; kontakt správce údajů v zásadách (u dema zástupný text, před kampaní nutný).
 - Ověření dostupnosti fondů u konkrétních brokerů.
 
 ## Technické řešení a spuštění

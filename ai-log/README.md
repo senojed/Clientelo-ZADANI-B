@@ -4,7 +4,7 @@
 |---|---|---|
 | `claude-code/hlavni-session.md` | Hlavní konverzace s Claude Code (plánování, ověřování dat, kód, nasazení) | Převod záznamu Claude Code (JSONL) skriptem `scripts/ai-log-export.py` |
 | `claude-code/subagenti/` | Pomocní agenti spuštění z hlavní konverzace: LLM council (5 poradců, 5 recenzentů) a nezávislý audit proti zadání | Totéž, každý agent zvlášť |
-| `codex/` | Konverzace v aplikaci Codex (druhý názor, review) | Doplní Jan exportem z Codexu |
+| (v hlavní konverzaci) | Dotazy na Codex v aplikaci Codex (druhý názor, review textů): Jan je kopíroval do konverzace s Claude Code, proto jsou v `hlavni-session.md` jako vložený text | Ruční kopírování, samostatný export z Codexu není |
 | `review/plan-consensus/` | 18 kol revize plánu Claude a Codex (Codex CLI přes `codex exec`) a závěrečný verdikt | Výstupy skriptu plan-consensus |
 | `chyby-ai.md` | Kde se AI mýlila a jak se to zjistilo | Psáno průběžně |
 | `casovy-log.md` | Kolik co trvalo | Psáno průběžně |

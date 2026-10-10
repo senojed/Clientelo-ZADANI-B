@@ -9,7 +9,7 @@ export default function Zasady() {
       <h1 className="text-2xl font-semibold">Zásady zpracování osobních údajů</h1>
       <p className="text-sm text-muted">Verze textu 2026-10-09-v1. Stránka je demo vytvořené pro výběrové řízení.</p>
       <h2 className="text-lg font-semibold">Kdo údaje zpracovává</h2>
-      <p>Jan Reich, autor této stránky. Kontakt: [doplní Jan].</p>
+      <p>Jan Reich, autor této stránky. Kontakt: doplní se před spuštěním kampaně (demo).</p>
       <h2 className="text-lg font-semibold">Jaké údaje a proč</h2>
       <ul className="list-disc pl-5">
         <li>
