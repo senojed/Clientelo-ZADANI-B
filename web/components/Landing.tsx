@@ -12,7 +12,8 @@ import Srovnani from "@/components/Srovnani";
 import Kalkulacka from "@/components/Kalkulacka";
 import LeadForm from "@/components/LeadForm";
 
-const OBRAZOVKA = "flex min-h-[100svh] flex-col justify-center py-6";
+// snap-start: začátek sekce se při scrollu přichytí k hornímu okraji (pravidlo scroll-snap-type je v globals.css).
+const OBRAZOVKA = "flex min-h-[100svh] snap-start flex-col justify-center py-6";
 
 // Zapíše událost "section_view" jednou za relaci, když je sekce aspoň ze třetiny vidět.
 function useSectionView(name: string) {

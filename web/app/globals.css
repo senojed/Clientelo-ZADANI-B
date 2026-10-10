@@ -34,6 +34,17 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+/* Přechod mezi obrazovkami: scroll se po puštění prstu "dobrzdí" a přichytí k nejbližší sekci.
+   "proximity" (ne "mandatory") přichytává jen blízko hranice, takže sekce vyšší než obrazovka
+   (rozbalený řádek, chyba ve formuláři) se dá normálně dočíst. Kdo má v systému omezený pohyb, snap ani plynulé
+   scrollování kotev nedostane. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+  }
+}
+
 @media print {
   .no-print {
     display: none !important;
