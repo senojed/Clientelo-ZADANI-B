@@ -6,22 +6,24 @@ import "./globals.css";
 
 // latin-ext kvůli české diakritice (č, ř, ž...).
 // Lora: nadpisy, Inter: běžný text a ovládání, IBM Plex Mono: čísla a tickery.
+// Lora a Inter jsou proměnná písma (jeden soubor pro všechna řezy), takže se stahuje míň dat.
 const lora = Lora({
   variable: "--font-lora",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
 });
 
+// Plex Mono (čísla) se nepředčítá (preload: false): předčítání všech tří písem zpomalovalo obrázek v úvodu (ten je LCP).
+// Zkoušeno: bez předčítání Lory a Interu byl první vykreslený text pozdě (FCP 2,6 s), proto se předčítají.
 const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500"],
+  preload: false,
 });
 
 export const metadata: Metadata = {

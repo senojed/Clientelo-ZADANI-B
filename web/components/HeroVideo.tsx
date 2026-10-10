@@ -30,10 +30,12 @@ export default function HeroVideo() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[324px] overflow-hidden">
       <Image
-        src="/hero-poster.jpg"
+        src="/hero-poster.webp"
         alt=""
         fill
         priority
+        fetchPriority="high"
+        unoptimized
         sizes="100vw"
         className="object-cover opacity-85"
       />
