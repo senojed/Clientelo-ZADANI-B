@@ -77,7 +77,7 @@ export default function Kalkulacka({ ticker, onTicker }: Props) {
       </dl>
       <p className="mt-2 text-xs text-muted">
         Modelový výpočet jen z ročních nákladů fondu na správu a provoz. Bez transakčních nákladů fondu, kurzů, spreadů,
-        daní a poplatků brokera. Fondy jsou v USD, výsledek v korunách ovlivní i kurz.
+        daní a poplatků brokera. Fondy jsou v USD, výsledek v korunách ovlivní i kurz. Před investicí si přečti KID.
       </p>
       <a
         href="#formular"

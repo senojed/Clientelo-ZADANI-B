@@ -78,7 +78,8 @@ export default function Landing() {
           </a>
         </div>
         <p className="mt-6 text-sm text-muted">
-          Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty. Údaje ověřeny{" "}
+          Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty, fondy jsou v USD (výsledek v
+          korunách ovlivní kurz). Před investicí si přečti KID. Údaje ověřeny{" "}
           {datum(etf.overeno)} a 10. 10. 2026.
         </p>
       </header>

@@ -44,3 +44,16 @@ Třídění: Claude (hlavní session), rozhodnutí o produktu Jan. Označení: C
 | Úvod: tabulka už na první obrazovce místo celoobrazovkového úvodu | Cl7 | **Rozhodne Jan při designu.** Teď jen text podnadpisu (proč alternativa). |
 | Lead magnet je slabý (ISIN dohledatelný) | Cl8 | **Rozhodnutí Jana:** veřejně zdroj u čísel (stránka správce u US, datum českého KID u UCITS), za e-mailem ISIN ke zkopírování, odkazy na české KID a kontrolní seznam. Tato data už nebudou v JavaScriptu stránky. |
 | Double opt-in u novinek | Cl13 | Odloženo: novinky se v demu neposílají; README "před prvním newsletterem potvrzovací e-mail". |
+
+## Kolo 2 (Codex, `round-2-codex.md`): VERDIKT CONTINUE
+
+Ověřeno jako opravené: #2 (v konfiguraci), #3, #5, #6 až #8, #10 až #22, #24, #25. Region ověřen i na produkci: odpověď funkce má hlavičku `X-Vercel-Id: fra1::fra1::...` (10. 10. 2026).
+
+| Nález kola 2 | Rozhodnutí | Oprava |
+|---|---|---|
+| 1 MAJOR: zásady bez mechanismu předání do USA; nezdůvodněná nezbytnost e-mailu pro přehled | Přijato | Mechanismus: standardní smluvní doložky (rozhodnutí 2021/914) v DPA Vercelu, Vercel certifikován v EU-US DPF (zdroj: vercel.com/legal/dpa, changelog Vercelu). Právní základ uložení e-mailu změněn na oprávněný zájem s právem námitky (přehled je za e-mail, záznam komu byl poskytnut); posouzení právníkem zůstává v seznamu. |
+| 2 MAJOR: `/api/events` bez limitu; kontrola limitu a zápis nejsou atomické | Přijato | Limit i pro události (300 za hodinu z IP); kontrola a zápis v jedné transakci se zámkem `pg_advisory_xact_lock`. Test: 8 souběžných odeslání, prošlo přesně 5. |
+| 3 MINOR: chybí "zkusit znovu" u přehledu; limit počítá i opakování stejného pokusu | Přijato | `app/prehled/error.tsx` s tlačítkem "Zkusit načíst znovu"; opakování existujícího klíče idempotence se do limitu nepočítá (test: po vyčerpání limitu vrátí 200). |
+| 4 MINOR: otisky IP se mažou jen při dalším odeslání | Přijato | Denní Vercel Cron `/api/uklid` (chráněno `CRON_SECRET`). |
+| 5 MINOR: uložený export ai-log má pořád zkrácené příkazy | Přijato | Export znovu vygenerován opraveným skriptem. |
+| 6 MINOR: měnové riziko a "přečti KID" chybí v úvodu a u kalkulačky | Přijato | Doplněno. |

@@ -2,7 +2,8 @@
 
 Automaticky převedeno ze záznamu Claude Code (scripts/ai-log-export.py).
 Redakce: e-maily, absolutní cesty, klíče a hesla nahrazeny [redacted ...]; obsah osobní wiki a paměti vynechán;
-výsledky nástrojů zkráceny na 400 znaků; interní úvahy modelu (thinking) nejsou součástí.
+výsledky nástrojů zkráceny na 400 znaků (odpovědi subagentů celé), obsah zapisovaných souborů na 600 znaků;
+příkazy a prompty jsou celé; interní úvahy modelu (thinking) a systémové zprávy aplikace nejsou součástí.
 
 ## Uživatel (2026-10-09 12:05 UTC)
 

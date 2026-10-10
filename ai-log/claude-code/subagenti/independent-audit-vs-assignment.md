@@ -2,7 +2,8 @@
 
 Automaticky převedeno ze záznamu Claude Code (scripts/ai-log-export.py).
 Redakce: e-maily, absolutní cesty, klíče a hesla nahrazeny [redacted ...]; obsah osobní wiki a paměti vynechán;
-výsledky nástrojů zkráceny na 400 znaků; interní úvahy modelu (thinking) nejsou součástí.
+výsledky nástrojů zkráceny na 400 znaků (odpovědi subagentů celé), obsah zapisovaných souborů na 600 znaků;
+příkazy a prompty jsou celé; interní úvahy modelu (thinking) a systémové zprávy aplikace nejsou součástí.
 
 ## Uživatel (2026-10-09 17:06 UTC)
 
@@ -269,7 +270,7 @@ Output format (Czech): sections "1. Pokrytí zadání" (table), "2. Odklony", "3
 
 **Nástroj Bash:**
 ```
-{"command": "cd \"data/dukazy\" && pdftotext -layout 2026-10-09-vuaa-eu-priips-kid-en.pdf - | grep -nE \"of the value of your investment\" ; echo ---DIA; grep -oE \"US78467X1090|78467X109|Gross Expense Ratio.{0,200}|Primary [Ee]xchange.{0,80}|PRIIP|KIID\" 2026-10-09-dia-ssga-produktova-stranka.html | sed 's/<[^>]*>//g' | head -12; echo ---IVV; grep -oE '\"fundHeader.keyDocuments.EUPRIIP\":\"[^\"]*\"' 2026-10-09-ivv-us-produktova-stranka.html | head -3; grep -oE \"Expense Ratio.{0,300}\" 2026-10-09-ivv-us-produktova-stranka.html | sed 's/<[^ … [zkráceno, 872 znaků]
+{"command": "cd \"data/dukazy\" && pdftotext -layout 2026-10-09-vuaa-eu-priips-kid-en.pdf - | grep -nE \"of the value of your investment\" ; echo ---DIA; grep -oE \"US78467X1090|78467X109|Gross Expense Ratio.{0,200}|Primary [Ee]xchange.{0,80}|PRIIP|KIID\" 2026-10-09-dia-ssga-produktova-stranka.html | sed 's/<[^>]*>//g' | head -12; echo ---IVV; grep -oE '\"fundHeader.keyDocuments.EUPRIIP\":\"[^\"]*\"' 2026-10-09-ivv-us-produktova-stranka.html | head -3; grep -oE \"Expense Ratio.{0,300}\" 2026-10-09-ivv-us-produktova-stranka.html | sed 's/<[^>]*>//g' | tr -s ' \\n' ' ' | head -c 800; echo; grep -oE \"Fees as stated in the prospectus.{0,100}|464287200|Exchange.{0,120}NYSE Arca\" 2026-10-09-ivv-us-produktova-stranka.html | sed 's/<[^>]*>//g' | head -6", "description": "Verify VUAA cost, DIA and IVV page facts"}
 ```
 
 > výsledek: 159:                                   0.07% of the value of your investment p.a. This is an estimate based on actual costs over the last year and takes account of any known future changes. USD 7

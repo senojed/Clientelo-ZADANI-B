@@ -18,10 +18,10 @@ export default function Zasady() {
       <h2 className="text-lg font-semibold">Jaké údaje, proč a na jakém základě</h2>
       <ul className="list-disc pl-5 flex flex-col gap-2">
         <li>
-          <span className="font-medium">E-mail z formuláře a zpřístupnění přehledu.</span> Po odeslání ti hned otevřeme
-          přehled. E-mail uložíme jako záznam, že sis přehled vyžádal/a, a abychom ti mohli odpovědět, když nás kontaktuješ.
-          Základ: tvoje žádost o přehled (čl. 6 odst. 1 písm. b GDPR) a náš oprávněný zájem evidovat, komu jsme přehled
-          poskytli (písm. f). Bez souhlasu ti na něj neposíláme žádné novinky.
+          <span className="font-medium">E-mail z formuláře.</span> Přehled je za e-mail: po odeslání ti ho hned otevřeme a
+          e-mail uložíme jako záznam, komu jsme přehled poskytli (abychom mohli vyhodnotit zájem o něj, odpovědět na tvé
+          dotazy a vyřídit tvá práva). Základ: náš oprávněný zájem (čl. 6 odst. 1 písm. f GDPR); můžeš vznést námitku a
+          e-mail smažeme. Bez souhlasu ti na něj neposíláme žádné novinky.
         </li>
         <li>
           <span className="font-medium">Novinky o ETF.</span> Jen když zaškrtneš nepovinné políčko. Základ: tvůj souhlas
@@ -36,13 +36,16 @@ export default function Zasady() {
         </li>
         <li>
           <span className="font-medium">Ochrana formuláře proti zneužití.</span> Z IP adresy ukládáme jen otisk (nelze z něj
-          IP zjistit) na nejvýš jeden den, abychom omezili hromadné odesílání. Základ: oprávněný zájem (písm. f).
+          IP zjistit), abychom omezili hromadné odesílání formuláře a měřicích událostí; otisky starší než den se mažou
+          jednou denně. Základ: oprávněný zájem (písm. f).
         </li>
       </ul>
 
       <h2 className="text-lg font-semibold">Kdo údaje technicky zpracovává</h2>
       <p>
         Hosting Vercel Inc. (USA); serverové funkce běží v regionu Frankfurt, poskytovatel ale může údaje zpracovat i v USA.
+        Předání do USA se řídí standardními smluvními doložkami EU (rozhodnutí Komise 2021/914) ve smlouvě o zpracování
+        údajů poskytovatele; Vercel je také certifikován v rámci EU-US Data Privacy Framework.
         Databáze Neon (region EU, Frankfurt). Technické logy hostingu mohou obsahovat IP adresu, prohlížeč, čas a adresu
         stránky; jejich rozsah a dobu uchování určuje poskytovatel.
       </p>
@@ -50,7 +53,7 @@ export default function Zasady() {
       <h2 className="text-lg font-semibold">Jak dlouho</h2>
       <p>
         Údaje z této ukázkové stránky budou po skončení výběrového řízení smazány. Souhlas s novinkami platí do odvolání,
-        nejdéle do stejného data. Otisk IP nejvýš jeden den.
+        nejdéle do stejného data. Otisky IP starší než den se mažou automaticky jednou denně.
       </p>
 
       <h2 className="text-lg font-semibold">Tvoje práva</h2>

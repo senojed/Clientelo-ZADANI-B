@@ -1,10 +1,12 @@
-// Jednoduché omezení četnosti odeslání formuláře podle IP adresy, uložené v databázi (funguje i na serverless).
+// Jednoduché omezení četnosti podle IP adresy, uložené v databázi (funguje i na serverless).
 // IP adresu neukládáme: jen její otisk (HMAC s tajným klíčem a dnešním datem), ze kterého se IP zpět zjistit nedá.
-// Záznamy starší než den se při každém volání mažou.
+// Kontrola a zápis běží v jedné transakci se zámkem na otisk, takže souběžné požadavky limit nepřeskočí.
+// Staré otisky maže denní úloha (app/api/uklid/route.ts).
 import { createHmac } from "node:crypto";
 import type { getSql } from "@/lib/db";
 
-const LIMIT = 5; // odeslání za hodinu z jedné IP
+// Kolik požadavků za hodinu z jedné IP: formulář málo, měřicí události víc (jedna návštěva jich pošle desítky).
+export const LIMITY = { lead: 5, events: 300 } as const;
 
 function otiskIp(request: Request): string {
   // Vercel posílá skutečnou IP návštěvníka v hlavičce x-forwarded-for (první adresa v seznamu).
@@ -13,13 +15,23 @@ function otiskIp(request: Request): string {
   return createHmac("sha256", process.env.DOWNLOAD_TOKEN_SECRET ?? "").update(`${den}|${ip}`).digest("base64url");
 }
 
-// Vrátí true, když už tahle IP za poslední hodinu odeslala LIMIT formulářů; jinak pokus zaznamená a vrátí false.
-export async function prekrocenLimit(sql: ReturnType<typeof getSql>, request: Request): Promise<boolean> {
-  const hash = otiskIp(request);
-  await sql`delete from rate_limits where created_at < now() - interval '1 day'`;
-  const rows = await sql`
-    select count(*)::int as n from rate_limits where ip_hash = ${hash} and created_at > now() - interval '1 hour'`;
-  if (rows[0].n >= LIMIT) return true;
-  await sql`insert into rate_limits (ip_hash) values (${hash})`;
-  return false;
+// Vrátí true, když už IP vyčerpala limit pro daný druh požadavku; jinak pokus zaznamená a vrátí false.
+export async function prekrocenLimit(
+  sql: ReturnType<typeof getSql>,
+  request: Request,
+  druh: keyof typeof LIMITY,
+): Promise<boolean> {
+  const klic = `${druh}:${otiskIp(request)}`;
+  const [, zapsano] = await sql.transaction([
+    // Zámek na tento otisk do konce transakce: druhý souběžný požadavek počká, až první zapíše.
+    sql`select pg_advisory_xact_lock(hashtext(${klic}))`,
+    // Zapíše pokus jen tehdy, když je za poslední hodinu pod limitem.
+    sql`
+      insert into rate_limits (ip_hash)
+      select ${klic}
+      where (select count(*) from rate_limits where ip_hash = ${klic} and created_at > now() - interval '1 hour')
+            < ${LIMITY[druh]}
+      returning 1`,
+  ]);
+  return zapsano.length === 0;
 }
