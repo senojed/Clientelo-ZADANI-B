@@ -75,7 +75,11 @@ Události: `page_view` (s UTM a variantou reklamy), `section_view` (srovnání, 
 
 Reklamu A a B rozliší `utm_content=ad_a` / `ad_b` (uloží se jako varianta). Trychtýř podle varianty včetně obou konverzí (lead, lead se souhlasem): [`web/db/funnel.sql`](web/db/funnel.sql).
 
-Meta bez pixelu nebo Conversions API konverze nevidí, takže kampaň by šla optimalizovat jen na zobrazení stránky. **[Otevřené: rozhoduje Jan]**
+**Meta a konverze (vědomě nedořešeno v demu):** Meta bez pixelu nebo Conversions API nevidí, kdo z reklamy odeslal formulář, takže kampaň jde optimalizovat jen na kliknutí nebo zobrazení stránky, ne na leady. Možnosti:
+- *Meta Pixel* (kód Mety v prohlížeči, cookies): vyžaduje cookie lištu se souhlasem předem, část návštěv nezměří (odmítnutí, blokátory, Safari).
+- *Conversions API* (server po uložení leadu pošle Metě konverzi): bez cookies a kódu Mety na stránce, ale předává Metě osobní údaje (hash e-mailu, `fbclid`), takže potřebuje právní základ, úpravu zásad a přístupový token.
+
+Pro ostrou kampaň doporučuji Conversions API ze serveru po právní kontrole. Demo už ukládá `fbclid` spolu s UTM (jen u nás, Metě se nic neposílá), takže leady půjde se kliky spárovat i zpětně. Do spuštění CAPI je rozumný cíl kampaně "zobrazení vstupní stránky".
 
 Omezení: relace žije jen v paměti stránky, po obnovení stránky vznikne nová (jedna návštěva se může rozpadnout na dvě, konverzi to mírně podhodnotí); skutečné stažení PDF změřit nejde (jen klik); události z prohlížeče lze podvrhnout (kontrola původu chrání jen proti cizím webům).
 

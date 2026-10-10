@@ -22,7 +22,8 @@ export function getAttribution() {
   if (atribuce) return atribuce;
   const params = new URLSearchParams(window.location.search);
   const utm: Record<string, string> = {};
-  for (const key of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]) {
+  // fbclid přidává Meta k odkazu z reklamy; ukládáme ho spolu s UTM (viz lib/validate.ts).
+  for (const key of ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"]) {
     const v = params.get(key);
     if (v) utm[key] = v;
   }

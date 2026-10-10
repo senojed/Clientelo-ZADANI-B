@@ -49,6 +49,7 @@ Princip převzatý z pokynů ESMA k marketingovým sdělením fondů [6] (formá
 - [ ] kontakt v zásadách (doplní Jan)
 - [x] region: databáze Neon Frankfurt, serverové funkce Vercel `fra1` (od 10. 10. po auditu 1, předtím běžely v USA `iad1`); Vercel Inc. je americká firma, uvedeno v zásadách
 - [x] zásady: účely, právní základy, doba uložení, práva včetně námitky a stížnosti u ÚOOÚ
+- [x] bez Meta Pixelu a cookies; `fbclid` se ukládá jen u nás (uvedeno v zásadách); Conversions API až po právní kontrole
 
 ## 3. Kontrola k 10. 10. 2026
 

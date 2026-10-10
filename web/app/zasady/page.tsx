@@ -9,7 +9,7 @@ export default function Zasady() {
     <main className="mx-auto w-full max-w-2xl px-4 py-10 flex flex-col gap-4">
       <h1 className="text-2xl font-semibold">Zásady zpracování osobních údajů</h1>
       <p className="text-sm text-muted">
-        Verze textu 2026-10-10-v2. Stránka je ukázka vytvořená pro výběrové řízení; právní posouzení textu nebylo provedeno.
+        Verze textu 2026-10-10-v3. Stránka je ukázka vytvořená pro výběrové řízení; právní posouzení textu nebylo provedeno.
       </p>
 
       <h2 className="text-lg font-semibold">Kdo údaje zpracovává</h2>
@@ -29,7 +29,9 @@ export default function Zasady() {
         </li>
         <li>
           <span className="font-medium">Měření návštěvy.</span> Pseudonymní události (zobrazení sekce, kliknutí, odeslání
-          formuláře) s náhodným identifikátorem, který žije jen do zavření nebo obnovení stránky. Po odeslání formuláře se
+          formuláře) s náhodným identifikátorem, který žije jen do zavření nebo obnovení stránky. Pokud přijdeš z reklamy,
+          uložíme i parametry odkazu (zdroj kampaně a identifikátor kliknutí fbclid, který k odkazu přidává Meta); Metě
+          ani nikomu dalšímu je neposíláme. Po odeslání formuláře se
           události z té návštěvy propojí s tvým kontaktem. Nepoužíváme cookies, nic neukládáme do tvého zařízení a
           nepoužíváme reklamní pixely ani analytické služby třetích stran. Základ: oprávněný zájem vyhodnotit, jak stránka
           funguje (písm. f); můžeš vznést námitku.

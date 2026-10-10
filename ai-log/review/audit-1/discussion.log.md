@@ -40,7 +40,7 @@ Třídění: Claude (hlavní session), rozhodnutí o produktu Jan. Označení: C
 |---|---|---|
 | Repo není veřejné | Cl3 | Plánováno na čtvrtek 15. 10. po kontrole `ai-log` (PLAN.md). Ne nyní. |
 | Rate limit | Cx6, Cl13 | **Přijato (Jan):** jednoduchý limit v databázi podle hashe IP. |
-| Meta Pixel / Conversions API, `fbclid` | Cl10 | **Otevřené (Jan řeší samostatně).** |
+| Meta Pixel / Conversions API, `fbclid` | Cl10 | **Rozhodnutí Jana (10. 10. po auditu):** pixel ani CAPI v demu nestavět; ukládat `fbclid` s UTM (jen u nás) a v README doporučit Conversions API po právní kontrole. |
 | Úvod: tabulka už na první obrazovce místo celoobrazovkového úvodu | Cl7 | **Rozhodne Jan při designu.** Teď jen text podnadpisu (proč alternativa). |
 | Lead magnet je slabý (ISIN dohledatelný) | Cl8 | **Rozhodnutí Jana:** veřejně zdroj u čísel (stránka správce u US, datum českého KID u UCITS), za e-mailem ISIN ke zkopírování, odkazy na české KID a kontrolní seznam. Tato data už nebudou v JavaScriptu stránky. |
 | Double opt-in u novinek | Cl13 | Odloženo: novinky se v demu neposílají; README "před prvním newsletterem potvrzovací e-mail". |

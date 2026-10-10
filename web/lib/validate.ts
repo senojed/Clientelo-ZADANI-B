@@ -1,7 +1,7 @@
 // Kontrola vstupů z prohlížeče. Koncové body jsou veřejné, takže každému poli
 // nastavíme tvar a maximální délku, aby do databáze nešel nesmysl nebo spam.
 
-export const CONSENT_TEXT_VERSION = "2026-10-10-v2";
+export const CONSENT_TEXT_VERSION = "2026-10-10-v3";
 
 // Události, které smí poslat prohlížeč. "lead_created" mezi nimi není: tu zapisuje jen server.
 export const CLIENT_EVENTS = [
@@ -18,7 +18,9 @@ export const CLIENT_EVENTS = [
   "pdf_download_clicked",
 ] as const;
 
-const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
+// fbclid = identifikátor kliknutí z reklamy Meta. Ukládá se, aby šlo leady později spárovat s kliky
+// (např. přes Conversions API po právní kontrole, viz README). Je delší, proto má vlastní limit délky.
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"] as const;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 // Jednoduchá kontrola tvaru e-mailu. Existenci adresy neověřujeme (měkká brána, viz PLAN.md).
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,7 +43,7 @@ export function cleanUtm(v: unknown): Record<string, string> {
   if (!v || typeof v !== "object") return out;
   for (const key of UTM_KEYS) {
     const val = (v as Record<string, unknown>)[key];
-    if (typeof val === "string" && val.length > 0) out[key] = val.slice(0, 100);
+    if (typeof val === "string" && val.length > 0) out[key] = val.slice(0, key === "fbclid" ? 500 : 100);
   }
   return out;
 }
