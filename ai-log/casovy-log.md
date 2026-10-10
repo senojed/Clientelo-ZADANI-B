@@ -26,3 +26,7 @@ Celkem zhruba 5,5 hodiny od přečtení zadání. Velkou část času zabraly re
 | 09:15 až 09:59 | ~45 min | Janova revize vzhledu a textů: celoobrazovkové sekce, tabulka s rozbalováním, nadpis, význam KID, zrušení varianty /b |
 | 09:59 až 10:05 | ~10 min | Přestavba stránky podle revize, zdroj k depozitáři (směrnice 2014/91/EU), úprava reklam |
 | 10:05 až 10:25 | ~20 min | Compliance checklist, pravidla Meta a Google (go/no-go), Lighthouse na mobilu |
+| 10:25 až 10:40 | ~15 min | Redigovaný export ai-log (skript, kontrola úniků), první verze README, dotaz na trychtýř |
+| 10:40 až 11:28 | ~50 min | Nezávislý audit 1: Codex + Claude subagent, 4 kola ping-pongu do shody; opravy (data za e-mailem, přehled na vlastní adrese, region, zásady, limit četnosti, výzvy ke kontaktu, reklamy) |
+| 11:28 až 11:51 | pauza | Vyčerpaný limit používání |
+| 11:51 až 11:55 | ~5 min | Záznam chyb AI a času, nový export ai-log |
