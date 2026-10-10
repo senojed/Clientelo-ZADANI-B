@@ -4,6 +4,12 @@
 
 let sessionId: string | null = null;
 let leadId: string | null = null;
+// Varianta stránky (a/b) podle adresy, na kterou vede reklama: "/" = a, "/b" = b.
+let pageVariant: string | null = null;
+
+export function setVariant(v: string) {
+  pageVariant = v;
+}
 
 export function getSessionId(): string {
   if (!sessionId) sessionId = crypto.randomUUID();
@@ -22,7 +28,7 @@ export function getAttribution() {
     const v = params.get(key);
     if (v) utm[key] = v;
   }
-  return { utm, variant: params.get("v") };
+  return { utm, variant: pageVariant ?? params.get("v") };
 }
 
 // sendBeacon odešle data i ve chvíli, kdy návštěvník odchází ze stránky (např. klik na stažení).

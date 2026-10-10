@@ -9,6 +9,7 @@ import {
   isSameOrigin,
   isUuid,
 } from "@/lib/validate";
+import { vydejToken } from "@/lib/token";
 
 export async function POST(request: Request) {
   if (!isSameOrigin(request)) return Response.json({ error: "forbidden" }, { status: 403 });
@@ -54,5 +55,6 @@ export async function POST(request: Request) {
     leadId = existing[0].public_id;
   }
 
-  return Response.json({ ok: true, lead_id: leadId });
+  // Token k přehledu: podepsaný, platí 24 hodin, bez e-mailu uvnitř (viz lib/token.ts).
+  return Response.json({ ok: true, lead_id: leadId, token: vydejToken() });
 }
