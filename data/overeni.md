@@ -116,7 +116,7 @@ Pozn.: původní předpoklad v `kandidati.md` byl, že u "světa" půjde jen o n
 
 ## Registrace v ČR (ověřeno 10. 10. 2026)
 
-Všechny 4 UCITS alternativy použité na stránce jsou v seznamu ČNB fondů, které lze nabízet v ČR, a mají český KID od správce: iShares Core S&P 500 (`2026-10-10-cspx-eu-priips-kid-cs.pdf`), Vanguard S&P 500 (`2026-10-10-vuaa-eu-priips-kid-cz.pdf`), Vanguard FTSE Global All-Cap (`2026-10-10-vgla-eu-priips-kid-cz.pdf`), iShares Dow Jones Industrial Average (IE) (`2026-10-10-cind-eu-priips-kid-cs.pdf`). Důkaz registru: `dukazy/2026-10-10-cnb-registr-ucits.md`. Obsah českých KID u S&P 500 a All-Cap zatím ověřen jen podle názvu souboru a zdroje (URL správce s ISIN), text neprocházen.
+Všechny 4 UCITS alternativy použité na stránce jsou v seznamu ČNB fondů, které lze nabízet v ČR, a mají český KID od správce: iShares Core S&P 500 (`2026-10-10-cspx-eu-priips-kid-cs.pdf`), Vanguard S&P 500 (`2026-10-10-vuaa-eu-priips-kid-cz.pdf`), Vanguard FTSE Global All-Cap (`2026-10-10-vgla-eu-priips-kid-cz.pdf`), iShares Dow Jones Industrial Average (IE) (`2026-10-10-cind-eu-priips-kid-cs.pdf`). Důkaz registru: `dukazy/2026-10-10-cnb-registr-ucits.md`. Obsah všech 4 českých KID ověřen 10. 10. (ISIN, index, náklady). **Data českých KID se u Vanguardu liší od anglických:** Vanguard S&P 500 český KID ze dne 24. 3. 2026, Vanguard FTSE Global All-Cap 20. 8. 2026 (anglické verze obě 29. 9. 2026); iShares Core S&P 500 i iShares Dow Jones (IE) český KID 3. 9. 2026. Náklady jsou ve všech jazykových verzích stejné (0,07 %; u All-Cap navíc transakční 0,02 %). Zachytila nezávislá kontrola v jiném chatu, potvrzeno čtením dokumentů. Pravidlo pro stránku: uvádět datum toho KID, na který stránka odkazuje (český).
 
 ## Ostatní kandidáti: stav
 
