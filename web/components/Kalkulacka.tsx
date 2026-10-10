@@ -106,18 +106,18 @@ export default function Kalkulacka({ ticker, onTicker }: Props) {
       </div>
 
       <p className="text-pretty text-xs leading-4 text-muted">
-        Modelový výpočet jen z ročních nákladů fondu na správu a provoz.
+        Modelový výpočet jen z&nbsp;ročních nákladů fondu na správu a&nbsp;provoz.
         <br />
         Bez transakčních nákladů fondu, kurzů, spreadů, daní a&nbsp;poplatků brokera.
         <br />
-        Fondy jsou v USD, výsledek v korunách ovlivní i kurz. Před investicí si přečti KID.
+        Fondy jsou v&nbsp;USD, výsledek v&nbsp;korunách ovlivní i&nbsp;kurz. Před investicí si přečti KID.
       </p>
       <a
         href="#formular"
         onClick={() => track("cta_click", { cta: "kalkulacka_prehled", ticker: par.us.ticker })}
         className="flex h-11 items-center justify-center rounded-[5px] bg-accent text-[13px] font-semibold text-accent-foreground"
       >
-        Získat ISIN a český KID zdarma
+        Získat ISIN a&nbsp;český KID zdarma
       </a>
     </div>
   );

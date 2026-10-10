@@ -81,12 +81,12 @@ export default function Landing() {
             amerických ETF
           </h1>
           <p className="relative mt-6 text-pretty text-sm leading-[21px] text-muted">
-            Americká ETF jako VOO většinou nemají KID, bez kterého je broker v EU drobnému investorovi obvykle nenabídne.
+            Americká ETF jako VOO většinou nemají KID, bez kterého je broker v&nbsp;EU drobnému investorovi obvykle nenabídne.
             <br />
-            Tady je alternativa na stejný index a náklady obou.
+            Tady je alternativa na stejný index a&nbsp;náklady obou.
           </p>
           <p className="relative mt-6 font-serif text-[18.8px] leading-[26px] min-[375px]:whitespace-nowrap max-[374px]:text-base">
-            Celý přehled s ISIN zdarma za <span className="whitespace-nowrap">e-mail</span>.
+            Celý přehled s&nbsp;ISIN zdarma za <span className="whitespace-nowrap">e-mail</span>.
           </p>
           <a
             href="#srovnani"
@@ -105,13 +105,12 @@ export default function Landing() {
           <div className="relative mt-2 text-muted">
             <div className="h-px bg-line" />
             <p className="mt-3 text-xs leading-[17px]">
-              Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty, fondy jsou v USD (výsledek v
-              korunách ovlivní kurz).
+              Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty, fondy jsou v&nbsp;USD (výsledek v&nbsp;korunách ovlivní kurz).
               <br />
               Před investicí si přečti KID.
             </p>
             <p className="mt-3 text-[11px] font-medium leading-[13px] text-subtle">
-              Údaje ověřeny {datum(etf.overeno)} a 10.&nbsp;10.&nbsp;2026.
+              Údaje ověřeny {datum(etf.overeno)} a&nbsp;10.&nbsp;10.&nbsp;2026.
             </p>
           </div>
         </div>
@@ -144,8 +143,8 @@ export default function Landing() {
               <li className="flex gap-2.5">
                 <Image src="/icon-kid.svg" alt="" width={18} height={18} className="shrink-0" />
                 <p>
-                  <strong className="font-semibold text-foreground">Má KID.</strong> Bez něj broker v EU fond drobnému
-                  investorovi obvykle nenabídne. U těchto 4 amerických ETF jsme KID k&nbsp;{datum(etf.overeno)} na stránce
+                  <strong className="font-semibold text-foreground">Má KID.</strong> Bez něj broker v&nbsp;EU fond drobnému
+                  investorovi obvykle nenabídne. U&nbsp;těchto 4 amerických ETF jsme KID k&nbsp;{datum(etf.overeno)} na stránce
                   správce nenašli.
                 </p>
               </li>
@@ -159,8 +158,8 @@ export default function Landing() {
               <li className="flex gap-2.5">
                 <Image src="/icon-shield.svg" alt="" width={18} height={18} className="shrink-0" />
                 <p>
-                  <strong className="font-semibold text-foreground">Smí se nabízet v ČR.</strong> Všechny 4 alternativy
-                  jsou v seznamu ČNB fondů nabízených v ČR (k&nbsp;10.&nbsp;10.&nbsp;2026).
+                  <strong className="font-semibold text-foreground">Smí se nabízet v&nbsp;ČR.</strong> Všechny 4 alternativy
+                  jsou v&nbsp;seznamu ČNB fondů nabízených v&nbsp;ČR (k&nbsp;10.&nbsp;10.&nbsp;2026).
                 </p>
               </li>
             </ul>
@@ -173,9 +172,9 @@ export default function Landing() {
       <footer className="border-t border-line bg-legal">
         <div className={`${SLOUPEC} px-6 py-6 text-[13px] leading-[17px] text-muted`}>
           <p>
-            Marketingové sdělení. Nejde o investiční doporučení ani nabídku. Investice do ETF nesou riziko ztráty, minulá
-            výkonnost není zárukou budoucích výnosů. Fondy jsou vedené v USD, výsledek v korunách ovlivní i kurz. Před
-            investicí si přečti KID a prospekt fondu. &quot;KID nenalezen&quot; znamená, že jsme ho k datu ověření nenašli
+            Marketingové sdělení. Nejde o&nbsp;investiční doporučení ani nabídku. Investice do ETF nesou riziko ztráty, minulá
+            výkonnost není zárukou budoucích výnosů. Fondy jsou vedené v&nbsp;USD, výsledek v&nbsp;korunách ovlivní i&nbsp;kurz. Před
+            investicí si přečti KID a&nbsp;prospekt fondu. &quot;KID nenalezen&quot; znamená, že jsme ho k&nbsp;datu ověření nenašli
             na stránce správce; neznamená, že fond nekoupí žádný broker.
           </p>
           <p className="mt-2">
@@ -183,8 +182,7 @@ export default function Landing() {
             ani od brokerů.
           </p>
           <p className="mt-2">
-            Zdroje: stránky správců fondů (odkaz u každého řádku tabulky), NYSE, seznam ČNB, české KID. Údaje ověřeny 9. a
-            10.&nbsp;10.&nbsp;2026.
+            Zdroje: stránky správců fondů (odkaz u&nbsp;každého řádku tabulky), NYSE, seznam ČNB, české KID. Údaje ověřeny 9. a&nbsp;10.&nbsp;10.&nbsp;2026.
           </p>
           <Link
             href="/zasady"

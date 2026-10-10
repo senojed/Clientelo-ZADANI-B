@@ -4,7 +4,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import type { EtfData } from "@/lib/etf-plna";
-import { datum, pct, zamereni } from "@/lib/etf";
+import { datum, pct, tvrdaMezera, zamereni } from "@/lib/etf";
 import { track } from "@/lib/track";
 
 // Vestavěný prohlížeč Facebooku a Instagramu tisk do PDF obvykle neumí.
@@ -63,7 +63,7 @@ export default function Prehled({ data }: { data: EtfData }) {
         </div>
         {vestaveny && (
           <p className="no-print mt-2 text-sm text-muted">
-            Jsi ve Facebooku nebo Instagramu: pro uložení PDF otevři stránku v prohlížeči (menu ⋯, Otevřít v prohlížeči).
+            Jsi ve Facebooku nebo Instagramu: pro uložení PDF otevři stránku v&nbsp;prohlížeči (menu ⋯, Otevřít v&nbsp;prohlížeči).
           </p>
         )}
       </div>
@@ -94,29 +94,29 @@ export default function Prehled({ data }: { data: EtfData }) {
             </p>
             <p className="mt-1 text-sm">
               Index: {p.ucits.index}
-              {"index_poznamka" in p.ucits && p.ucits.index_poznamka ? ` (${p.ucits.index_poznamka})` : ""} · replikace:{" "}
-              {p.ucits.replikace} · roční náklady {pct(p.ucits.naklady_pct)} (správa a provoz podle KID, bez transakčních
+              {"index_poznamka" in p.ucits && p.ucits.index_poznamka ? ` (${tvrdaMezera(p.ucits.index_poznamka)})` : ""} · replikace:{" "}
+              {p.ucits.replikace} · roční náklady {pct(p.ucits.naklady_pct)} (správa a&nbsp;provoz podle KID, bez transakčních
               nákladů)
             </p>
             <p className="mt-1 text-sm">
               <a href={p.ucits.kid_url} className="underline" target="_blank" rel="noopener noreferrer">
                 Český KID ze dne {datum(p.ucits.kid_datum)}
               </a>{" "}
-              · v seznamu ČNB fondů nabízených v ČR (ověřeno 10.&nbsp;10.&nbsp;2026)
+              · v&nbsp;seznamu ČNB fondů nabízených v&nbsp;ČR (ověřeno 10.&nbsp;10.&nbsp;2026)
             </p>
           </div>
         </section>
       ))}
 
       <section>
-        <h2 className="text-xl font-medium">Kontrolní seznam: jak si ETF ověřit u brokera</h2>
+        <h2 className="text-xl font-medium">Kontrolní seznam: jak si ETF ověřit u&nbsp;brokera</h2>
         <ol className="mt-3 list-decimal pl-5 flex flex-col gap-2">
-          <li>Vyhledej fond u svého brokera podle ISIN (ne jen podle zkratky, ta se na různých burzách liší).</li>
-          <li>Ověř, že broker k fondu nabízí KID a že ISIN v KID odpovídá.</li>
-          <li>Zkontroluj burzu a měnu, ve které fond u brokera koupíš (stejný fond bývá na více burzách a v různých měnách).</li>
-          <li>Podívej se na poplatky brokera a směnu měny, ty v ročních nákladech fondu nejsou.</li>
-          <li>Když broker fond nenabízí, ověř si, zda nejde o omezení pro tvůj typ klienta.</li>
-          <li>Před nákupem si přečti KID: ukazatel rizika, scénáře a doporučenou dobu držení.</li>
+          <li>Vyhledej fond u&nbsp;svého brokera podle ISIN (ne jen podle zkratky, ta se na různých burzách liší).</li>
+          <li>Ověř, že broker k&nbsp;fondu nabízí KID a&nbsp;že ISIN v&nbsp;KID odpovídá.</li>
+          <li>Zkontroluj burzu a&nbsp;měnu, ve které fond u&nbsp;brokera koupíš (stejný fond bývá na více burzách a&nbsp;v&nbsp;různých měnách).</li>
+          <li>Podívej se na poplatky brokera a&nbsp;směnu měny, ty v&nbsp;ročních nákladech fondu nejsou.</li>
+          <li>Když broker fond nenabízí, ověř si, zda nejde o&nbsp;omezení pro tvůj typ klienta.</li>
+          <li>Před nákupem si přečti KID: ukazatel rizika, scénáře a&nbsp;doporučenou dobu držení.</li>
         </ol>
       </section>
 
@@ -124,28 +124,28 @@ export default function Prehled({ data }: { data: EtfData }) {
         <h2 className="text-xl font-medium">Pojmy lidsky</h2>
         <ul className="mt-3 flex flex-col gap-2">
           <li>
-            <span className="font-medium">KID</span>: krátký povinný dokument o riziku, nákladech a scénářích. Bez něj se fond
-            drobným investorům v EU obvykle nenabízí.
+            <span className="font-medium">KID</span>: krátký povinný dokument o&nbsp;riziku, nákladech a&nbsp;scénářích. Bez něj se fond
+            drobným investorům v&nbsp;EU obvykle nenabízí.
           </li>
           <li>
             <span className="font-medium">PRIIPs</span>: evropské nařízení, které KID vyžaduje.
           </li>
           <li>
-            <span className="font-medium">UCITS</span>: evropská pravidla pro fondy. UCITS ETF mají KID a mohou být registrované
-            k nabízení v ČR.
+            <span className="font-medium">UCITS</span>: evropská pravidla pro fondy. UCITS ETF mají KID a&nbsp;mohou být registrované
+            k&nbsp;nabízení v&nbsp;ČR.
           </li>
           <li>
-            <span className="font-medium">Fyzická a syntetická replikace</span>: fyzický fond drží akcie z indexu, syntetický
-            sleduje index přes smlouvy (swapy). Všechny 4 alternativy v přehledu jsou fyzické.
+            <span className="font-medium">Fyzická a&nbsp;syntetická replikace</span>: fyzický fond drží akcie z&nbsp;indexu, syntetický
+            sleduje index přes smlouvy (swapy). Všechny 4 alternativy v&nbsp;přehledu jsou fyzické.
           </li>
           <li>
-            <span className="font-medium">Měnové riziko</span>: fondy jsou vedené v USD, výsledek v korunách ovlivní i kurz.
+            <span className="font-medium">Měnové riziko</span>: fondy jsou vedené v&nbsp;USD, výsledek v&nbsp;korunách ovlivní i&nbsp;kurz.
           </li>
         </ul>
       </section>
 
       <p className="text-sm text-muted">
-        Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty. Údaje ověřeny 9. a 10.&nbsp;10.&nbsp;2026,
+        Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty. Údaje ověřeny 9. a&nbsp;10.&nbsp;10.&nbsp;2026,
         náklady US ETF podle správců, náklady UCITS podle českých KID.
       </p>
     </article>

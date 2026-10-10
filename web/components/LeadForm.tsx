@@ -61,10 +61,10 @@ export default function LeadForm() {
         za <span className="whitespace-nowrap">e-mail</span>
       </h2>
       <ul className="mt-3 list-disc pl-4 text-[13px] leading-[17px] text-muted marker:text-subtle">
-        <li>ISIN UCITS alternativ ke zkopírování do vyhledávání u brokera</li>
-        <li>odkazy na české KID a data dokumentů</li>
-        <li>kontrolní seznam: jak si ETF ověřit u svého brokera</li>
-        <li>KID, PRIIPs a UCITS vysvětlené lidsky</li>
+        <li>ISIN UCITS alternativ ke zkopírování do vyhledávání u&nbsp;brokera</li>
+        <li>odkazy na české KID a&nbsp;data dokumentů</li>
+        <li>kontrolní seznam: jak si ETF ověřit u&nbsp;svého brokera</li>
+        <li>KID, PRIIPs a&nbsp;UCITS vysvětlené lidsky</li>
       </ul>
       <label className="mt-4 flex flex-col gap-1">
         <span className="whitespace-nowrap text-xs font-medium">E-mail</span>
@@ -95,7 +95,7 @@ export default function LeadForm() {
           checked={consent}
           onChange={(e) => setConsent(e.target.checked)}
         />
-        Chci občas dostat novinky o ETF (nepovinné)
+        Chci občas dostat novinky o&nbsp;ETF (nepovinné)
       </label>
       <button
         type="submit"
@@ -110,7 +110,7 @@ export default function LeadForm() {
         <Link href="/zasady" target="_blank" className="text-accent underline">
           zásadami zpracování
         </Link>
-        . <span className="whitespace-nowrap">E-mail</span> uložíme jako kontakt k tomuto přehledu.
+        . <span className="whitespace-nowrap">E-mail</span> uložíme jako kontakt k&nbsp;tomuto přehledu.
       </p>
       {status === "error" && (
         <p role="alert" className="mt-3 text-sm text-danger">

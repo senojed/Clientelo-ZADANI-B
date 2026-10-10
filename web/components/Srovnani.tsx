@@ -4,7 +4,7 @@
 // (každý interaktivní prvek vede ke kontaktu).
 "use client";
 
-import { etf, pct, datum, zamereni } from "@/lib/etf";
+import { etf, pct, datum, zamereni, tvrdaMezera } from "@/lib/etf";
 import { track } from "@/lib/track";
 
 type Props = {
@@ -26,8 +26,8 @@ export default function Srovnani({ otevreny, onVyber }: Props) {
           Srovnání 4 amerických ETF
         </h2>
         <p className="mt-2 text-[13px] leading-[18px] text-muted">
-          Evropská alternativa je dražší. Za to má český KID a je v seznamu ČNB fondů nabízených v ČR. Klikni na řádek pro
-          podrobnosti a zdroj.
+          Evropská alternativa je dražší. Za to má český KID a&nbsp;je v&nbsp;seznamu ČNB fondů nabízených v&nbsp;ČR. Klikni na řádek pro
+          podrobnosti a&nbsp;zdroj.
         </p>
       </div>
       <div className="text-sm">
@@ -88,13 +88,13 @@ export default function Srovnani({ otevreny, onVyber }: Props) {
                       <dt className="text-[11px] font-semibold text-subtle">Alternativa</dt>
                       <dd className="text-muted">
                         {p.ucits.nazev}
-                        {p.ucits.index_poznamka ? `; ${p.ucits.index_poznamka}` : ""}
+                        {p.ucits.index_poznamka ? `; ${tvrdaMezera(p.ucits.index_poznamka)}` : ""}
                       </dd>
                     </div>
                     <div>
                       <dt className="text-[11px] font-semibold text-subtle">Zdroj</dt>
                       <dd className="text-muted">
-                        český KID ze dne {datum(p.ucits.kid_datum)} (odkaz je v přehledu), seznam ČNB k&nbsp;10.&nbsp;10.&nbsp;2026;
+                        český KID ze dne {datum(p.ucits.kid_datum)} (odkaz je v&nbsp;přehledu), seznam ČNB k&nbsp;10.&nbsp;10.&nbsp;2026;
                         replikace {p.ucits.replikace}
                       </dd>
                     </div>
@@ -104,7 +104,7 @@ export default function Srovnani({ otevreny, onVyber }: Props) {
                     onClick={() => track("cta_click", { cta: "radek_prehled", ticker: p.us.ticker })}
                     className="mt-3 flex h-11 items-center justify-center rounded-[5px] bg-accent text-[13px] font-semibold text-accent-foreground"
                   >
-                    Získat ISIN a český KID zdarma
+                    Získat ISIN a&nbsp;český KID zdarma
                   </a>
                 </div>
               )}
@@ -113,7 +113,7 @@ export default function Srovnani({ otevreny, onVyber }: Props) {
         })}
       </div>
       <p className="text-xs leading-4 text-muted">
-        Roční náklady na správu a provoz fondu: USA podle správce, EU podle českého KID (bez transakčních nákladů fondu).
+        Roční náklady na správu a&nbsp;provoz fondu: USA podle správce, EU podle českého KID (bez transakčních nákladů fondu).
         Seřazeno abecedně podle tickeru.
       </p>
     </div>

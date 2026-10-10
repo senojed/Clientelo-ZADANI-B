@@ -6,12 +6,18 @@ export type EtfVerejne = typeof data;
 
 export const etf: EtfVerejne = data;
 
+// Česká typografie: za jednopísmennou předložkou nebo spojkou (a, i, k, o, s, u, v, z) nesmí řádek skončit.
+// Doplní nedělitelnou mezeru; používá se u textů z dat, které se do kódu nepíšou ručně.
+export function tvrdaMezera(text: string): string {
+  return text.replace(/(^|[\s(;])([aiksuvzoAIKSUVZO])\s+(?=\S)/g, "$1$2 ");
+}
+
 // Krátký popis zaměření pro člověka, který zkratky indexů nezná.
 export const zamereni: Record<string, string> = {
   DIA: "30 velkých amerických firem (index Dow Jones)",
   IVV: "500 velkých amerických firem (index S&P 500)",
   VOO: "500 velkých amerických firem (index S&P 500)",
-  VT: "akcie z celého světa (index FTSE Global All Cap)",
+  VT: "akcie z celého světa (index FTSE Global All Cap)",
 };
 
 // 0.07 -> "0,07 %" (česká desetinná čárka).
