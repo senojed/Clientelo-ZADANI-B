@@ -9,5 +9,5 @@ Stav: koncept k Janově kontrole. Stav spustitelnosti (spustitelné / koncept / 
 - **Tlačítko (CTA):** Další informace
 - **Vizuál / koncept:** výřez tabulky (2 řádky čitelně, zbytek naznačený), malé "ověřeno 9. 10. 2026" a "zdroj u každého údaje". Bez superlativů.
 - **Cílení:** ČR, čeština, 18+; zájmy finance a investování jen pokud to platforma dovolí, jinak široké cílení
-- **UTM:** `?utm_source=meta&utm_medium=paid_social&utm_campaign=etf_prehled&utm_content=ad_b&v=b`
-- **Návaznost na první obrazovku:** varianta stránky `v=b`, nadpis B ("4 americká ETF a jejich evropské alternativy na jednom místě")
+- **UTM:** `?utm_source=meta&utm_medium=paid_social&utm_campaign=etf_prehled&utm_content=ad_b` (cíl: https://clientelo-zadani-b.vercel.app/)
+- **Návaznost na první obrazovku:** obě reklamy vedou na stejnou stránku s nadpisem "Evropské alternativy amerických ETF" (štítek "Srovnání"). Měření pozná reklamu podle `utm_content=ad_b` (varianta "b").

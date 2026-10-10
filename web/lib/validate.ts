@@ -8,6 +8,7 @@ export const CLIENT_EVENTS = [
   "page_view",
   "section_view",
   "interaction_used",
+  "row_expand",
   "cta_click",
   "form_start",
   "form_submit_attempt",

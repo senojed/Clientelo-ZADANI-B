@@ -48,8 +48,8 @@ export default function LeadForm({ onDone }: { onDone: (token: string) => void }
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-3 rounded-box border border-line p-5">
-      <h2 className="text-2xl font-semibold">Celý přehled zdarma</h2>
-      <ul className="list-disc pl-5 text-muted">
+      <h2 className="text-xl font-semibold">Celý přehled zdarma</h2>
+      <ul className="list-disc pl-5 text-sm text-muted">
         <li>ISIN UCITS alternativ ke zkopírování do vyhledávání u brokera</li>
         <li>odkazy na české KID a data dokumentů</li>
         <li>kontrolní seznam: jak si ETF ověřit u svého brokera</li>

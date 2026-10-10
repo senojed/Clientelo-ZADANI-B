@@ -20,6 +20,7 @@
       },
       "ucits": {
         "nazev": "iShares Dow Jones Industrial Average UCITS ETF (USD Acc)",
+        "kratky_nazev": "iShares Dow Jones",
         "isin": "IE00B53L4350",
         "index": "Dow Jones Industrial Average",
         "naklady_pct": 0.33,
@@ -75,6 +76,7 @@
       },
       "ucits": {
         "nazev": "iShares Core S&P 500 UCITS ETF (USD Acc)",
+        "kratky_nazev": "iShares Core S&P 500",
         "isin": "IE00B5BMR087",
         "index": "S&P 500",
         "naklady_pct": 0.07,
@@ -111,6 +113,7 @@
       },
       "ucits": {
         "nazev": "Vanguard S&P 500 UCITS ETF (USD) Accumulating",
+        "kratky_nazev": "Vanguard S&P 500",
         "isin": "IE00BFMXXD54",
         "index": "S&P 500",
         "naklady_pct": 0.07,
@@ -147,6 +150,7 @@
       },
       "ucits": {
         "nazev": "Vanguard FTSE Global All-Cap UCITS ETF (USD) Accumulating",
+        "kratky_nazev": "Vanguard Global All-Cap",
         "isin": "IE000VAHT5T0",
         "index": "FTSE Global All Cap",
         "naklady_pct": 0.07,
