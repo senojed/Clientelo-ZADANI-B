@@ -33,3 +33,4 @@ Celkem zhruba 5,5 hodiny od přečtení zadání. Velkou část času zabraly re
 | 12:33 až 14:55 | ~2 h 20 min | Návrh vzhledu: čtení zadání a Figmy, úpravy Figmy (rozbalený řádek, odkaz), scroll-snap přechody (nasazeno), světlé mockupy (zahozeno) |
 | 14:55 až 15:53 | pauza | Jan dokončoval design mimo Clauda |
 | 15:53 až 16:19 | ~25 min | Převod tmavého designu do kódu (tokeny, písma, video, tabulka, kalkulačka, formulář), test v mobilu, Lighthouse |
+| 16:19 až 16:57 | ~40 min | Telefon (pád `crypto.randomUUID`, snap), záloha tagem, rozbor LCP (8 experimentů, příčina = webová písma), ořezání písem na české znaky |

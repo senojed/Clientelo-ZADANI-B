@@ -1,30 +1,8 @@
-// Kořenový layout: jazyk stránky (cs), písma a metadata.
-// Písma se stahují při buildu a servírují z našeho serveru (next/font), žádný externí CDN.
+// Kořenový layout: jazyk stránky (cs), předčítání písem a metadata.
+// Písma jsou naše ořezané soubory v public/fonts (definice v globals.css), žádný externí CDN.
 import type { Metadata } from "next";
-import { Inter, Lora, IBM_Plex_Mono } from "next/font/google";
+import { preload } from "react-dom";
 import "./globals.css";
-
-// latin-ext kvůli české diakritice (č, ř, ž...).
-// Lora: nadpisy, Inter: běžný text a ovládání, IBM Plex Mono: čísla a tickery.
-// Lora a Inter jsou proměnná písma (jeden soubor pro všechna řezy), takže se stahuje míň dat.
-const lora = Lora({
-  variable: "--font-lora",
-  subsets: ["latin", "latin-ext"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin", "latin-ext"],
-});
-
-// Plex Mono (čísla) se nepředčítá (preload: false): předčítání všech tří písem zpomalovalo obrázek v úvodu (ten je LCP).
-// Zkoušeno: bez předčítání Lory a Interu byl první vykreslený text pozdě (FCP 2,6 s), proto se předčítají.
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
-  preload: false,
-});
 
 export const metadata: Metadata = {
   title: "Americké ETF a UCITS alternativy",
@@ -32,11 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  // Předčítá se jen písmo Inter a Lora (text a nadpisy, česká diakritika je v "latin-ext"); mono písmo se načte až při použití.
+  for (const soubor of ["inter-latin", "inter-latin-ext", "lora-latin", "lora-latin-ext"]) {
+    preload(`/fonts/${soubor}.woff2`, { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
+  }
   return (
-    <html
-      lang="cs"
-      className={`${lora.variable} ${inter.variable} ${plexMono.variable} h-full antialiased`}
-    >
+    <html lang="cs" className="h-full antialiased">
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
