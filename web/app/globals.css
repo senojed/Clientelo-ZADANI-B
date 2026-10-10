@@ -146,13 +146,11 @@ h3 {
   border-color: var(--accent);
 }
 
-/* Přichytávání sekcí: scroll se po puštění prstu "dobrzdí" a přichytí k nejbližší sekci.
-   "proximity" (ne "mandatory") přichytává jen blízko hranice, takže sekce vyšší než obrazovka
-   (rozbalený řádek, chyba ve formuláři) se dá normálně dočíst. Kdo má v systému omezený pohyb, snap ani plynulé
-   scrollování kotev nedostane. */
+/* Plynulé scrollování kotev (tlačítka "Zobrazit srovnání" apod.); kdo má v systému omezený pohyb, dostane skok.
+   Přichytávání sekcí (scroll-snap) je vypnuté: sekce jsou na telefonech vyšší než obrazovka a prohlížeč pak
+   po zastavení "odskakoval" na začátek nebo konec sekce o desítky pixelů. */
 @media (prefers-reduced-motion: no-preference) {
   html {
-    scroll-snap-type: y proximity;
     scroll-behavior: smooth;
   }
 }

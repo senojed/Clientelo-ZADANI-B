@@ -64,7 +64,7 @@ export default function Landing() {
   return (
     <main>
       {/* 1. Úvod: navazuje na slib reklamy, hodnota hned, bez formuláře */}
-      <header className="relative snap-start overflow-hidden bg-background">
+      <header className="relative overflow-hidden bg-background">
         <HeroVideo />
         <div className={`${SLOUPEC} ${OBRAZOVKA} px-6 pb-3 pt-6`}>
           <div className="relative flex h-5 items-center gap-[9px] font-serif text-[17px] font-medium leading-5">
@@ -118,7 +118,7 @@ export default function Landing() {
       <section
         id="srovnani"
         ref={refSrovnani}
-        className="snap-start border-t border-section-line bg-comparison"
+        className="border-t border-section-line bg-comparison"
       >
         <div className={`${SLOUPEC} ${OBRAZOVKA} gap-2.5 px-4 pb-4 pt-4`}>
           <Srovnani otevreny={otevreny} onVyber={vyberRadek} />
@@ -130,7 +130,7 @@ export default function Landing() {
       <section
         id="formular"
         ref={refFormular}
-        className="snap-start border-t border-section-line bg-background"
+        className="border-t border-section-line bg-background"
       >
         <div className={`${SLOUPEC} ${OBRAZOVKA} justify-between gap-6 px-6 pb-3 pt-6`}>
           <div>

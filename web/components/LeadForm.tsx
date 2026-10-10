@@ -5,7 +5,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { getAttribution, getSessionId, setLeadId, track } from "@/lib/track";
+import { getAttribution, getSessionId, novyUuid, setLeadId, track } from "@/lib/track";
 
 export default function LeadForm() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function LeadForm() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "sending") return;
-    if (!attemptKey.current) attemptKey.current = crypto.randomUUID();
+    if (!attemptKey.current) attemptKey.current = novyUuid();
     setStatus("sending");
     track("form_submit_attempt");
 
