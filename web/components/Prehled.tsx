@@ -37,7 +37,7 @@ export default function Prehled({ data }: { data: EtfData }) {
   return (
     <article className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold">Hotovo. Tady je celý přehled.</h1>
+        <h1 className="text-2xl font-medium">Hotovo. Tady je celý přehled.</h1>
         <p className="mt-2 text-sm text-muted">Odkaz na tuto stránku platí 24 hodin.</p>
         <div className="no-print mt-3 flex flex-wrap gap-2">
           <button
@@ -46,7 +46,7 @@ export default function Prehled({ data }: { data: EtfData }) {
               track("link_copied");
               kopiruj(window.location.href, "odkaz");
             }}
-            className="rounded-box border border-accent px-4 py-2 text-accent"
+            className="rounded-box border border-accent px-4 min-h-11 text-accent"
           >
             {zkopirovano === "odkaz" ? "Odkaz zkopírován" : "Zkopírovat odkaz"}
           </button>
@@ -56,7 +56,7 @@ export default function Prehled({ data }: { data: EtfData }) {
               track("pdf_download_clicked");
               window.print();
             }}
-            className="rounded-box border border-accent px-4 py-2 text-accent"
+            className="rounded-box border border-accent px-4 min-h-11 text-accent"
           >
             Uložit jako PDF
           </button>
@@ -70,7 +70,7 @@ export default function Prehled({ data }: { data: EtfData }) {
 
       {data.pary.map((p) => (
         <section key={p.us.ticker} className="rounded-box border border-line p-4">
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-xl font-medium">
             {p.us.ticker}: {zamereni[p.us.ticker]}
           </h2>
           <p className="mt-1 text-sm text-muted">
@@ -87,7 +87,7 @@ export default function Prehled({ data }: { data: EtfData }) {
               <button
                 type="button"
                 onClick={() => kopiruj(p.ucits.isin, p.ucits.isin)}
-                className="no-print rounded border border-line px-2 py-0.5 text-sm"
+                className="no-print rounded border border-line px-3 min-h-11 text-sm"
               >
                 {zkopirovano === p.ucits.isin ? "Zkopírováno" : "Kopírovat"}
               </button>
@@ -109,7 +109,7 @@ export default function Prehled({ data }: { data: EtfData }) {
       ))}
 
       <section>
-        <h2 className="text-xl font-semibold">Kontrolní seznam: jak si ETF ověřit u brokera</h2>
+        <h2 className="text-xl font-medium">Kontrolní seznam: jak si ETF ověřit u brokera</h2>
         <ol className="mt-3 list-decimal pl-5 flex flex-col gap-2">
           <li>Vyhledej fond u svého brokera podle ISIN (ne jen podle zkratky, ta se na různých burzách liší).</li>
           <li>Ověř, že broker k fondu nabízí KID a že ISIN v KID odpovídá.</li>
@@ -121,7 +121,7 @@ export default function Prehled({ data }: { data: EtfData }) {
       </section>
 
       <section>
-        <h2 className="text-xl font-semibold">Pojmy lidsky</h2>
+        <h2 className="text-xl font-medium">Pojmy lidsky</h2>
         <ul className="mt-3 flex flex-col gap-2">
           <li>
             <span className="font-medium">KID</span>: krátký povinný dokument o riziku, nákladech a scénářích. Bez něj se fond

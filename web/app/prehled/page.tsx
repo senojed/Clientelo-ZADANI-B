@@ -14,7 +14,7 @@ async function Obsah({ searchParams }: { searchParams: Promise<{ t?: string }> }
   if (!overToken(t)) {
     return (
       <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-semibold">Odkaz na přehled vypršel nebo není platný</h1>
+        <h1 className="text-2xl font-medium">Odkaz na přehled vypršel nebo není platný</h1>
         <p>Odkaz platí 24 hodin. Nový získáš zdarma na úvodní stránce.</p>
         <Link href="/#formular" className="rounded-box bg-accent px-5 py-3 text-center font-medium text-accent-foreground">
           Zpět na srovnání

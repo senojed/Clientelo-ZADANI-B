@@ -51,16 +51,23 @@ export default function LeadForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-3 rounded-box border border-line p-5">
-      <h2 className="text-xl font-semibold">Celý přehled zdarma za e-mail</h2>
-      <ul className="list-disc pl-5 text-sm text-muted">
+    <form
+      onSubmit={onSubmit}
+      className="-mx-3 flex flex-col rounded-lg border border-form-line bg-form px-[11px] pb-4 pt-5"
+    >
+      <h2 className="text-[28px] leading-8 tracking-[-0.65px] max-[374px]:text-2xl">
+        Celý přehled zdarma
+        <br />
+        za e-mail
+      </h2>
+      <ul className="mt-3 list-disc pl-4 text-[13px] leading-[17px] text-muted marker:text-subtle">
         <li>ISIN UCITS alternativ ke zkopírování do vyhledávání u brokera</li>
         <li>odkazy na české KID a data dokumentů</li>
         <li>kontrolní seznam: jak si ETF ověřit u svého brokera</li>
         <li>KID, PRIIPs a UCITS vysvětlené lidsky</li>
       </ul>
-      <label className="flex flex-col gap-1">
-        <span className="text-sm text-muted">E-mail</span>
+      <label className="mt-4 flex flex-col gap-1">
+        <span className="text-xs font-medium">E-mail</span>
         <input
           type="email"
           name="email"
@@ -76,33 +83,50 @@ export default function LeadForm() {
             }
           }}
           placeholder="tvuj@email.cz"
-          className="rounded-box border border-line px-3 py-2"
+          className="h-11 rounded-box border border-field-line bg-background px-3 text-sm placeholder:text-subtle"
         />
       </label>
       {/* Honeypot: skryté pole pro boty, člověk ho nevidí ani na něj nedojde tabulátorem. */}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-      <label className="flex gap-2 text-sm">
-        <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
+      <label className="mt-1 flex min-h-11 items-center gap-2 text-xs text-muted">
+        <input
+          type="checkbox"
+          className="zaskrtavatko"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+        />
         Chci občas dostat novinky o ETF (nepovinné)
       </label>
       <button
         type="submit"
         disabled={status === "sending"}
-        className="rounded-box bg-accent px-5 py-3 font-medium text-accent-foreground disabled:opacity-60"
+        className="flex h-11 items-center justify-center rounded-[5px] bg-accent text-[13px] font-semibold text-accent-foreground disabled:opacity-60"
       >
         {status === "sending" ? "Odesílám..." : "Získat přehled zdarma"}
       </button>
-      <p className="text-sm text-muted">Přehled se otevře hned po odeslání.</p>
-      <p className="text-xs text-muted">
+      <p className="mt-3 text-xs font-medium leading-[15px]">Přehled se otevře hned po odeslání.</p>
+      <p className="mt-3 text-[13px] leading-[17px] text-muted">
         Odesláním potvrzuješ, že ses seznámil/a se{" "}
-        <Link href="/zasady" target="_blank" className="underline">
+        <Link href="/zasady" target="_blank" className="text-accent underline">
           zásadami zpracování
         </Link>
         . E-mail uložíme jako kontakt k tomuto přehledu.
       </p>
-      {status === "error" && <p className="text-sm text-red-700">Nepodařilo se odeslat. Zkus to prosím znovu.</p>}
-      {status === "bad_email" && <p className="text-sm text-red-700">Zkontroluj prosím e-mailovou adresu.</p>}
-      {status === "limit" && <p className="text-sm text-red-700">Příliš mnoho pokusů. Zkus to prosím za chvíli.</p>}
+      {status === "error" && (
+        <p role="alert" className="mt-3 text-sm text-danger">
+          Nepodařilo se odeslat. Zkus to prosím znovu.
+        </p>
+      )}
+      {status === "bad_email" && (
+        <p role="alert" className="mt-3 text-sm text-danger">
+          Zkontroluj prosím e-mailovou adresu.
+        </p>
+      )}
+      {status === "limit" && (
+        <p role="alert" className="mt-3 text-sm text-danger">
+          Příliš mnoho pokusů. Zkus to prosím za chvíli.
+        </p>
+      )}
     </form>
   );
 }

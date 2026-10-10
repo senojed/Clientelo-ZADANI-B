@@ -1,6 +1,7 @@
 // Tabulka srovnání: každý pár (americké ETF + UCITS alternativa) na jednom řádku, jen názvy a roční náklady.
 // Klik na řádek ho rozbalí s dalšími údaji a zdrojem a zároveň vybere fond v kalkulačce. Otevřený je vždy nejvýš jeden řádek.
-// Rozbalený řádek končí výzvou k přehledu pro daný fond (každý interaktivní prvek vede ke kontaktu).
+// Rozbalený řádek je jedna plocha přes celou šířku (řádek + detail, bez linek) a končí výzvou k přehledu pro daný fond
+// (každý interaktivní prvek vede ke kontaktu).
 "use client";
 
 import { etf, pct, datum, zamereni } from "@/lib/etf";
@@ -19,69 +20,90 @@ export default function Srovnani({ otevreny, onVyber }: Props) {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold">Srovnání 4 amerických ETF</h2>
-      <p className="mt-2 text-sm text-muted">
-        Evropská alternativa je dražší. Za to má český KID a je v seznamu ČNB fondů nabízených v ČR. Klikni na řádek pro
-        podrobnosti a zdroj.
-      </p>
-      <div className="mt-4 rounded-box border border-line text-sm">
-        <div className="grid grid-cols-[3rem_1fr_3.5rem_3.5rem] gap-2 border-b border-line px-3 py-2 text-xs text-muted">
+    <div className="flex flex-col gap-2.5">
+      <div>
+        <h2 className="text-[27.5px] font-medium leading-[34px] tracking-[-0.55px] max-[374px]:text-2xl min-[375px]:whitespace-nowrap">
+          Srovnání 4 amerických ETF
+        </h2>
+        <p className="mt-2 text-[13px] leading-[18px] text-muted">
+          Evropská alternativa je dražší. Za to má český KID a je v seznamu ČNB fondů nabízených v ČR. Klikni na řádek pro
+          podrobnosti a zdroj.
+        </p>
+      </div>
+      <div className="text-sm">
+        <div className="grid grid-cols-[45px_1fr_84px] items-end gap-3 border-b border-[#344553] pb-1.5 text-[10px] font-semibold leading-[14px] text-subtle">
           <span>Fond USA</span>
           <span>Alternativa v EU</span>
-          <span className="col-span-2 text-right">Roční náklady USA / EU</span>
+          <span className="text-right">Roční náklady USA / EU</span>
         </div>
-        {etf.pary.map((p) => {
+        {etf.pary.map((p, i) => {
           const open = otevreny === p.us.ticker;
+          const predchoziOtevreny = i > 0 && otevreny === etf.pary[i - 1].us.ticker;
+          // Linka je vždy pod řádkem; kolem rozbaleného bloku se vynechá, ať je plocha bez okrajů.
+          const linka = open || predchoziOtevreny ? "border-transparent" : "border-line";
           return (
-            <div key={p.us.ticker} className="border-b border-line last:border-b-0">
+            <div
+              key={p.us.ticker}
+              className={`${open ? "-mx-4 bg-surface px-4" : ""} ${i === etf.pary.length - 1 && !open ? "border-b border-line" : ""}`}
+            >
+              {i > 0 && <div className={`h-px ${linka === "border-line" ? "bg-line" : "bg-transparent"}`} />}
               <button
                 type="button"
                 aria-expanded={open}
                 onClick={() => klik(p.us.ticker)}
-                className={`grid w-full grid-cols-[3rem_1fr_3.5rem_3.5rem] items-center gap-2 px-3 py-3 text-left ${
-                  open ? "bg-surface" : ""
-                }`}
+                className="grid min-h-11 w-full grid-cols-[45px_1fr_84px] items-center gap-3 text-left"
               >
-                <span className="font-semibold">{p.us.ticker}</span>
-                <span>{p.ucits.kratky_nazev}</span>
-                <span className="text-right">{pct(p.us.naklady_pct)}</span>
-                <span className="text-right font-medium">{pct(p.ucits.naklady_pct)}</span>
+                <span className="font-mono text-[17px] font-medium leading-[22px]">{p.us.ticker}</span>
+                <span className="text-xs font-medium leading-4">{p.ucits.kratky_nazev}</span>
+                <span className="flex justify-end gap-1 font-mono text-[11px] leading-[14px]">
+                  <span className="w-10 whitespace-nowrap text-right">{pct(p.us.naklady_pct)}</span>
+                  <span className="w-10 whitespace-nowrap text-right font-medium text-accent">
+                    {pct(p.ucits.naklady_pct)}
+                  </span>
+                </span>
               </button>
               {open && (
-                <div className="bg-surface px-3 pb-3 text-xs">
-                  <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
-                    <dt className="text-muted">Zaměření</dt>
-                    <dd>{zamereni[p.us.ticker]}</dd>
-                    <dt className="text-muted">{p.us.ticker}</dt>
-                    <dd>
-                      kótováno na {p.us.burza}; KID pro EU retail jsme na stránce správce nenašli k{" "}
-                      {datum(p.us.kid_overeno)};{" "}
-                      <a
-                        href={p.us.zdroj}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => track("source_click", { ticker: p.us.ticker })}
-                        className="underline"
-                      >
-                        zdroj: stránka správce
-                      </a>
-                    </dd>
-                    <dt className="text-muted">Alternativa</dt>
-                    <dd>
-                      {p.ucits.nazev}
-                      {p.ucits.index_poznamka ? `; ${p.ucits.index_poznamka}` : ""}
-                    </dd>
-                    <dt className="text-muted">Zdroj</dt>
-                    <dd>
-                      český KID ze dne {datum(p.ucits.kid_datum)} (odkaz je v přehledu), seznam ČNB k 10. 10. 2026;
-                      replikace {p.ucits.replikace}
-                    </dd>
+                <div className="pb-4 pt-1 text-xs leading-[17px]">
+                  <dl className="flex flex-col gap-2.5">
+                    <div>
+                      <dt className="text-[11px] font-semibold text-subtle">Zaměření</dt>
+                      <dd className="text-muted">{zamereni[p.us.ticker]}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-[11px] font-semibold text-subtle">{p.us.ticker}</dt>
+                      <dd className="text-muted">
+                        kótováno na {p.us.burza}; KID pro EU retail jsme na stránce správce nenašli k{" "}
+                        {datum(p.us.kid_overeno)};{" "}
+                        <a
+                          href={p.us.zdroj}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => track("source_click", { ticker: p.us.ticker })}
+                          className="font-medium text-accent underline"
+                        >
+                          zdroj: stránka správce
+                        </a>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-[11px] font-semibold text-subtle">Alternativa</dt>
+                      <dd className="text-muted">
+                        {p.ucits.nazev}
+                        {p.ucits.index_poznamka ? `; ${p.ucits.index_poznamka}` : ""}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-[11px] font-semibold text-subtle">Zdroj</dt>
+                      <dd className="text-muted">
+                        český KID ze dne {datum(p.ucits.kid_datum)} (odkaz je v přehledu), seznam ČNB k 10. 10. 2026;
+                        replikace {p.ucits.replikace}
+                      </dd>
+                    </div>
                   </dl>
                   <a
                     href="#formular"
                     onClick={() => track("cta_click", { cta: "radek_prehled", ticker: p.us.ticker })}
-                    className="mt-3 block rounded-box bg-accent px-4 py-2 text-center text-sm font-medium text-accent-foreground"
+                    className="mt-3 flex h-11 items-center justify-center rounded-[5px] bg-accent text-[13px] font-semibold text-accent-foreground"
                   >
                     Získat ISIN a český KID zdarma
                   </a>
@@ -91,7 +113,7 @@ export default function Srovnani({ otevreny, onVyber }: Props) {
           );
         })}
       </div>
-      <p className="mt-2 text-xs text-muted">
+      <p className="text-xs leading-4 text-muted">
         Roční náklady na správu a provoz fondu: USA podle správce, EU podle českého KID (bez transakčních nákladů fondu).
         Seřazeno abecedně podle tickeru.
       </p>

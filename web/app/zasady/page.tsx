@@ -7,15 +7,15 @@ export const metadata = { title: "Zásady zpracování osobních údajů" };
 export default function Zasady() {
   return (
     <main className="mx-auto w-full max-w-2xl px-4 py-10 flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold">Zásady zpracování osobních údajů</h1>
+      <h1 className="text-2xl font-medium">Zásady zpracování osobních údajů</h1>
       <p className="text-sm text-muted">
         Verze textu 2026-10-10-v3. Stránka je ukázka vytvořená pro výběrové řízení; právní posouzení textu nebylo provedeno.
       </p>
 
-      <h2 className="text-lg font-semibold">Kdo údaje zpracovává</h2>
+      <h2 className="text-lg font-medium">Kdo údaje zpracovává</h2>
       <p>Správce: Jan Reich, autor této stránky. Kontakt: doplní se před spuštěním kampaně (demo).</p>
 
-      <h2 className="text-lg font-semibold">Jaké údaje, proč a na jakém základě</h2>
+      <h2 className="text-lg font-medium">Jaké údaje, proč a na jakém základě</h2>
       <ul className="list-disc pl-5 flex flex-col gap-2">
         <li>
           <span className="font-medium">E-mail z formuláře.</span> Přehled je za e-mail: po odeslání ti ho hned otevřeme a
@@ -43,7 +43,7 @@ export default function Zasady() {
         </li>
       </ul>
 
-      <h2 className="text-lg font-semibold">Kdo údaje technicky zpracovává</h2>
+      <h2 className="text-lg font-medium">Kdo údaje technicky zpracovává</h2>
       <p>
         Hosting Vercel Inc. (USA); serverové funkce běží v regionu Frankfurt, poskytovatel ale může údaje zpracovat i v USA.
         Předání do USA: Vercel je certifikován v rámci EU-US Data Privacy Framework (rozhodnutí Komise o odpovídající
@@ -52,13 +52,13 @@ export default function Zasady() {
         stránky; jejich rozsah a dobu uchování určuje poskytovatel.
       </p>
 
-      <h2 className="text-lg font-semibold">Jak dlouho</h2>
+      <h2 className="text-lg font-medium">Jak dlouho</h2>
       <p>
         Údaje z této ukázkové stránky budou po skončení výběrového řízení smazány. Souhlas s novinkami platí do odvolání,
         nejdéle do stejného data. Otisky IP starší než den se mažou automaticky jednou denně.
       </p>
 
-      <h2 className="text-lg font-semibold">Tvoje práva</h2>
+      <h2 className="text-lg font-medium">Tvoje práva</h2>
       <p>
         Můžeš požádat o přístup k údajům, jejich opravu, výmaz, omezení zpracování a přenositelnost, vznést námitku proti
         zpracování na základě oprávněného zájmu a kdykoli odvolat souhlas s novinkami. Máš také právo podat stížnost u Úřadu

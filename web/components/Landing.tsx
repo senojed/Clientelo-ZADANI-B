@@ -1,19 +1,28 @@
-// Celá landing page (neutrální vzhled). Tři obrazovky + patička:
-// 1) úvod, 2) tabulka srovnání + kalkulačka, 3) proč evropská alternativa + formulář.
-// Každá sekce je aspoň na výšku obrazovky (min-h-[100svh]), delší obsah ji smí natáhnout.
+// Celá landing page (tmavý design). Tři obrazovky + patička:
+// 1) úvod s videem, 2) tabulka srovnání + kalkulačka, 3) proč evropská alternativa + formulář, 4) patička s upozorněními.
+// Každá sekce má barevné pozadí přes celou šířku a obsah v úzkém sloupci; první tři jsou aspoň na výšku obrazovky
+// (min-h-[100svh]), delší obsah je smí natáhnout. V pravém dolním rohu sekcí je dekorativní pixelový motiv.
 // Po odeslání formuláře přejde návštěvník na /prehled s podepsaným odkazem (stejná relace, měření navazuje).
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { etf, datum } from "@/lib/etf";
 import { track } from "@/lib/track";
+import HeroVideo from "@/components/HeroVideo";
 import Srovnani from "@/components/Srovnani";
 import Kalkulacka from "@/components/Kalkulacka";
 import LeadForm from "@/components/LeadForm";
 
-// snap-start: začátek sekce se při scrollu přichytí k hornímu okraji (pravidlo scroll-snap-type je v globals.css).
-const OBRAZOVKA = "flex min-h-[100svh] snap-start flex-col justify-center py-6";
+// Sloupec s obsahem uvnitř sekce: úzký, vystředěný, s pixelovým rohem. Pozadí sekce je mimo něj (přes celou šířku).
+const SLOUPEC = "pixel-roh mx-auto flex w-full max-w-md flex-col";
+// Výška první tří obrazovek: aspoň celé okno.
+const OBRAZOVKA = "min-h-[100svh]";
+
+// Zlaté tlačítko hlavní akce v úvodu (ostatní tlačítka jsou v komponentách).
+const TLACITKO =
+  "flex h-[52px] items-center justify-center rounded-[5px] bg-accent text-sm font-semibold text-accent-foreground";
 
 // Zapíše událost "section_view" jednou za relaci, když je sekce aspoň ze třetiny vidět.
 function useSectionView(name: string) {
@@ -53,85 +62,134 @@ export default function Landing() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-2xl px-4">
+    <main>
       {/* 1. Úvod: navazuje na slib reklamy, hodnota hned, bez formuláře */}
-      <header className={OBRAZOVKA}>
-        <p className="text-sm font-medium uppercase tracking-wide text-accent">Srovnání</p>
-        <h1 className="mt-2 text-4xl font-semibold leading-tight">Evropské alternativy amerických ETF</h1>
-        <p className="mt-4 text-lg text-muted">
-          Americká ETF jako VOO většinou nemají KID, bez kterého je broker v EU drobnému investorovi obvykle nenabídne.
-          Tady je alternativa na stejný index a náklady obou. Celý přehled s ISIN zdarma za e-mail.
-        </p>
-        <div className="mt-8 flex flex-col gap-3">
+      <header className="relative snap-start overflow-hidden bg-background">
+        <HeroVideo />
+        <div className={`${SLOUPEC} ${OBRAZOVKA} px-6 pb-3 pt-6`}>
+          <div className="relative flex h-5 items-center gap-[9px] font-serif text-[17px] font-medium leading-5">
+            <Image src="/logo-symbol.svg" alt="" width={22} height={20} />
+            <span>ETF přehled</span>
+          </div>
+          {/* Volné místo nad nadpisem: video je v něm vidět; na vyšších displejích se zvětší. */}
+          <div className="min-h-[230px] flex-1" />
+          <h1 className="relative text-[43px] font-medium leading-[49px] tracking-[-0.55px] max-[359px]:text-[36px] max-[359px]:leading-[42px]">
+            Evropské
+            <br />
+            alternativy
+            <br />
+            amerických ETF
+          </h1>
+          <p className="relative mt-6 text-sm leading-[21px] text-muted">
+            Americká ETF jako VOO většinou nemají KID, bez kterého je broker v EU drobnému investorovi obvykle nenabídne.
+            Tady je alternativa na stejný index a náklady obou.
+          </p>
+          <p className="relative mt-6 font-serif text-[18.8px] leading-[26px] min-[375px]:whitespace-nowrap max-[374px]:text-base">
+            Celý přehled s ISIN zdarma za e-mail.
+          </p>
           <a
             href="#srovnani"
             onClick={() => track("cta_click", { cta: "hero_srovnani" })}
-            className="rounded-box bg-accent px-5 py-3 text-center font-medium text-accent-foreground"
+            className={`relative mt-6 ${TLACITKO}`}
           >
             Zobrazit srovnání
           </a>
           <a
             href="#formular"
             onClick={() => track("cta_click", { cta: "hero_co_obsahuje" })}
-            className="text-center text-accent underline"
+            className="relative mt-1 flex min-h-11 items-center justify-center text-[13px] text-accent underline"
           >
             Co obsahuje přehled
           </a>
+          <div className="relative mt-2 text-muted">
+            <div className="h-px bg-line" />
+            <p className="mt-3 text-xs leading-[17px]">
+              Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty, fondy jsou v USD (výsledek v
+              korunách ovlivní kurz). Před investicí si přečti KID.
+            </p>
+            <p className="mt-3 text-[11px] font-medium leading-[13px] text-subtle">
+              Údaje ověřeny {datum(etf.overeno)} a 10. 10. 2026.
+            </p>
+          </div>
         </div>
-        <p className="mt-6 text-sm text-muted">
-          Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty, fondy jsou v USD (výsledek v
-          korunách ovlivní kurz). Před investicí si přečti KID. Údaje ověřeny{" "}
-          {datum(etf.overeno)} a 10. 10. 2026.
-        </p>
       </header>
 
       {/* 2. Tabulka srovnání + kalkulačka; klik na řádek vybere fond i v kalkulačce */}
-      <section id="srovnani" ref={refSrovnani} className={`${OBRAZOVKA} gap-4`}>
-        <Srovnani otevreny={otevreny} onVyber={vyberRadek} />
-        <Kalkulacka ticker={ticker} onTicker={setTicker} />
+      <section
+        id="srovnani"
+        ref={refSrovnani}
+        className="snap-start border-t border-section-line bg-comparison"
+      >
+        <div className={`${SLOUPEC} ${OBRAZOVKA} gap-2.5 px-4 pb-4 pt-4`}>
+          <Srovnani otevreny={otevreny} onVyber={vyberRadek} />
+          <Kalkulacka ticker={ticker} onTicker={setTicker} />
+        </div>
       </section>
 
       {/* 3. Krátké vysvětlení pro nedůvěřivé + formulář; po odeslání přechod na /prehled */}
-      <section id="formular" ref={refFormular} className={`${OBRAZOVKA} gap-6`}>
-        <div>
-            <h2 className="text-2xl font-semibold">Proč evropská alternativa</h2>
-            <ul className="mt-3 flex flex-col gap-2 text-sm">
-              <li>
-                <span className="font-medium">Má KID.</span> Bez něj broker v EU fond drobnému investorovi obvykle
-                nenabídne. U těchto 4 amerických ETF jsme KID k {datum(etf.overeno)} na stránce správce nenašli.
+      <section
+        id="formular"
+        ref={refFormular}
+        className="snap-start border-t border-section-line bg-background"
+      >
+        <div className={`${SLOUPEC} ${OBRAZOVKA} justify-between gap-6 px-6 pb-3 pt-6`}>
+          <div>
+            <h2 className="text-[29px] leading-[35px] tracking-[-0.65px] max-[374px]:text-2xl min-[375px]:whitespace-nowrap">
+              Proč evropská alternativa
+            </h2>
+            <ul className="mt-3 flex flex-col gap-2.5 text-xs leading-[17px] text-muted">
+              <li className="flex gap-2.5">
+                <Image src="/icon-kid.svg" alt="" width={18} height={18} className="shrink-0" />
+                <p>
+                  <strong className="font-semibold text-foreground">Má KID.</strong> Bez něj broker v EU fond drobnému
+                  investorovi obvykle nenabídne. U těchto 4 amerických ETF jsme KID k {datum(etf.overeno)} na stránce
+                  správce nenašli.
+                </p>
               </li>
-              <li>
-                <span className="font-medium">Dá se srovnat.</span> Každý KID má stejnou osnovu: riziko 1 až 7, náklady,
-                scénáře výnosu.
+              <li className="flex gap-2.5">
+                <Image src="/icon-compare.svg" alt="" width={18} height={18} className="shrink-0" />
+                <p>
+                  <strong className="font-semibold text-foreground">Dá se srovnat.</strong> Každý KID má stejnou osnovu:
+                  riziko 1 až 7, náklady, scénáře výnosu.
+                </p>
               </li>
-              <li>
-                <span className="font-medium">Smí se nabízet v ČR.</span> Všechny 4 alternativy jsou v seznamu ČNB fondů
-                nabízených v ČR (k 10. 10. 2026).
+              <li className="flex gap-2.5">
+                <Image src="/icon-shield.svg" alt="" width={18} height={18} className="shrink-0" />
+                <p>
+                  <strong className="font-semibold text-foreground">Smí se nabízet v ČR.</strong> Všechny 4 alternativy
+                  jsou v seznamu ČNB fondů nabízených v ČR (k 10. 10. 2026).
+                </p>
               </li>
             </ul>
           </div>
-        <LeadForm />
+          <LeadForm />
+        </div>
       </section>
 
-      {/* Patička s upozorněními */}
-      <footer className="border-t border-line py-6 text-sm text-muted">
-        <p>
-          Marketingové sdělení. Nejde o investiční doporučení ani nabídku. Investice do ETF nesou riziko ztráty, minulá
-          výkonnost není zárukou budoucích výnosů. Fondy jsou vedené v USD, výsledek v korunách ovlivní i kurz. Před
-          investicí si přečti KID a prospekt fondu. &quot;KID nenalezen&quot; znamená, že jsme ho k datu ověření nenašli na
-          stránce správce; neznamená, že fond nekoupí žádný broker.
-        </p>
-        <p className="mt-3">
-          Kdo za stránkou stojí: Jan Reich, ukázka pro výběrové řízení. Nedostáváme provize od správců uvedených fondů ani
-          od brokerů.
-        </p>
-        <p className="mt-3">
-          Zdroje: stránky správců fondů (odkaz u každého řádku tabulky), NYSE, seznam ČNB, české KID. Údaje ověřeny 9. a
-          10. 10. 2026.{" "}
-          <Link href="/zasady" className="underline">
+      {/* 4. Patička s upozorněními */}
+      <footer className="border-t border-line bg-legal">
+        <div className={`${SLOUPEC} px-6 py-6 text-[13px] leading-[17px] text-muted`}>
+          <p>
+            Marketingové sdělení. Nejde o investiční doporučení ani nabídku. Investice do ETF nesou riziko ztráty, minulá
+            výkonnost není zárukou budoucích výnosů. Fondy jsou vedené v USD, výsledek v korunách ovlivní i kurz. Před
+            investicí si přečti KID a prospekt fondu. &quot;KID nenalezen&quot; znamená, že jsme ho k datu ověření nenašli
+            na stránce správce; neznamená, že fond nekoupí žádný broker.
+          </p>
+          <p className="mt-2">
+            Kdo za stránkou stojí: Jan Reich, ukázka pro výběrové řízení. Nedostáváme provize od správců uvedených fondů
+            ani od brokerů.
+          </p>
+          <p className="mt-2">
+            Zdroje: stránky správců fondů (odkaz u každého řádku tabulky), NYSE, seznam ČNB, české KID. Údaje ověřeny 9. a
+            10. 10. 2026.
+          </p>
+          <Link
+            href="/zasady"
+            className="relative mt-1 inline-flex min-h-11 items-center self-start text-xs text-accent underline"
+          >
             Zásady zpracování osobních údajů
           </Link>
-        </p>
+        </div>
       </footer>
     </main>
   );

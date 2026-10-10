@@ -1,16 +1,27 @@
+// Kořenový layout: jazyk stránky (cs), písma a metadata.
+// Písma se stahují při buildu a servírují z našeho serveru (next/font), žádný externí CDN.
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Lora, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
 // latin-ext kvůli české diakritice (č, ř, ž...).
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Lora: nadpisy, Inter: běžný text a ovládání, IBM Plex Mono: čísla a tickery.
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin", "latin-ext"],
+  weight: ["400", "500"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -22,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="cs"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${lora.variable} ${inter.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

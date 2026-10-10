@@ -1,40 +1,151 @@
-/* Globální styly. Celý vzhled stránky řídí proměnné níže (barvy, písmo, zaoblení):
-   při návrhu vlastního designu stačí změnit hodnoty tady, komponenty používají jen tyto názvy. */
+/* Globální styly. Celý vzhled stránky řídí proměnné níže (barvy, písma, zaoblení), hodnoty jsou z design/sources/design-tokens.json.
+   Komponenty používají jen tyto názvy (bg-surface, text-muted, border-line, bg-accent...), takže změna vzhledu = změna tady.
+   Dále: posuvník částky, zaškrtávátko, pixelový roh sekcí, tisk do PDF a plynulé přichytávání sekcí při scrollu. */
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #1a1a1a;
-  --muted: #5b6168;
-  --surface: #f4f5f7;
-  --line: #e1e4e8;
-  --accent: #1f4e8c;
-  --accent-foreground: #ffffff;
-  --positive: #1d6b3a;
-  --radius: 10px;
+  --background: #081725; /* základní pozadí stránky */
+  --foreground: #f4f0e8; /* nadpisy a zvýrazněný text */
+  --muted: #b5c1cd; /* běžný odstavcový text */
+  --subtle: #9fafbe; /* drobný text: hlavičky tabulky, datum, ikony */
+  --surface: #112638; /* rozbalený řádek, výběr fondu */
+  --line: #293c4b; /* linky tabulky */
+  --section-line: #233545; /* linky mezi sekcemi */
+  --comparison: #0a1b2a; /* pozadí sekce srovnání */
+  --legal: #06131e; /* pozadí patičky */
+  --form: #0d2131; /* karta formuláře */
+  --form-line: #203747;
+  --result: #332d1e; /* pozadí výsledku kalkulačky */
+  --field-line: #566d80; /* okraj polí, kontrast aspoň 3:1 */
+  --track: #344c5f; /* dráha posuvníku, okraj výběru */
+  --accent: #ddb65b; /* zlatá: tlačítka, odkazy, důležitá čísla */
+  --accent-foreground: #081725; /* text na zlatém tlačítku */
+  --danger: #ff9b8f; /* chybové hlášky */
+  --radius: 4px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
   --color-surface: var(--surface);
   --color-line: var(--line);
+  --color-section-line: var(--section-line);
+  --color-comparison: var(--comparison);
+  --color-legal: var(--legal);
+  --color-form: var(--form);
+  --color-form-line: var(--form-line);
+  --color-result: var(--result);
+  --color-field-line: var(--field-line);
+  --color-track: var(--track);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --color-positive: var(--positive);
+  --color-danger: var(--danger);
   --radius-box: var(--radius);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-lora);
+  --font-mono: var(--font-plex-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
-/* Přechod mezi obrazovkami: scroll se po puštění prstu "dobrzdí" a přichytí k nejbližší sekci.
+/* Všechny nadpisy jsou v patkovém písmu Lora. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-lora), Georgia, serif;
+}
+
+/* Viditelný focus pro klávesnici, v barvě akcentu. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Pixelový motiv v pravém dolním rohu sekce (dekorace, nezachytává kliknutí, leží pod obsahem). */
+.pixel-roh {
+  position: relative;
+  isolation: isolate;
+}
+.pixel-roh::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 250px;
+  height: 140px;
+  background: url("/pixel-corner-right.svg") right bottom / 250px 140px no-repeat;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Posuvník částky: zlatá aktivní dráha (do --pct), viditelný zlatý jezdec. Výška 44 px = dostatečná dotyková plocha. */
+.posuvnik {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 44px;
+  background: transparent;
+  cursor: pointer;
+}
+.posuvnik::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--accent) var(--pct, 50%), var(--track) var(--pct, 50%));
+}
+.posuvnik::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--background);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.posuvnik::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--track);
+}
+.posuvnik::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.posuvnik::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--background);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* Zaškrtávátko podle návrhu: tmavý čtvereček se světlým okrajem, po zaškrtnutí zlatý. */
+.zaskrtavatko {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--subtle);
+  border-radius: 2px;
+  background: var(--background);
+}
+.zaskrtavatko:checked {
+  background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23081725' stroke-width='2'/%3E%3C/svg%3E") center / 14px no-repeat;
+  border-color: var(--accent);
+}
+
+/* Přichytávání sekcí: scroll se po puštění prstu "dobrzdí" a přichytí k nejbližší sekci.
    "proximity" (ne "mandatory") přichytává jen blízko hranice, takže sekce vyšší než obrazovka
    (rozbalený řádek, chyba ve formuláři) se dá normálně dočíst. Kdo má v systému omezený pohyb, snap ani plynulé
    scrollování kotev nedostane. */
@@ -45,7 +156,18 @@ body {
   }
 }
 
+/* Tisk a uložení do PDF (stránka /prehled): světlé barvy, ať se nevytiskne světlý text na bílém papíře. */
 @media print {
+  :root {
+    --background: #ffffff;
+    --foreground: #111111;
+    --muted: #333333;
+    --subtle: #444444;
+    --surface: #f1f1f1;
+    --line: #bbbbbb;
+    --accent: #6b4e00;
+    --accent-foreground: #ffffff;
+  }
   .no-print {
     display: none !important;
   }
