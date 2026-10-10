@@ -44,8 +44,8 @@ export default function Zasady() {
       <h2 className="text-lg font-semibold">Kdo údaje technicky zpracovává</h2>
       <p>
         Hosting Vercel Inc. (USA); serverové funkce běží v regionu Frankfurt, poskytovatel ale může údaje zpracovat i v USA.
-        Předání do USA se řídí standardními smluvními doložkami EU (rozhodnutí Komise 2021/914) ve smlouvě o zpracování
-        údajů poskytovatele; Vercel je také certifikován v rámci EU-US Data Privacy Framework.
+        Předání do USA: Vercel je certifikován v rámci EU-US Data Privacy Framework (rozhodnutí Komise o odpovídající
+        ochraně údajů).
         Databáze Neon (region EU, Frankfurt). Technické logy hostingu mohou obsahovat IP adresu, prohlížeč, čas a adresu
         stránky; jejich rozsah a dobu uchování určuje poskytovatel.
       </p>

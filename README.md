@@ -104,7 +104,7 @@ Lighthouse na mobilu (produkční URL, 10. 10. 2026): výkon 96, přístupnost 9
 ## Co chybí
 
 - PDF z designového nástroje (teď tisk stránky do PDF z prohlížeče).
-- Skutečné odesílání e-mailů (přehled se ukáže hned, e-mail se jen uloží).
+- **Odeslání odkazu na přehled e-mailem (upozornění pro kontrolu).** Teď se přehled otevře hned a e-mail se jen uloží. Audit (Codex) správně upozornil, že bez odeslání není doložené, proč e-mail ukládat (GDPR, minimalizace údajů). Pro ostrý provoz doporučuji posílat odkaz e-mailem: účel uložení je pak jasný a zároveň se ověří, že adresa existuje (kvalitnější leady). Vyžaduje vlastní doménu a službu na odesílání e-mailů; v demu vědomě není.
 - Měření pro Meta (pixel nebo Conversions API), viz Měření.
 - Potvrzení souhlasu s novinkami e-mailem (double opt-in) před prvním newsletterem.
 - Hosting pro ostrou kampaň: Vercel Hobby je podle podmínek Vercelu jen pro nekomerční použití; demo běží na něm, firemní kampaň by potřebovala Vercel Pro nebo hosting zadavatele.
@@ -124,4 +124,4 @@ npm install
 npm run dev
 ```
 
-Proměnné prostředí: `DATABASE_URL`, `DOWNLOAD_TOKEN_SECRET` (viz `.env.example`). Tabulky: `node --env-file=<cesta k .env> scripts/migrate.mjs`.
+Proměnné prostředí: `DATABASE_URL`, `DOWNLOAD_TOKEN_SECRET`, `CRON_SECRET` (viz `web/.env.example`; `CRON_SECRET` musí být i ve Vercelu, jinak denní úklid `/api/uklid` vrací 401). Ověření úklidu: `curl -H "Authorization: Bearer <CRON_SECRET>" <URL>/api/uklid` vrátí počet smazaných otisků. Tabulky: `node --env-file=<cesta k .env> scripts/migrate.mjs`.

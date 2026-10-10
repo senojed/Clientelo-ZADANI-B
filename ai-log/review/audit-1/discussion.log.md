@@ -57,3 +57,12 @@ Ověřeno jako opravené: #2 (v konfiguraci), #3, #5, #6 až #8, #10 až #22, #2
 | 4 MINOR: otisky IP se mažou jen při dalším odeslání | Přijato | Denní Vercel Cron `/api/uklid` (chráněno `CRON_SECRET`). |
 | 5 MINOR: uložený export ai-log má pořád zkrácené příkazy | Přijato | Export znovu vygenerován opraveným skriptem. |
 | 6 MINOR: měnové riziko a "přečti KID" chybí v úvodu a u kalkulačky | Přijato | Doplněno. |
+
+## Kolo 3 (Codex, `round-3-codex.md`): VERDIKT CONTINUE
+
+| Nález kola 3 | Rozhodnutí | Oprava |
+|---|---|---|
+| 1 MAJOR: nezbytnost uložení e-mailu není doložená (přehled se na e-mail neposílá) | **Rozhodnutí Jana: souhlas s nálezem, v demu se nestaví.** Doporučené řešení (posílat odkaz e-mailem) je v README jako upozornění pro kontrolu a krok před ostrým provozem. | README, Co chybí |
+| 2 MAJOR: standardní smluvní doložky z DPA nemusí platit pro účet Hobby | Přijato | Zásady uvádějí jen doložený mechanismus: certifikace Vercelu v EU-US Data Privacy Framework (rozhodnutí o odpovídající ochraně). |
+| 3 MINOR: souběžná opakování nového stejného klíče idempotence mohou čerpat víc míst v limitu | Odmítnuto | Nejhorší dopad: jeden člověk při dvojkliku spotřebuje 2 z 5 pokusů za hodinu; lead vznikne jen jeden. Oprava (druhá kontrola pod zámkem) přidá složitost bez užitku pro demo. |
+| 4 MINOR: `CRON_SECRET` chybí v návodu a `.env.example` | Přijato | Doplněno do `web/.env.example` a README včetně ověření úklidu. |
