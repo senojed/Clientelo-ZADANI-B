@@ -21,3 +21,8 @@ Celkem zhruba 5,5 hodiny od přečtení zadání. Velkou část času zabraly re
 | Čas | Trvání | Činnost |
 |---|---|---|
 | 07:56 až 08:10 | ~15 min | Ověření registrace UCITS v ČR: české KID, registr ČNB (CAPTCHA opsal Jan), záměna alternativy k DIA |
+| 08:10 až 09:00 | ~50 min | České KID místo anglických (jiná data u Vanguardu, zachytila nezávislá kontrola), data v3, volba "neutrální verze napřed" |
+| 09:00 až 09:15 | ~15 min | Neutrální funkční stránka (tabulka, kalkulačka, formulář, přehled za tokenem), nasazení, test na produkci |
+| 09:15 až 09:59 | ~45 min | Janova revize vzhledu a textů: celoobrazovkové sekce, tabulka s rozbalováním, nadpis, význam KID, zrušení varianty /b |
+| 09:59 až 10:05 | ~10 min | Přestavba stránky podle revize, zdroj k depozitáři (směrnice 2014/91/EU), úprava reklam |
+| 10:05 až 10:28 | ~25 min | Compliance checklist, pravidla Meta a Google (go/no-go), Lighthouse na mobilu |
