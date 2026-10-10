@@ -40,7 +40,21 @@ Záznam toho, co je ověřené ze zdroje, s datem. Sem se zapisuje průběžně,
 | UCITS náklady | 0,07 % ročně (Management fees and other administrative or operating costs) | tamtéž | 9. 10. 2026 |
 | UCITS KID pro EU retail | ano, PRIIPs KID ze dne 29. 9. 2026; "registered for sale in other EEA Member States" | https://fund-docs.vanguard.com/ie00bfmxxd54_priipskid_en.pdf | 9. 10. 2026 |
 
-## Dvojice 3: DIA ↔ iShares Dow Jones Industrial Average UCITS ETF (DE)
+## Dvojice 3: DIA ↔ iShares Dow Jones Industrial Average UCITS ETF (IE, iShares VII plc)
+
+**Aktualizace 10. 10. 2026: UCITS alternativa změněna na irský fond IE00B53L4350.** Ověření v seznamu ČNB ukázalo, že dříve vybraný iShares (DE) ani Amundi nejsou registrované k nabízení v ČR; registrovaný je irský fond stejného indexu od stejné skupiny (iShares VII plc). Má český KID, fyzickou replikaci a nižší náklady. Původní tabulky níže jsou ponechané jako historie rozhodování.
+
+| Údaj | Hodnota | Zdroj | Datum ověření |
+|---|---|---|---|
+| UCITS název | iShares Dow Jones Industrial Average UCITS ETF, USD Accu (podfond iShares VII plc) | český PRIIPs KID `dukazy/2026-10-10-cind-eu-priips-kid-cs.pdf` | 10. 10. 2026 |
+| UCITS ISIN | IE00B53L4350 | tamtéž | 10. 10. 2026 |
+| UCITS index | Dow Jones Industrial Average Index (KID); produktová stránka uvádí variantu Net TR | tamtéž; https://www.ishares.com/uk/individual/en/products/253713/ishares-dow-jones-industrial-average-ucits-etf | 10. 10. 2026 |
+| UCITS replikace | fyzická ("Fond má v úmyslu replikovat index držením majetkových cenných papírů") | český KID | 10. 10. 2026 |
+| UCITS náklady | 0,33 % ročně (poplatky za správu a další administrativní a provozní náklady); transakční náklady navíc 0,01 % | český KID | 10. 10. 2026 |
+| UCITS KID | český PRIIPs KID datovaný 3. 9. 2026, cílová skupina retailoví investoři | https://www.ishares.com/gls-download/literature/kiid/eu-priips-ishares-dow-jones-industrial-average-ucits-etf-usd-acc-ie00b53l4350-cs.pdf | 10. 10. 2026 |
+| Registrace v ČR | ano, "iShares VII plc - iShares Dow Jones Industrial Average UCITS ETF" v seznamu ČNB, stav k 10. 10. 2026 | `dukazy/2026-10-10-cnb-registr-ucits.md` | 10. 10. 2026 |
+
+### Historie (do 9. 10.): DIA ↔ iShares Dow Jones Industrial Average UCITS ETF (DE)
 
 **Zkontroloval Jan 9. 10. 2026: OK.** Platí opravené pravidlo výběru 2b (stejná replikace jako US ETF), viz rozhodnutí pod tabulkou.
 
@@ -99,6 +113,10 @@ Pozn. k nákladům: UCITS na DJIA stojí kolem 0,5 % ročně, DIA 0,16 %. Rozdí
 | UCITS KID pro EU retail | ano, PRIIPs KID ze dne 29. 9. 2026; "registered for sale in other EEA Member States" | https://fund-docs.vanguard.com/ie000vaht5t0_priipskid_en.pdf | 9. 10. 2026 |
 
 Pozn.: původní předpoklad v `kandidati.md` byl, že u "světa" půjde jen o nejbližší index. Ověření ukázalo, že UCITS na stejný index existuje.
+
+## Registrace v ČR (ověřeno 10. 10. 2026)
+
+Všechny 4 UCITS alternativy použité na stránce jsou v seznamu ČNB fondů, které lze nabízet v ČR, a mají český KID od správce: iShares Core S&P 500 (`2026-10-10-cspx-eu-priips-kid-cs.pdf`), Vanguard S&P 500 (`2026-10-10-vuaa-eu-priips-kid-cz.pdf`), Vanguard FTSE Global All-Cap (`2026-10-10-vgla-eu-priips-kid-cz.pdf`), iShares Dow Jones Industrial Average (IE) (`2026-10-10-cind-eu-priips-kid-cs.pdf`). Důkaz registru: `dukazy/2026-10-10-cnb-registr-ucits.md`. Obsah českých KID u S&P 500 a All-Cap zatím ověřen jen podle názvu souboru a zdroje (URL správce s ISIN), text neprocházen.
 
 ## Ostatní kandidáti: stav
 

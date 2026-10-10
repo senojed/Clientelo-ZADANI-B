@@ -1,6 +1,6 @@
 {
   "_popis": "Ověřená data pro stránku a PDF přehled. Každý údaj má zdroj a datum ověření; podrobnosti a důkazy v data/overeni.md a data/dukazy/. Řazení abecedně podle US tickeru (neutrální, bez doporučení).",
-  "verze": "2026-10-09-v1",
+  "verze": "2026-10-10-v2",
   "overeno": "2026-10-09",
   "pary": [
     {
@@ -19,17 +19,32 @@
         "zdroj": "https://www.ssga.com/us/en/intermediary/etfs/state-street-spdr-dow-jones-industrial-average-etf-trust-dia"
       },
       "ucits": {
-        "nazev": "iShares Dow Jones Industrial Average UCITS ETF (DE)",
-        "isin": "DE0006289390",
-        "index": "Dow Jones Industrial Average (Net Total Return)",
-        "naklady_pct": 0.51,
+        "nazev": "iShares Dow Jones Industrial Average UCITS ETF (USD Acc)",
+        "isin": "IE00B53L4350",
+        "index": "Dow Jones Industrial Average",
+        "naklady_pct": 0.33,
         "naklady_typ": "průběžné náklady podle KID",
         "replikace": "fyzická",
-        "kid_datum": "2026-05-01",
-        "kid_url": "https://www.ishares.com/gls-download/literature/kiid/eu-priips-ishares-dow-jones-industrial-average-ucits-etf-de-de0006289390-de.pdf",
-        "vyber": "stejný index (1), stejná replikace jako DIA (2b)"
+        "kid_datum": "2026-09-03",
+        "kid_url": "https://www.ishares.com/gls-download/literature/kiid/eu-priips-ishares-dow-jones-industrial-average-ucits-etf-usd-acc-ie00b53l4350-cs.pdf",
+        "kid_cesky": true,
+        "registrace_cr": "ano (seznam ČNB k 2026-10-10)",
+        "vyber": "registrace v ČR (0), stejný index (1), stejná replikace jako DIA (2b)"
       },
-      "ucits_dalsi": [
+      "zkontroloval_jan": true,
+      "ucits_historie": [
+        {
+          "nazev": "iShares Dow Jones Industrial Average UCITS ETF (DE)",
+          "isin": "DE0006289390",
+          "index": "Dow Jones Industrial Average (Net Total Return)",
+          "naklady_pct": 0.51,
+          "naklady_typ": "průběžné náklady podle KID",
+          "replikace": "fyzická",
+          "kid_datum": "2026-05-01",
+          "kid_url": "https://www.ishares.com/gls-download/literature/kiid/eu-priips-ishares-dow-jones-industrial-average-ucits-etf-de-de0006289390-de.pdf",
+          "vyber": "stejný index (1), stejná replikace jako DIA (2b)",
+          "registrace_cr": "ne (není v seznamu ČNB k 2026-10-10)"
+        },
         {
           "nazev": "Amundi Dow Jones Industrial Average UCITS ETF Dist",
           "isin": "FR0007056841",
@@ -38,10 +53,10 @@
           "naklady_typ": "průběžné náklady podle KID",
           "replikace": "syntetická (swapy)",
           "kid_datum": "2026-06-05",
-          "kid_url": "https://www.amundietf.lu/pdfDocuments/kid-priips/FR0007056841/ENG/LUX/20260605"
+          "kid_url": "https://www.amundietf.lu/pdfDocuments/kid-priips/FR0007056841/ENG/LUX/20260605",
+          "registrace_cr": "ne (není v seznamu ČNB k 2026-10-10)"
         }
-      ],
-      "zkontroloval_jan": true
+      ]
     },
     {
       "us": {
@@ -67,7 +82,9 @@
         "replikace": "fyzická",
         "kid_datum": "2026-09-03",
         "kid_url": "https://www.ishares.com/gls-download/literature/kiid/eu-priips-ishares-core-sp-500-ucits-etf-usd-acc-ie00b5bmr087-de.pdf",
-        "vyber": "stejný index (1), stejný správce (2)"
+        "vyber": "stejný index (1), stejný správce (2)",
+        "registrace_cr": "ano (seznam ČNB k 2026-10-10)",
+        "kid_cesky": true
       },
       "zkontroloval_jan": true
     },
@@ -95,7 +112,9 @@
         "replikace": "fyzická",
         "kid_datum": "2026-09-29",
         "kid_url": "https://fund-docs.vanguard.com/ie00bfmxxd54_priipskid_en.pdf",
-        "vyber": "stejný index (1), stejný správce (2)"
+        "vyber": "stejný index (1), stejný správce (2)",
+        "registrace_cr": "ano (seznam ČNB k 2026-10-10)",
+        "kid_cesky": true
       },
       "zkontroloval_jan": true
     },
@@ -123,7 +142,9 @@
         "replikace": "fyzická (reprezentativní vzorek)",
         "kid_datum": "2026-09-29",
         "kid_url": "https://fund-docs.vanguard.com/ie000vaht5t0_priipskid_en.pdf",
-        "vyber": "stejný index (1), stejný správce (2)"
+        "vyber": "stejný index (1), stejný správce (2)",
+        "registrace_cr": "ano (seznam ČNB k 2026-10-10)",
+        "kid_cesky": true
       },
       "zkontroloval_jan": true
     }

@@ -15,3 +15,9 @@ Přibližné časy podle časových razítek v konverzaci, 9. 10. 2026. Slouží
 | 18:18 až 18:35 | ~15 min | Oprava pravidla výběru UCITS po druhé kontrole v nezávislém chatu Claude Code |
 
 Celkem zhruba 5,5 hodiny od přečtení zadání. Velkou část času zabraly revize a kontroly (council, 18 kol plan-consensus, ruční kontrola dat).
+
+## 10. 10. 2026
+
+| Čas | Trvání | Činnost |
+|---|---|---|
+| 07:56 až 08:10 | ~15 min | Ověření registrace UCITS v ČR: české KID, registr ČNB (CAPTCHA opsal Jan), záměna alternativy k DIA |

@@ -19,13 +19,12 @@ Srovnání 4 známých amerických ETF z NYSE Arca a jejich UCITS alternativ na 
 - Hlavní srovnání: 4 americká ETF mezi sebou. DIA (Dow Jones, 30 firem), IVV a VOO (S&P 500, 500 firem), VT (celý svět). Roční náklady fondu: DIA 0,16 %, IVV 0,03 %, VOO 0,03 %, VT 0,06 %.
 - U všech 4 jsme k 9. 10. 2026 na stránce správce nenašli KID pro EU retail. To neznamená, že je nekoupí žádný broker.
 - Ke všem 4 existuje UCITS alternativa na stejný index s KID: S&P 500 a celý svět se stejným indexem; u Dow Jones sleduje UCITS variantu indexu s reinvesticí dividend (DIA sleduje cenový index).
-- Roční náklady UCITS alternativ: S&P 500 0,07 %, celý svět 0,07 %, Dow Jones 0,51 % (fyzicky) nebo 0,50 % (synteticky).
+- Roční náklady UCITS alternativ: S&P 500 0,07 %, celý svět 0,07 %, Dow Jones 0,33 %. Všechny 4 alternativy jsou v seznamu ČNB fondů nabízených v ČR a mají český KID (ověřeno 10. 10. 2026).
 - Pojmenování nákladů: u amerických fondů "expense ratio" podle správce, u UCITS "průběžné náklady" podle KID. Na stránce jednotně "roční náklady fondu", v metodice vysvětleno.
-- Model: 100 000 Kč, roční rozdíl nákladů fondu: S&P 500 cca 40 Kč, Dow Jones cca 350 Kč (vzorec částka × rozdíl ročních nákladů; nejde o celkové náklady investora: bez kurzů, spreadů, daní a poplatků brokera).
+- Model: 100 000 Kč, roční rozdíl nákladů fondu: S&P 500 cca 40 Kč, Dow Jones cca 170 Kč (vzorec částka × rozdíl ročních nákladů; nejde o celkové náklady investora: bez kurzů, spreadů, daní a poplatků brokera).
 
 ## Co zatím ověřené není (nesmí být na stránce, dokud se neověří)
 
-- Registrace UCITS alternativ k prodeji v ČR a dostupnost KID v češtině.
 - US ISIN u IVV, VOO a VT (máme jen CUSIP).
 - Tickery, burzy a měny UCITS alternativ na evropských burzách (pro PDF).
 
@@ -52,10 +51,11 @@ Tabulka 4 amerických ETF mezi sebou (ticker, zaměření, roční náklady), ř
 
 Obsah (co na stránce není):
 1. úplná tabulka s ISIN UCITS alternativ ke zkopírování do vyhledávání u brokera, zdrojem a datem u každého údaje,
-2. u Dow Jones obě alternativy (fyzická a synteticky přes swapy) s vysvětlením rozdílu,
+2. vysvětlení, proč u Dow Jones nevybíráme fondy, které v ČR registrované nejsou (příklad fyzické a syntetické replikace),
 3. kontrolní seznam krok za krokem "jak si ETF ověřit u svého brokera" (ISIN, KID, burza, měna, typ klienta), bez názvů brokerů,
 4. KID, PRIIPs a UCITS vysvětlené lidsky,
-5. k ověření a doplnění: burzy, tickery a měny UCITS alternativ, registrace v ČR.
+5. u každé UCITS alternativy odkaz na český KID a informace, že je v seznamu ČNB fondů nabízených v ČR,
+6. k ověření a doplnění: burzy, tickery a měny UCITS alternativ.
 
 ## Formulář
 
