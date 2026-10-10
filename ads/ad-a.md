@@ -4,8 +4,8 @@ Stav: koncept k Janově kontrole. Stav spustitelnosti (spustitelné / koncept / 
 
 - **Platforma a formát (předběžně):** Meta (Facebook, Instagram), jeden obrázek 1080×1350 a varianta 9:16, mobil
 - **Headline:** Znáš VOO nebo IVV? Porovnej náklady
-- **Hlavní text:** Známá americká ETF mají UCITS alternativy na stejný index. Srovnali jsme 4 z nich: zaměření, roční náklady a co si ověřit u brokera. Zdroj a datum u každého údaje, přehled zdarma.
-- **Popis:** Informační přehled, ne investiční doporučení.
+- **Hlavní text:** Známá americká ETF mají UCITS alternativy na stejný index. Srovnali jsme 4 z nich: zaměření, roční náklady a co si ověřit u brokera. Zdroje a datum ověření uvádíme, přehled zdarma.
+- **Popis:** Marketingové sdělení, ne investiční doporučení.
 - **Tlačítko (CTA):** Další informace
 - **Vizuál / koncept:** dvě karty vedle sebe: vlevo americké ETF (ticker, roční náklady), vpravo UCITS alternativa na stejný index (roční náklady), mezi nimi "stejný index". Bez grafů výkonnosti a bez slibů výnosů.
 - **Cílení:** ČR, čeština, 18+; zájmy finance a investování jen pokud to platforma dovolí, jinak široké cílení, publikum vybírá kreativa

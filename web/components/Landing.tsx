@@ -80,7 +80,8 @@ export default function Landing() {
           </a>
         </div>
         <p className="mt-6 text-sm text-muted">
-          Informační přehled, ne investiční doporučení. Údaje ověřeny {datum(etf.overeno)} a 10. 10. 2026.
+          Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty. Údaje ověřeny{" "}
+          {datum(etf.overeno)} a 10. 10. 2026.
         </p>
       </header>
 
