@@ -140,7 +140,7 @@ export default function Landing() {
               Proč evropská alternativa
             </h2>
             <ul className="mt-3 flex flex-col gap-2.5 text-xs leading-[17px] text-muted">
-              <li className="flex gap-2.5">
+              <li className="flex items-start gap-2.5">
                 <Image src="/icon-kid.svg" alt="" width={18} height={18} className="shrink-0" />
                 <p>
                   <strong className="font-semibold text-foreground">Má KID.</strong> Bez něj broker v&nbsp;EU fond drobnému
@@ -148,14 +148,14 @@ export default function Landing() {
                   správce nenašli.
                 </p>
               </li>
-              <li className="flex gap-2.5">
+              <li className="flex items-start gap-2.5">
                 <Image src="/icon-compare.svg" alt="" width={18} height={18} className="shrink-0" />
                 <p>
                   <strong className="font-semibold text-foreground">Dá se srovnat.</strong> Každý KID má stejnou osnovu:
                   riziko 1 až 7, náklady, scénáře výnosu.
                 </p>
               </li>
-              <li className="flex gap-2.5">
+              <li className="flex items-start gap-2.5">
                 <Image src="/icon-shield.svg" alt="" width={18} height={18} className="shrink-0" />
                 <p>
                   <strong className="font-semibold text-foreground">Smí se nabízet v&nbsp;ČR.</strong> Všechny 4 alternativy
