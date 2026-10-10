@@ -54,7 +54,7 @@ export default function Landing() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-2xl px-4">
+    <main className="mx-auto w-full max-w-2xl px-4">
       {/* 1. Úvod: navazuje na slib reklamy, hodnota hned, bez formuláře */}
       <header className={OBRAZOVKA}>
         <p className="text-sm font-medium uppercase tracking-wide text-accent">Srovnání</p>
@@ -137,6 +137,6 @@ export default function Landing() {
           </Link>
         </p>
       </footer>
-    </div>
+    </main>
   );
 }
