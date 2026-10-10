@@ -25,4 +25,4 @@ Celkem zhruba 5,5 hodiny od přečtení zadání. Velkou část času zabraly re
 | 09:00 až 09:15 | ~15 min | Neutrální funkční stránka (tabulka, kalkulačka, formulář, přehled za tokenem), nasazení, test na produkci |
 | 09:15 až 09:59 | ~45 min | Janova revize vzhledu a textů: celoobrazovkové sekce, tabulka s rozbalováním, nadpis, význam KID, zrušení varianty /b |
 | 09:59 až 10:05 | ~10 min | Přestavba stránky podle revize, zdroj k depozitáři (směrnice 2014/91/EU), úprava reklam |
-| 10:05 až 10:28 | ~25 min | Compliance checklist, pravidla Meta a Google (go/no-go), Lighthouse na mobilu |
+| 10:05 až 10:25 | ~20 min | Compliance checklist, pravidla Meta a Google (go/no-go), Lighthouse na mobilu |
