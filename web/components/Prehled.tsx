@@ -75,7 +75,7 @@ export default function Prehled({ data }: { data: EtfData }) {
           </h2>
           <p className="mt-1 text-sm text-muted">
             {p.us.nazev} · {p.us.burza} · roční náklady {pct(p.us.naklady_pct)} · KID pro EU retail jsme na stránce správce
-            nenašli k {datum(p.us.kid_overeno)} ·{" "}
+            nenašli k&nbsp;{datum(p.us.kid_overeno)} ·{" "}
             <a href={p.us.zdroj} className="underline" target="_blank" rel="noopener noreferrer">
               zdroj
             </a>
@@ -102,7 +102,7 @@ export default function Prehled({ data }: { data: EtfData }) {
               <a href={p.ucits.kid_url} className="underline" target="_blank" rel="noopener noreferrer">
                 Český KID ze dne {datum(p.ucits.kid_datum)}
               </a>{" "}
-              · v seznamu ČNB fondů nabízených v ČR (ověřeno 10. 10. 2026)
+              · v seznamu ČNB fondů nabízených v ČR (ověřeno 10.&nbsp;10.&nbsp;2026)
             </p>
           </div>
         </section>
@@ -145,7 +145,7 @@ export default function Prehled({ data }: { data: EtfData }) {
       </section>
 
       <p className="text-sm text-muted">
-        Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty. Údaje ověřeny 9. a 10. 10. 2026,
+        Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty. Údaje ověřeny 9. a 10.&nbsp;10.&nbsp;2026,
         náklady US ETF podle správců, náklady UCITS podle českých KID.
       </p>
     </article>

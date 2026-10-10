@@ -58,7 +58,7 @@ export default function LeadForm() {
       <h2 className="text-[28px] leading-8 tracking-[-0.65px] max-[374px]:text-2xl">
         Celý přehled zdarma
         <br />
-        za e-mail
+        za <span className="whitespace-nowrap">e-mail</span>
       </h2>
       <ul className="mt-3 list-disc pl-4 text-[13px] leading-[17px] text-muted marker:text-subtle">
         <li>ISIN UCITS alternativ ke zkopírování do vyhledávání u brokera</li>
@@ -67,7 +67,7 @@ export default function LeadForm() {
         <li>KID, PRIIPs a UCITS vysvětlené lidsky</li>
       </ul>
       <label className="mt-4 flex flex-col gap-1">
-        <span className="text-xs font-medium">E-mail</span>
+        <span className="whitespace-nowrap text-xs font-medium">E-mail</span>
         <input
           type="email"
           name="email"
@@ -110,7 +110,7 @@ export default function LeadForm() {
         <Link href="/zasady" target="_blank" className="text-accent underline">
           zásadami zpracování
         </Link>
-        . E-mail uložíme jako kontakt k tomuto přehledu.
+        . <span className="whitespace-nowrap">E-mail</span> uložíme jako kontakt k tomuto přehledu.
       </p>
       {status === "error" && (
         <p role="alert" className="mt-3 text-sm text-danger">
@@ -119,7 +119,7 @@ export default function LeadForm() {
       )}
       {status === "bad_email" && (
         <p role="alert" className="mt-3 text-sm text-danger">
-          Zkontroluj prosím e-mailovou adresu.
+          Zkontroluj prosím <span className="whitespace-nowrap">e-mailovou</span> adresu.
         </p>
       )}
       {status === "limit" && (

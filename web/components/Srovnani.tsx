@@ -72,8 +72,7 @@ export default function Srovnani({ otevreny, onVyber }: Props) {
                     <div>
                       <dt className="text-[11px] font-semibold text-subtle">{p.us.ticker}</dt>
                       <dd className="text-muted">
-                        kótováno na {p.us.burza}; KID pro EU retail jsme na stránce správce nenašli k{" "}
-                        {datum(p.us.kid_overeno)};{" "}
+                        kótováno na {p.us.burza}; KID pro EU retail jsme na stránce správce nenašli k&nbsp;{datum(p.us.kid_overeno)};{" "}
                         <a
                           href={p.us.zdroj}
                           target="_blank"
@@ -95,7 +94,7 @@ export default function Srovnani({ otevreny, onVyber }: Props) {
                     <div>
                       <dt className="text-[11px] font-semibold text-subtle">Zdroj</dt>
                       <dd className="text-muted">
-                        český KID ze dne {datum(p.ucits.kid_datum)} (odkaz je v přehledu), seznam ČNB k 10. 10. 2026;
+                        český KID ze dne {datum(p.ucits.kid_datum)} (odkaz je v přehledu), seznam ČNB k&nbsp;10.&nbsp;10.&nbsp;2026;
                         replikace {p.ucits.replikace}
                       </dd>
                     </div>

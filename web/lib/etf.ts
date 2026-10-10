@@ -23,7 +23,7 @@ export function pct(v: number): string {
 export function datum(iso: string | null | undefined): string {
   if (!iso) return "neuvedeno";
   const [y, m, d] = iso.split("-").map(Number);
-  return `${d}. ${m}. ${y}`;
+  return `${d}. ${m}. ${y}`;
 }
 
 // Částka v Kč s mezerami po tisících.
