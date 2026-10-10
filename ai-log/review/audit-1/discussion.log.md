@@ -66,3 +66,7 @@ Ověřeno jako opravené: #2 (v konfiguraci), #3, #5, #6 až #8, #10 až #22, #2
 | 2 MAJOR: standardní smluvní doložky z DPA nemusí platit pro účet Hobby | Přijato | Zásady uvádějí jen doložený mechanismus: certifikace Vercelu v EU-US Data Privacy Framework (rozhodnutí o odpovídající ochraně). |
 | 3 MINOR: souběžná opakování nového stejného klíče idempotence mohou čerpat víc míst v limitu | Odmítnuto | Nejhorší dopad: jeden člověk při dvojkliku spotřebuje 2 z 5 pokusů za hodinu; lead vznikne jen jeden. Oprava (druhá kontrola pod zámkem) přidá složitost bez užitku pro demo. |
 | 4 MINOR: `CRON_SECRET` chybí v návodu a `.env.example` | Přijato | Doplněno do `web/.env.example` a README včetně ověření úklidu. |
+
+## Kolo 4 (Codex, `round-4-codex.md`): VERDIKT CONSENSUS
+
+Všechny přijaté nálezy ověřeny jako opravené. Jediný nový drobný nález (odeslání e-mailu samo neověří adresu) opraven v README. Audit 1 uzavřen ve 4. kole z 5.

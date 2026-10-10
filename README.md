@@ -104,7 +104,7 @@ Lighthouse na mobilu (produkční URL, 10. 10. 2026): výkon 96, přístupnost 9
 ## Co chybí
 
 - PDF z designového nástroje (teď tisk stránky do PDF z prohlížeče).
-- **Odeslání odkazu na přehled e-mailem (upozornění pro kontrolu).** Teď se přehled otevře hned a e-mail se jen uloží. Audit (Codex) správně upozornil, že bez odeslání není doložené, proč e-mail ukládat (GDPR, minimalizace údajů). Pro ostrý provoz doporučuji posílat odkaz e-mailem: účel uložení je pak jasný a zároveň se ověří, že adresa existuje (kvalitnější leady). Vyžaduje vlastní doménu a službu na odesílání e-mailů; v demu vědomě není.
+- **Odeslání odkazu na přehled e-mailem (upozornění pro kontrolu).** Teď se přehled otevře hned a e-mail se jen uloží. Audit (Codex) správně upozornil, že bez odeslání není doložené, proč e-mail ukládat (GDPR, minimalizace údajů). Pro ostrý provoz doporučuji posílat odkaz e-mailem: účel uložení je pak jasný a půjde sledovat nedoručitelné adresy (úplné ověření schránky by vyžadovalo potvrzovací klik). Vyžaduje vlastní doménu a službu na odesílání e-mailů; v demu vědomě není.
 - Měření pro Meta (pixel nebo Conversions API), viz Měření.
 - Potvrzení souhlasu s novinkami e-mailem (double opt-in) před prvním newsletterem.
 - Hosting pro ostrou kampaň: Vercel Hobby je podle podmínek Vercelu jen pro nekomerční použití; demo běží na něm, firemní kampaň by potřebovala Vercel Pro nebo hosting zadavatele.
