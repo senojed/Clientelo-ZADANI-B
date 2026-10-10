@@ -1,5 +1,6 @@
 // Příjem formuláře: uloží lead do databáze a zapíše serverovou událost "lead_created" (to je konverze).
 // Idempotence: stejný idempotency_key (dvojklik, opakování po výpadku) vrátí stejný výsledek a nic nezdvojí.
+// Ochrany: kontrola původu (proti cizím webům), honeypot (proti jednoduchým botům), limit četnosti podle IP.
 import { getSql } from "@/lib/db";
 import {
   CONSENT_TEXT_VERSION,
@@ -10,6 +11,7 @@ import {
   isUuid,
 } from "@/lib/validate";
 import { vydejToken } from "@/lib/token";
+import { prekrocenLimit } from "@/lib/ratelimit";
 
 export async function POST(request: Request) {
   if (!isSameOrigin(request)) return Response.json({ error: "forbidden" }, { status: 403 });
@@ -35,24 +37,37 @@ export async function POST(request: Request) {
   const variant = cleanVariant(body.variant);
 
   const sql = getSql();
-  // "on conflict do nothing": když klíč už existuje, nevloží se nic a returning vrátí prázdno.
+
+  // Omezení četnosti: nejvýš LIMIT odeslání za hodinu z jedné IP adresy (uložen jen otisk IP, viz lib/ratelimit.ts).
+  if (await prekrocenLimit(sql, request)) return Response.json({ error: "too_many" }, { status: 429 });
+
+  // Lead i konverze "lead_created" v jednom příkazu (CTE), takže se uloží buď oba, nebo nic.
+  // "on conflict do nothing": když klíč idempotence už existuje, nevloží se nic a returning vrátí prázdno.
   const inserted = await sql`
-    insert into leads (email, marketing_consent, consent_text_version, consent_ts, idempotency_key, session_id, utm, variant)
-    values (${email.trim().toLowerCase()}, ${marketingConsent}, ${CONSENT_TEXT_VERSION},
-            ${marketingConsent ? new Date().toISOString() : null}, ${idempotency_key}, ${session_id},
-            ${JSON.stringify(utm)}::jsonb, ${variant})
-    on conflict (idempotency_key) do nothing
-    returning public_id`;
+    with novy as (
+      insert into leads (email, marketing_consent, consent_text_version, consent_ts, idempotency_key, session_id, utm, variant)
+      values (${email.trim().toLowerCase()}, ${marketingConsent}, ${CONSENT_TEXT_VERSION},
+              ${marketingConsent ? new Date().toISOString() : null}, ${idempotency_key}, ${session_id},
+              ${JSON.stringify(utm)}::jsonb, ${variant})
+      on conflict (idempotency_key) do nothing
+      returning public_id
+    )
+    insert into events (event, session_id, lead_public_id, utm, variant)
+    select 'lead_created', ${session_id}, public_id, ${JSON.stringify(utm)}::jsonb, ${variant} from novy
+    returning lead_public_id`;
 
   let leadId: string;
   if (inserted.length > 0) {
-    leadId = inserted[0].public_id;
+    leadId = inserted[0].lead_public_id;
+  } else {
+    // Opakované odeslání: vrátíme existující lead. Kdyby mu konverze chyběla, doplní se (nejvýš jedna, unikátní index).
+    const existing = await sql`select public_id, session_id, utm, variant from leads where idempotency_key = ${idempotency_key}`;
+    const l = existing[0];
+    leadId = l.public_id;
     await sql`
       insert into events (event, session_id, lead_public_id, utm, variant)
-      values ('lead_created', ${session_id}, ${leadId}, ${JSON.stringify(utm)}::jsonb, ${variant})`;
-  } else {
-    const existing = await sql`select public_id from leads where idempotency_key = ${idempotency_key}`;
-    leadId = existing[0].public_id;
+      values ('lead_created', ${l.session_id}, ${leadId}, ${JSON.stringify(l.utm)}::jsonb, ${l.variant})
+      on conflict (lead_public_id) where event = 'lead_created' do nothing`;
   }
 
   // Token k přehledu: podepsaný, platí 24 hodin, bez e-mailu uvnitř (viz lib/token.ts).

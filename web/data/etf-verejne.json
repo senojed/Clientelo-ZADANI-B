@@ -1,0 +1,82 @@
+{
+  "verze": "2026-10-10-v4",
+  "overeno": "2026-10-09",
+  "pary": [
+    {
+      "us": {
+        "ticker": "DIA",
+        "burza": "NYSE Arca",
+        "index": "Dow Jones Industrial Average",
+        "naklady_pct": 0.16,
+        "kid_overeno": "2026-10-09",
+        "zdroj": "https://www.ssga.com/us/en/intermediary/etfs/state-street-spdr-dow-jones-industrial-average-etf-trust-dia"
+      },
+      "ucits": {
+        "nazev": "iShares Dow Jones Industrial Average UCITS ETF (USD Acc)",
+        "kratky_nazev": "iShares Dow Jones",
+        "index": "Dow Jones Industrial Average",
+        "index_poznamka": "produktová stránka správce uvádí variantu indexu Net TR (s reinvesticí čistých dividend); KID uvádí Dow Jones Industrial Average Index",
+        "naklady_pct": 0.33,
+        "replikace": "fyzická",
+        "kid_datum": "2026-09-03"
+      }
+    },
+    {
+      "us": {
+        "ticker": "IVV",
+        "burza": "NYSE Arca",
+        "index": "S&P 500",
+        "naklady_pct": 0.03,
+        "kid_overeno": "2026-10-09",
+        "zdroj": "https://www.ishares.com/us/products/239726/ishares-core-sp-500-etf"
+      },
+      "ucits": {
+        "nazev": "iShares Core S&P 500 UCITS ETF (USD Acc)",
+        "kratky_nazev": "iShares Core S&P 500",
+        "index": "S&P 500",
+        "index_poznamka": null,
+        "naklady_pct": 0.07,
+        "replikace": "fyzická",
+        "kid_datum": "2026-09-03"
+      }
+    },
+    {
+      "us": {
+        "ticker": "VOO",
+        "burza": "NYSE Arca",
+        "index": "S&P 500",
+        "naklady_pct": 0.03,
+        "kid_overeno": "2026-10-09",
+        "zdroj": "https://investor.vanguard.com/investment-products/etfs/profile/voo"
+      },
+      "ucits": {
+        "nazev": "Vanguard S&P 500 UCITS ETF (USD) Accumulating",
+        "kratky_nazev": "Vanguard S&P 500",
+        "index": "S&P 500",
+        "index_poznamka": null,
+        "naklady_pct": 0.07,
+        "replikace": "fyzická",
+        "kid_datum": "2026-03-24"
+      }
+    },
+    {
+      "us": {
+        "ticker": "VT",
+        "burza": "NYSE Arca",
+        "index": "FTSE Global All Cap",
+        "naklady_pct": 0.06,
+        "kid_overeno": "2026-10-09",
+        "zdroj": "https://investor.vanguard.com/investment-products/etfs/profile/vt"
+      },
+      "ucits": {
+        "nazev": "Vanguard FTSE Global All-Cap UCITS ETF (USD) Accumulating",
+        "kratky_nazev": "Vanguard Global All-Cap",
+        "index": "FTSE Global All Cap",
+        "index_poznamka": null,
+        "naklady_pct": 0.07,
+        "replikace": "fyzická (reprezentativní vzorek)",
+        "kid_datum": "2026-08-20"
+      }
+    }
+  ]
+}

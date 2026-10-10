@@ -11,12 +11,13 @@
 
 ## Redakce
 
-Surové záznamy leží mimo repozitář. Do repa jde jen převedená a redigovaná kopie:
+Zadání chce export příkazem `/export`. Ten v desktopové aplikaci Claude Code nebyl k dispozici a surový export obsahuje osobní údaje, proto je tu náhrada: převod záznamu konverzace (JSONL), který Claude Code ukládá, na Markdown s redakcí. Surové záznamy leží mimo repozitář. Do repa jde jen převedená a redigovaná kopie:
 
 - e-mailové adresy, absolutní cesty k osobním složkám, klíče, hesla a připojovací řetězce jsou nahrazené `[redacted ...]`;
 - jména třetích osob (z e-mailové korespondence) nahrazena `[redacted jméno]`; seznam jmen je mimo repozitář;
 - čtení a výsledky z osobní wiki a paměti asistenta jsou vynechané celé (`[redacted obsah osobní wiki nebo paměti]`);
-- výsledky nástrojů jsou zkrácené na 400 znaků (plné výstupy by měly desítky MB); prompty a odpovědi subagentů jsou celé;
+- výsledky nástrojů jsou zkrácené na 400 znaků (plné výstupy by měly desítky MB), odpovědi subagentů jsou celé;
+- obsah souborů zapisovaných nástroji Write a Edit je zkrácený na 600 znaků (výsledný soubor je v repozitáři a v historii commitů); příkazy, dotazy a prompty jsou celé;
 - interní úvahy modelu (thinking) a systémové zprávy aplikace nejsou součástí.
 
 Prompty, odpovědi, chyby AI, příkazy a časová posloupnost zůstávají beze změny. Časy jsou v UTC (místní čas = UTC + 2 h).

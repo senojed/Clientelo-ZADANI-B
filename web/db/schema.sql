@@ -29,3 +29,14 @@ create table if not exists events (
 
 create index if not exists events_session_idx on events (session_id);
 create index if not exists events_event_idx on events (event);
+
+-- Nejvýš jedna konverze (lead_created) na lead: opakované odeslání ji nezdvojí.
+create unique index if not exists events_lead_created_uq on events (lead_public_id) where event = 'lead_created';
+
+-- Omezení četnosti odeslání formuláře (ochrana proti botům). IP adresu neukládáme,
+-- jen její otisk (HMAC s tajným klíčem a datem), a záznamy starší než den se mažou.
+create table if not exists rate_limits (
+  ip_hash text not null,
+  created_at timestamptz not null default now()
+);
+create index if not exists rate_limits_idx on rate_limits (ip_hash, created_at);

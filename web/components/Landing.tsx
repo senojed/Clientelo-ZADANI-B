@@ -1,7 +1,7 @@
 // Celá landing page (neutrální vzhled). Tři obrazovky + patička:
 // 1) úvod, 2) tabulka srovnání + kalkulačka, 3) proč evropská alternativa + formulář.
 // Každá sekce je aspoň na výšku obrazovky (min-h-[100svh]), delší obsah ji smí natáhnout.
-// Po odeslání formuláře se na stejném místě zobrazí plný přehled (stejná relace, měření navazuje).
+// Po odeslání formuláře přejde návštěvník na /prehled s podepsaným odkazem (stejná relace, měření navazuje).
 "use client";
 
 import Link from "next/link";
@@ -11,7 +11,6 @@ import { track } from "@/lib/track";
 import Srovnani from "@/components/Srovnani";
 import Kalkulacka from "@/components/Kalkulacka";
 import LeadForm from "@/components/LeadForm";
-import Prehled from "@/components/Prehled";
 
 const OBRAZOVKA = "flex min-h-[100svh] flex-col justify-center py-6";
 
@@ -37,7 +36,6 @@ function useSectionView(name: string) {
 }
 
 export default function Landing() {
-  const [token, setToken] = useState<string | null>(null);
   // otevreny = rozbalený řádek tabulky (nebo žádný); ticker = fond v kalkulačce (zůstane i po sbalení řádku).
   const [otevreny, setOtevreny] = useState<string | null>(null);
   const [ticker, setTicker] = useState("VOO");
@@ -60,8 +58,8 @@ export default function Landing() {
         <p className="text-sm font-medium uppercase tracking-wide text-accent">Srovnání</p>
         <h1 className="mt-2 text-4xl font-semibold leading-tight">Evropské alternativy amerických ETF</h1>
         <p className="mt-4 text-lg text-muted">
-          VOO, IVV, VT a DIA vedle UCITS fondů na stejný index. Náklady hned, celý přehled s ISIN a kontrolním seznamem
-          zdarma.
+          Americká ETF jako VOO většinou nemají KID, bez kterého je broker v EU drobnému investorovi obvykle nenabídne.
+          Tady je alternativa na stejný index a náklady obou. Celý přehled s ISIN zdarma za e-mail.
         </p>
         <div className="mt-8 flex flex-col gap-3">
           <a
@@ -89,49 +87,45 @@ export default function Landing() {
       <section id="srovnani" ref={refSrovnani} className={`${OBRAZOVKA} gap-4`}>
         <Srovnani otevreny={otevreny} onVyber={vyberRadek} />
         <Kalkulacka ticker={ticker} onTicker={setTicker} />
-        <a
-          href="#formular"
-          onClick={() => track("cta_click", { cta: "srovnani_prehled" })}
-          className="block rounded-box border border-accent px-5 py-3 text-center font-medium text-accent"
-        >
-          Získat celý přehled zdarma
-        </a>
       </section>
 
-      {/* 3. Krátké vysvětlení pro nedůvěřivé + formulář; po odeslání přehled na stejném místě */}
+      {/* 3. Krátké vysvětlení pro nedůvěřivé + formulář; po odeslání přechod na /prehled */}
       <section id="formular" ref={refFormular} className={`${OBRAZOVKA} gap-6`}>
-        {!token && (
-          <div>
+        <div>
             <h2 className="text-2xl font-semibold">Proč evropská alternativa</h2>
             <ul className="mt-3 flex flex-col gap-2 text-sm">
               <li>
-                <span className="font-medium">Má KID.</span> Broker v EU smí drobnému investorovi prodat fond jen s tímto
-                dokumentem. U těchto 4 amerických ETF jsme KID pro EU nenašli.
+                <span className="font-medium">Má KID.</span> Bez něj broker v EU fond drobnému investorovi obvykle
+                nenabídne. U těchto 4 amerických ETF jsme KID k {datum(etf.overeno)} na stránce správce nenašli.
               </li>
               <li>
                 <span className="font-medium">Dá se srovnat.</span> Každý KID má stejnou osnovu: riziko 1 až 7, náklady,
                 scénáře výnosu.
               </li>
               <li>
-                <span className="font-medium">Je to fond UCITS.</span> Evropská pravidla na ochranu investorů, například
-                majetek fondu opatruje depozitář na oddělených účtech fondu.
+                <span className="font-medium">Smí se nabízet v ČR.</span> Všechny 4 alternativy jsou v seznamu ČNB fondů
+                nabízených v ČR (k 10. 10. 2026).
               </li>
             </ul>
           </div>
-        )}
-        {token ? <Prehled token={token} /> : <LeadForm onDone={setToken} />}
+        <LeadForm />
       </section>
 
       {/* Patička s upozorněními */}
       <footer className="border-t border-line py-6 text-sm text-muted">
         <p>
-          Informační a marketingové sdělení. Nejde o investiční doporučení ani nabídku. Investice do ETF nesou riziko
-          ztráty, minulá výkonnost není zárukou budoucích výnosů. &quot;KID nenalezen&quot; znamená, že jsme ho k datu
-          ověření nenašli na stránce správce; neznamená, že fond nekoupí žádný broker.
+          Marketingové sdělení. Nejde o investiční doporučení ani nabídku. Investice do ETF nesou riziko ztráty, minulá
+          výkonnost není zárukou budoucích výnosů. Fondy jsou vedené v USD, výsledek v korunách ovlivní i kurz. Před
+          investicí si přečti KID a prospekt fondu. &quot;KID nenalezen&quot; znamená, že jsme ho k datu ověření nenašli na
+          stránce správce; neznamená, že fond nekoupí žádný broker.
         </p>
         <p className="mt-3">
-          Zdroje: stránky správců fondů, NYSE, seznam ČNB, české KID, směrnice 2014/91/EU. Údaje ověřeny 9. a 10. 10.
-          2026.{" "}
+          Kdo za stránkou stojí: Jan Reich, ukázka pro výběrové řízení. Nedostáváme provize od správců uvedených fondů ani
+          od brokerů.
+        </p>
+        <p className="mt-3">
+          Zdroje: stránky správců fondů (odkaz u každého řádku tabulky), NYSE, seznam ČNB, české KID. Údaje ověřeny 9. a
+          10. 10. 2026.{" "}
           <Link href="/zasady" className="underline">
             Zásady zpracování osobních údajů
           </Link>

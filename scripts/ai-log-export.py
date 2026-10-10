@@ -9,7 +9,8 @@ import os
 import re
 import sys
 
-MAX_TOOL_INPUT = 600     # kolik znaků vstupu nástroje ukázat (příkaz, cesta, dotaz)
+MAX_TOOL_INPUT = 600     # kolik znaků ukázat ze vstupu nástrojů, které zapisují soubory (obsah souboru je v repu)
+ZAPIS = {"Write", "Edit", "NotebookEdit"}  # jen u nich se vstup zkracuje; příkazy, dotazy a prompty zůstávají celé
 MAX_TOOL_RESULT = 400    # výsledky nástrojů jen zkráceně, celé by byly desítky MB
 CELE = {"Agent", "Task"}  # nástroje, jejichž výsledek (odpověď subagenta) se ukáže celý
 
@@ -65,7 +66,8 @@ def text_obsahu(obsah) -> str:
 def main(vstup: str, vystup: str, nadpis: str) -> None:
     radky = [f"# {nadpis}", "", "Automaticky převedeno ze záznamu Claude Code (scripts/ai-log-export.py).",
              "Redakce: e-maily, absolutní cesty, klíče a hesla nahrazeny [redacted ...]; obsah osobní wiki a paměti vynechán;",
-             f"výsledky nástrojů zkráceny na {MAX_TOOL_RESULT} znaků; interní úvahy modelu (thinking) nejsou součástí.", ""]
+             f"výsledky nástrojů zkráceny na {MAX_TOOL_RESULT} znaků (odpovědi subagentů celé), obsah zapisovaných souborů na {MAX_TOOL_INPUT} znaků;",
+             "příkazy a prompty jsou celé; interní úvahy modelu (thinking) a systémové zprávy aplikace nejsou součástí.", ""]
     soukrome_volani = set()  # id volání nástrojů, která četla osobní wiki
     nazvy_volani = {}        # id volání -> název nástroje (výsledky subagentů se nezkracují)
 
@@ -109,8 +111,8 @@ def main(vstup: str, vystup: str, nadpis: str) -> None:
                         soukrome_volani.add(c.get("id"))
                         radky += [f"**Nástroj {c.get('name')}:** [redacted přístup k osobní wiki nebo paměti]", ""]
                         continue
-                    # Zadání pro subagenta je prompt, ten se zachová celý.
-                    if c.get("name") not in CELE:
+                    # Příkazy, dotazy a prompty se zachovají celé; zkracuje se jen obsah zapisovaných souborů.
+                    if c.get("name") in ZAPIS:
                         vstup_nastroje = zkrat(vstup_nastroje, MAX_TOOL_INPUT)
                     radky += [f"**Nástroj {c.get('name')}:**", "```", rediguj(vstup_nastroje), "```", ""]
 

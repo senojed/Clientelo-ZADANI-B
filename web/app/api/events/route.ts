@@ -23,9 +23,12 @@ export async function POST(request: Request) {
   const clientTs = typeof body.ts === "string" && !Number.isNaN(Date.parse(body.ts)) ? body.ts : null;
 
   const sql = getSql();
+  // lead_id se uloží, jen když lead opravdu existuje a patří ke stejné relaci; jinak null (nejde podvrhnout cizí lead).
   await sql`
     insert into events (event, session_id, lead_public_id, utm, variant, props, client_ts)
-    values (${event}, ${session_id}, ${leadId}, ${JSON.stringify(cleanUtm(body.utm))}::jsonb,
+    values (${event}, ${session_id},
+            (select public_id from leads where public_id = ${leadId}::uuid and session_id = ${session_id}::uuid),
+            ${JSON.stringify(cleanUtm(body.utm))}::jsonb,
             ${cleanVariant(body.variant)}, ${JSON.stringify(cleanProps(body.props))}::jsonb, ${clientTs})`;
 
   return new Response(null, { status: 204 });

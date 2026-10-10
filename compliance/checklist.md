@@ -1,6 +1,8 @@
 # Compliance checklist a pravidla reklamních platforem
 
-Stav k 10. 10. 2026. Praktický kontrolní seznam pro demo, **ne právní posouzení**. Právní rámec je ověřen jen obecně; před reálnou kampaní je nutná kontrola právníkem.
+Stav k 10. 10. 2026 (aktualizováno po auditu 1). Praktický kontrolní seznam pro demo, **ne právní posouzení**. Právní rámec je ověřen jen obecně; před reálnou kampaní je nutná kontrola právníkem.
+
+**Pro právní kontrolu před kampaní:** zda srovnání jmenovitých fondů s důvody "proč alternativa" není investiční doporučení podle nařízení MAR (čl. 3 odst. 1 bod 35) s povinností zveřejnit střet zájmů; identifikace provozovatele webu; právní základ uložení e-mailu; předání údajů do USA (Vercel).
 
 ## 1. Pravidla reklamních platforem (go/no-go)
 
@@ -35,22 +37,26 @@ Princip převzatý z pokynů ESMA k marketingovým sdělením fondů [6] (formá
 
 **Povinné na stránce:**
 - [x] "Marketingové sdělení, ne investiční doporučení" a "Investice nesou riziko ztráty" viditelně v úvodu (ne jen v patičce)
+- [x] měnové riziko (fondy v USD) a "před investicí si přečti KID a prospekt" (patička, kalkulačka, přehled)
+- [x] kdo za stránkou stojí a že nedostáváme provize (patička)
+- [x] zdroj u čísel ve veřejné části: odkaz na stránku správce u každého US fondu, datum českého KID u UCITS
 - [x] plné upozornění v patičce (riziko ztráty, minulá výkonnost, význam "KID nenalezen")
 - [x] datum ověření údajů
-- [x] řazení tabulky abecedně (neutrální), uvedeno u tabulky
+- [x] řazení tabulky abecedně podle tickeru (neutrální), uvedeno pod tabulkou
 - [x] kalkulačka označená jako modelový výpočet jen z ročního poplatku fondu
 - [x] informace o zpracování u formuláře + odkaz na zásady
 - [x] souhlas s novinkami nepovinný a nezaškrtnutý
 - [ ] kontakt v zásadách (doplní Jan)
-- [x] region úložiště: Neon Frankfurt (EU), uvedeno v zásadách
+- [x] region: databáze Neon Frankfurt, serverové funkce Vercel `fra1` (od 10. 10. po auditu 1, předtím běžely v USA `iad1`); Vercel Inc. je americká firma, uvedeno v zásadách
+- [x] zásady: účely, právní základy, doba uložení, práva včetně námitky a stížnosti u ÚOOÚ
 
 ## 3. Kontrola k 10. 10. 2026
 
 | Místo | Stav |
 |---|---|
 | Stránka (úvod, tabulka, kalkulačka, proč, formulář, patička) | Prošlo kontrolou slov z bodu 2. Úvod doplněn o "Marketingové sdělení" a riziko ztráty. |
-| Reklama A | "Zdroj a datum u každého údaje" přepsáno (u nákladů US ETF chybí datum dokumentu); popis změněn na "Marketingové sdělení". |
-| Reklama B | Popis změněn na "Marketingové sdělení". |
+| Reklama A | "Zdroj a datum u každého údaje" přepsáno; upozornění na riziko v hlavním textu a ve vizuálu (po auditu 1: dřív jen v poli Popis, které se ve všech umístěních nezobrazuje); "zdarma za e-mail". |
+| Reklama B | Totéž jako A; datum ověření opraveno na 9. a 10. 10. 2026. |
 | Přehled po odeslání | Upozornění v patičce přehledu je; plná kontrola při auditu (kontrolní bod 1). |
 
 ## Zdroje (staženo 10. 10. 2026)

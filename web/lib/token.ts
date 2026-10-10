@@ -2,7 +2,7 @@
 // Nic se neukládá do databáze (bez stavu). Token obsahuje jen expiraci, rozsah a verzi přehledu, žádný e-mail.
 import { createHmac, timingSafeEqual } from "node:crypto";
 
-export const PREHLED_VERZE = "2026-10-10-v3";
+export const PREHLED_VERZE = "2026-10-10-v4";
 const PLATNOST_MS = 24 * 60 * 60 * 1000;
 
 function tajemstvi(): string {

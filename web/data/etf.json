@@ -1,6 +1,6 @@
 {
   "_popis": "Ověřená data pro stránku a PDF přehled. Každý údaj má zdroj a datum ověření; podrobnosti a důkazy v data/overeni.md a data/dukazy/. Řazení abecedně podle US tickeru (neutrální, bez doporučení).",
-  "verze": "2026-10-10-v3",
+  "verze": "2026-10-10-v4",
   "overeno": "2026-10-09",
   "pary": [
     {
@@ -23,6 +23,7 @@
         "kratky_nazev": "iShares Dow Jones",
         "isin": "IE00B53L4350",
         "index": "Dow Jones Industrial Average",
+        "index_poznamka": "produktová stránka správce uvádí variantu indexu Net TR (s reinvesticí čistých dividend); KID uvádí Dow Jones Industrial Average Index",
         "naklady_pct": 0.33,
         "naklady_typ": "průběžné náklady podle KID",
         "replikace": "fyzická",

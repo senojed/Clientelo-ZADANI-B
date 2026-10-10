@@ -1,15 +1,17 @@
-// Formulář: jen e-mail + nepovinný (nezaškrtnutý) souhlas s novinkami. Po úspěchu předá token k přehledu.
+// Formulář: jen e-mail + nepovinný (nezaškrtnutý) souhlas s novinkami. Po úspěchu přejde na stránku přehledu s tokenem.
 // Klíč idempotence brání dvojímu uložení při dvojkliku; honeypot (skryté pole) odfiltruje boty.
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { getAttribution, getSessionId, setLeadId, track } from "@/lib/track";
 
-export default function LeadForm({ onDone }: { onDone: (token: string) => void }) {
+export default function LeadForm() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
-  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "error" | "bad_email" | "limit">("idle");
   const attemptKey = useRef<string | null>(null);
   const started = useRef(false);
 
@@ -36,11 +38,13 @@ export default function LeadForm({ onDone }: { onDone: (token: string) => void }
           website,
         }),
       });
+      if (res.status === 400) return setStatus("bad_email");
+      if (res.status === 429) return setStatus("limit");
       if (!res.ok) throw new Error(String(res.status));
       const data = await res.json();
       if (data.lead_id) setLeadId(data.lead_id);
       if (!data.token) throw new Error("bez tokenu");
-      onDone(data.token);
+      router.push(`/prehled?t=${encodeURIComponent(data.token)}`);
     } catch {
       setStatus("error");
     }
@@ -48,7 +52,7 @@ export default function LeadForm({ onDone }: { onDone: (token: string) => void }
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-3 rounded-box border border-line p-5">
-      <h2 className="text-xl font-semibold">Celý přehled zdarma</h2>
+      <h2 className="text-xl font-semibold">Celý přehled zdarma za e-mail</h2>
       <ul className="list-disc pl-5 text-sm text-muted">
         <li>ISIN UCITS alternativ ke zkopírování do vyhledávání u brokera</li>
         <li>odkazy na české KID a data dokumentů</li>
@@ -59,6 +63,9 @@ export default function LeadForm({ onDone }: { onDone: (token: string) => void }
         <span className="text-sm text-muted">E-mail</span>
         <input
           type="email"
+          name="email"
+          autoComplete="email"
+          inputMode="email"
           required
           value={email}
           onChange={(e) => {
@@ -85,15 +92,17 @@ export default function LeadForm({ onDone }: { onDone: (token: string) => void }
       >
         {status === "sending" ? "Odesílám..." : "Získat přehled zdarma"}
       </button>
-      <p className="text-sm text-muted">Přehled se zobrazí hned po odeslání.</p>
+      <p className="text-sm text-muted">Přehled se otevře hned po odeslání.</p>
       <p className="text-xs text-muted">
         Odesláním potvrzuješ, že ses seznámil/a se{" "}
-        <Link href="/zasady" className="underline">
+        <Link href="/zasady" target="_blank" className="underline">
           zásadami zpracování
         </Link>
         . E-mail uložíme jako kontakt k tomuto přehledu.
       </p>
       {status === "error" && <p className="text-sm text-red-700">Nepodařilo se odeslat. Zkus to prosím znovu.</p>}
+      {status === "bad_email" && <p className="text-sm text-red-700">Zkontroluj prosím e-mailovou adresu.</p>}
+      {status === "limit" && <p className="text-sm text-red-700">Příliš mnoho pokusů. Zkus to prosím za chvíli.</p>}
     </form>
   );
 }

@@ -1,7 +1,7 @@
 // Kontrola vstupů z prohlížeče. Koncové body jsou veřejné, takže každému poli
 // nastavíme tvar a maximální délku, aby do databáze nešel nesmysl nebo spam.
 
-export const CONSENT_TEXT_VERSION = "2026-10-09-v1";
+export const CONSENT_TEXT_VERSION = "2026-10-10-v2";
 
 // Události, které smí poslat prohlížeč. "lead_created" mezi nimi není: tu zapisuje jen server.
 export const CLIENT_EVENTS = [
@@ -10,9 +10,11 @@ export const CLIENT_EVENTS = [
   "interaction_used",
   "row_expand",
   "cta_click",
+  "source_click",
   "form_start",
   "form_submit_attempt",
-  "pdf_requested",
+  "overview_shown",
+  "link_copied",
   "pdf_download_clicked",
 ] as const;
 

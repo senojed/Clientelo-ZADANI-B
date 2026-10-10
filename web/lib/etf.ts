@@ -1,17 +1,16 @@
-// Ověřená data o ETF (kopie data/etf.json z kořene repa) a pomocné funkce pro jejich zobrazení.
-// Veřejná část (stránka) ukazuje jen souhrn; plný přehled s ISIN a odkazy na KID se vydává až po odeslání e-mailu.
-import data from "@/data/etf.json";
+// Veřejná data o ETF pro stránku (web/data/etf-verejne.json, vyrábí scripts/sync-data.mjs) a pomocné funkce.
+// Veřejná část nemá ISIN ani odkazy na KID: ty jsou za e-mailem a importuje je jen server (lib/etf-plna.ts).
+import data from "@/data/etf-verejne.json";
 
-export type EtfData = typeof data;
-export type Par = EtfData["pary"][number];
+export type EtfVerejne = typeof data;
 
-export const etf: EtfData = data;
+export const etf: EtfVerejne = data;
 
 // Krátký popis zaměření pro člověka, který zkratky indexů nezná.
 export const zamereni: Record<string, string> = {
   DIA: "30 velkých amerických firem (index Dow Jones)",
-  IVV: "500 největších amerických firem (index S&P 500)",
-  VOO: "500 největších amerických firem (index S&P 500)",
+  IVV: "500 velkých amerických firem (index S&P 500)",
+  VOO: "500 velkých amerických firem (index S&P 500)",
   VT: "akcie z celého světa (index FTSE Global All Cap)",
 };
 

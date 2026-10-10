@@ -1,4 +1,5 @@
 // Výpočet modelového rozdílu ročního poplatku fondu: částka × (náklady UCITS − náklady US ETF).
+// Pod výsledkem je výzva k přehledu pro vybraný fond (interakce vede ke kontaktu).
 // Fond vybírá rodič (klik na řádek tabulky nebo výběr tady), aby tabulka a kalkulačka ukazovaly totéž.
 // Nejde o celkové náklady investora (bez kurzů, spreadů, daní, brokera).
 "use client";
@@ -75,8 +76,16 @@ export default function Kalkulacka({ ticker, onTicker }: Props) {
         <dd className="text-right font-medium">{kc(ucits - us)} ročně</dd>
       </dl>
       <p className="mt-2 text-xs text-muted">
-        Modelový výpočet jen z ročního poplatku fondu. Bez kurzů, spreadů, daní a poplatků brokera.
+        Modelový výpočet jen z ročních nákladů fondu na správu a provoz. Bez transakčních nákladů fondu, kurzů, spreadů,
+        daní a poplatků brokera. Fondy jsou v USD, výsledek v korunách ovlivní i kurz.
       </p>
+      <a
+        href="#formular"
+        onClick={() => track("cta_click", { cta: "kalkulacka_prehled", ticker: par.us.ticker })}
+        className="mt-3 block rounded-box bg-accent px-4 py-2 text-center text-sm font-medium text-accent-foreground"
+      >
+        Získat ISIN a český KID zdarma
+      </a>
     </div>
   );
 }
