@@ -34,3 +34,5 @@ Celkem zhruba 5,5 hodiny od přečtení zadání. Velkou část času zabraly re
 | 14:55 až 15:53 | pauza | Jan dokončoval design mimo Clauda |
 | 15:53 až 16:19 | ~25 min | Převod tmavého designu do kódu (tokeny, písma, video, tabulka, kalkulačka, formulář), test v mobilu, Lighthouse |
 | 16:19 až 16:57 | ~40 min | Telefon (pád `crypto.randomUUID`, snap), záloha tagem, rozbor LCP (8 experimentů, příčina = webová písma), ořezání písem na české znaky |
+| 17:07 až 18:42 | ~1 h 35 min | Kontrola reklam v1, vlastní reklamy v2 (skript), změna pořadí řádků tabulky a návrat, kontrola reklam v3, kompletní texty stránky a PDF přehledu |
+| 22:40 až 23:10 | ~30 min | Kontrola PDF přehledu (InDesign), tlačítko Stáhnout PDF s tokenem, reklamy v3 do repa, zápis do wiki |
