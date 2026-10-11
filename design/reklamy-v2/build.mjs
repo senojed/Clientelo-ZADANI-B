@@ -1,5 +1,6 @@
 // Vyrobí 4 reklamní obrázky (A a B, formát 4:5 a 9:16) z HTML šablony a vyexportuje je do PNG přes Chrome bez okna.
 // Spuštění: node design/reklamy-v2/build.mjs (z kořene repa). Texty a čísla jsou v objektu OBSAH, ověřená data viz data/etf.json.
+// Výřez tabulky v B = první dva řádky stránky (pořadí VOO, VT, DIA, IVV z web/lib/poradi.ts); při změně pořadí upravit i tady.
 // Pravidla: povinné upozornění je přímo v obrázku, obsah u 9:16 leží mimo horních 250 px a dolních 350 px (rozhraní Stories/Reels),
 // žádný falešný klikací prvek (tlačítko dělá Meta pod reklamou).
 import { spawnSync } from "node:child_process";
@@ -17,7 +18,7 @@ const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const data = JSON.parse(readFileSync(join(koren, "data", "etf.json"), "utf8"));
 const par = (t) => data.pary.find((p) => p.us.ticker === t);
 const pct = (v) => `${v.toFixed(2).replace(".", ",")} %`;
-const voo = par("VOO"), ivv = par("IVV");
+const voo = par("VOO"), vt = par("VT");
 
 const NEDELITELNE = (s) => s.replace(/ ([aiksuvzo]) /gi, " $1\u00a0"); // jednopísmenná slova nezůstanou na konci řádku
 
@@ -48,7 +49,7 @@ function html(varianta, f) {
     : `<div class="table" style="top:${f.tableB}px">
          <div class="th"><span>Fond USA</span><span>Alternativa v EU</span><span class="r">Roční náklady<br>USA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EU</span></div>
          <div class="tr"><span class="tick2">VOO</span><span>Vanguard S&amp;P 500</span><span class="cp"><i>${pct(voo.us.naklady_pct)}</i><b>${pct(voo.ucits.naklady_pct)}</b></span></div>
-         <div class="tr"><span class="tick2">IVV</span><span>iShares Core S&amp;P 500</span><span class="cp"><i>${pct(ivv.us.naklady_pct)}</i><b>${pct(ivv.ucits.naklady_pct)}</b></span></div>
+         <div class="tr"><span class="tick2">VT</span><span>${vt.ucits.kratky_nazev}</span><span class="cp"><i>${pct(vt.us.naklady_pct)}</i><b>${pct(vt.ucits.naklady_pct)}</b></span></div>
          <div class="more"><span></span><span></span><span></span></div>
          <div class="note">Další 2 fondy v celém přehledu.</div>
        </div>`;
