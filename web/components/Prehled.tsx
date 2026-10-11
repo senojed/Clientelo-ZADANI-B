@@ -1,19 +1,22 @@
 // Plný přehled po odeslání e-mailu (stránka /prehled). Data dostane od serveru až po ověření tokenu.
-// Návštěvník si může zkopírovat odkaz (platí 24 h) nebo stránku uložit jako PDF tiskem prohlížeče.
+// Návštěvník si může zkopírovat odkaz (platí 24 h) nebo stáhnout hotové PDF přehledu (/prehled/pdf, vydá se s tokenem z adresy).
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import type { EtfData } from "@/lib/etf-plna";
 import { datum, pct, tvrdaMezera, zamereni } from "@/lib/etf";
 import { track } from "@/lib/track";
 
-// Vestavěný prohlížeč Facebooku a Instagramu tisk do PDF obvykle neumí.
+// Vestavěný prohlížeč Facebooku a Instagramu stahování souborů obvykle neumí.
 function jeVestavenyProhlizec(): boolean {
   return /FBAN|FBAV|FB_IAB|Instagram/i.test(navigator.userAgent);
 }
 
 export default function Prehled({ data }: { data: EtfData }) {
   const [zkopirovano, setZkopirovano] = useState<string | null>(null);
+  // Token z adresy přehledu: stejný odkaz ověří i stažení PDF.
+  const token = useSearchParams().get("t") ?? "";
   // Na serveru prohlížeč neznáme (false), v prohlížeči se zjistí z user agentu.
   const vestaveny = useSyncExternalStore(
     () => () => {},
@@ -50,20 +53,18 @@ export default function Prehled({ data }: { data: EtfData }) {
           >
             {zkopirovano === "odkaz" ? "Odkaz zkopírován" : "Zkopírovat odkaz"}
           </button>
-          <button
-            type="button"
-            onClick={() => {
-              track("pdf_download_clicked");
-              window.print();
-            }}
-            className="rounded-box border border-accent px-4 min-h-11 text-accent"
+          <a
+            href={`/prehled/pdf?t=${encodeURIComponent(token)}`}
+            download
+            onClick={() => track("pdf_download_clicked")}
+            className="flex items-center rounded-box border border-accent px-4 min-h-11 text-accent"
           >
-            Uložit jako PDF
-          </button>
+            Stáhnout PDF
+          </a>
         </div>
         {vestaveny && (
           <p className="no-print mt-2 text-sm text-muted">
-            Jsi ve Facebooku nebo Instagramu: pro uložení PDF otevři stránku v&nbsp;prohlížeči (menu ⋯, Otevřít v&nbsp;prohlížeči).
+            Jsi ve Facebooku nebo Instagramu: pokud se PDF nestáhne, otevři stránku v&nbsp;prohlížeči (menu ⋯, Otevřít v&nbsp;prohlížeči).
           </p>
         )}
       </div>

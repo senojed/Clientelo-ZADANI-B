@@ -1,6 +1,6 @@
 # Reklama B: hák "přehled 4 ETF" (v3)
 
-Stav: texty a vizuály hotové (v3, po auditu 1; vizuály vygenerované skriptem `design/reklamy-v2/build.mjs` z `data/etf.json`), podle pravidel Meta k 10. 10. 2026 spustitelné bez certifikace inzerenta (viz `compliance/checklist.md`) **po kontrole vizuálu v náhledu Ads Manageru** (okraje 9:16, čitelnost upozornění).
+Stav: texty a vizuály hotové (v3, po auditu 1; vizuály vytvořil Jan), podle pravidel Meta k 10. 10. 2026 spustitelné bez certifikace inzerenta (viz `compliance/checklist.md`) **po kontrole vizuálu v náhledu Ads Manageru** (okraje 9:16, čitelnost upozornění).
 
 - **Platforma a formát (předběžně):** Meta (Facebook, Instagram), karusel nebo jeden obrázek 1080×1350, mobil
 - **Headline:** 4 americká ETF a jejich evropské alternativy
@@ -19,4 +19,4 @@ Stav: texty a vizuály hotové (v3, po auditu 1; vizuály vygenerované skriptem
 
 ![9:16 Stories a Reels](ad-b-1080x1920.png)
 
-Upozornění na riziko je přímo v obrázku. U 9:16 leží obsah mimo horních 250 px a dolních 350 px (přibližná rezerva pro rozhraní, ověřit v náhledu). Obrázek nemá falešné tlačítko, klikací je tlačítko Mety ("Další informace").
+Upozornění na riziko je přímo v obrázku. U 9:16 leží obsah mimo horních 250 px a dolních 350 px (přibližná rezerva pro rozhraní, ověřit v náhledu). Obrázek nemá falešné tlačítko, klikací je tlačítko Mety ("Další informace"). Čísla v obrázku odpovídají `data/etf.json`.

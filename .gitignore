@@ -12,3 +12,13 @@ Thumbs.db
 
 # Snímky cizích webů jen pro inspiraci, nezveřejňovat
 design/inspirace/
+
+# Pracovní podklady designu, které do odevzdání nepatří (hotové výstupy jsou v ads/ a web/)
+design/mockup/
+design/sources/
+design/web-affinity/
+design/reklamy/
+design/reklamy-nastrely/
+design/reklamy-v3/
+design/PDF/
+web/.claude/
