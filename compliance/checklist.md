@@ -42,7 +42,7 @@ Princip převzatý z pokynů ESMA k marketingovým sdělením fondů [6] (formá
 - [x] zdroj u čísel ve veřejné části: odkaz na stránku správce u každého US fondu, datum českého KID u UCITS
 - [x] plné upozornění v patičce (riziko ztráty, minulá výkonnost, význam "KID nenalezen")
 - [x] datum ověření údajů
-- [x] řazení tabulky: VOO, VT, DIA, IVV (rozhodnutí autora 11. 10., dřív abecedně); pod tabulkou uvedeno "Pořadí řádků není hodnocení fondů". Pořadí nesmí působit jako doporučení (otázka pro právní kontrolu).
+- [x] řazení tabulky abecedně podle tickeru (neutrální), uvedeno pod tabulkou
 - [x] kalkulačka označená jako modelový výpočet jen z ročního poplatku fondu
 - [x] informace o zpracování u formuláře + odkaz na zásady
 - [x] souhlas s novinkami nepovinný a nezaškrtnutý
