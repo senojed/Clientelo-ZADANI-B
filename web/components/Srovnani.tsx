@@ -114,7 +114,7 @@ export default function Srovnani({ otevreny, onVyber }: Props) {
       </div>
       <p className="text-xs leading-4 text-muted">
         Roční náklady na správu a&nbsp;provoz fondu: USA podle správce, EU podle českého KID (bez transakčních nákladů fondu).
-        Seřazeno abecedně podle tickeru.
+        Pořadí řádků není hodnocení fondů.
       </p>
     </div>
   );

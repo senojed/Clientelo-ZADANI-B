@@ -1,10 +1,12 @@
 // Veřejná data o ETF pro stránku (web/data/etf-verejne.json, vyrábí scripts/sync-data.mjs) a pomocné funkce.
 // Veřejná část nemá ISIN ani odkazy na KID: ty jsou za e-mailem a importuje je jen server (lib/etf-plna.ts).
 import data from "@/data/etf-verejne.json";
+import { serad } from "@/lib/poradi";
 
 export type EtfVerejne = typeof data;
 
-export const etf: EtfVerejne = data;
+// Pořadí párů na stránce určuje lib/poradi.ts (ne abeceda z dat).
+export const etf: EtfVerejne = { ...data, pary: serad(data.pary) };
 
 // Česká typografie: za jednopísmennou předložkou nebo spojkou (a, i, k, o, s, u, v, z) nesmí řádek skončit.
 // Doplní nedělitelnou mezeru; používá se u textů z dat, které se do kódu nepíšou ručně.
