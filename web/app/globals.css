@@ -267,3 +267,13 @@ h3 {
     display: none !important;
   }
 }
+
+/* Pole formuláře a výběr fondu mají na mobilu písmo aspoň 16 px: Safari na iPhonu jinak při zaostření stránku přiblíží
+   a nevrátí. Výška polí (44 px) zůstává. */
+@media (max-width: 767px) {
+  input[type="email"],
+  input[type="text"],
+  select {
+    font-size: 16px !important;
+  }
+}

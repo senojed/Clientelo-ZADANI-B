@@ -3,7 +3,7 @@
 Next.js 16 + TypeScript, nasazeno na Vercel (Root Directory `web`). Hlavní README celého řešení je v kořeni repozitáře.
 
 - `app/page.tsx`, `components/`: landing page (úvod, tabulka `Srovnani`, `Kalkulacka`, `LeadForm`, `Prehled`)
-- `app/api/prehled/route.ts`: data přehledu jen s platným podepsaným tokenem (`lib/token.ts`)
+- `app/prehled/page.tsx`, `app/prehled/pdf/route.ts`: přehled a jeho PDF jen s platným podepsaným tokenem (`lib/token.ts`)
 - `app/zasady/page.tsx`: zásady zpracování osobních údajů
 - `app/api/lead/route.ts`: uložení kontaktu do databáze Neon, idempotence, honeypot, kontrola původu
 - `app/api/events/route.ts`: měření cesty bez cookies, jen povolené události

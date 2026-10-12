@@ -10,6 +10,7 @@ Plán byl zmrazen 9. 10. a dál platí, jen s těmito změnami, které vznikly p
 - **Měření:** `pdf_requested` přejmenováno na `overview_shown`, přibyly `row_expand`, `source_click`, `link_copied`; `fbclid` se ukládá s UTM; Meta Pixel ani Conversions API se nestaví.
 - **Zpracování dat:** funkce ve Frankfurtu (`fra1`), limit četnosti podle otisku IP, denní úklid otisků.
 - **Pořadí řádků tabulky:** abecedně podle tickeru.
+- **Veřejně jsou všechny 4 řádky tabulky** (ne dva) a plovoucí tlačítko formuláře se nepoužívá; formulář je na třetí obrazovce a výzvy k přehledu jsou v rozbaleném řádku a pod kalkulačkou.
 - Zadání A se nedělalo (příprava A zrušena 9. 10.).
 
 ## 1. Cíl a hodnocení

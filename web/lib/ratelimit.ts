@@ -5,8 +5,9 @@
 import { createHmac } from "node:crypto";
 import type { getSql } from "@/lib/db";
 
-// Kolik požadavků za hodinu z jedné IP: formulář málo, měřicí události víc (jedna návštěva jich pošle desítky).
-export const LIMITY = { lead: 5, events: 300 } as const;
+// Kolik požadavků za hodinu z jedné IP: formulář méně, měřicí události víc (jedna návštěva jich pošle desítky). Limity jsou
+// vyšší kvůli mobilním sítím, kde jednu IP sdílí mnoho lidí. Otisk obsahuje den (UTC), takže se limit o půlnoci UTC vynuluje.
+export const LIMITY = { lead: 20, events: 1000 } as const;
 
 function otiskIp(request: Request): string {
   // Vercel posílá skutečnou IP návštěvníka v hlavičce x-forwarded-for (první adresa v seznamu).

@@ -30,7 +30,7 @@ export default function Zasady() {
           formuláře) s&nbsp;náhodným identifikátorem, který žije jen do zavření nebo obnovení stránky. Pokud přijdeš z&nbsp;reklamy,
           uložíme i&nbsp;parametry odkazu (zdroj kampaně a&nbsp;identifikátor kliknutí fbclid, který k&nbsp;odkazu přidává Meta); Metě
           ani nikomu dalšímu je neposíláme. Po odeslání formuláře se
-          události z&nbsp;té návštěvy propojí s&nbsp;tvým kontaktem. Nepoužíváme cookies, nic neukládáme do tvého zařízení a&nbsp;nepoužíváme reklamní pixely ani analytické služby třetích stran. Základ: oprávněný zájem vyhodnotit, jak stránka
+          události z&nbsp;té návštěvy propojí s&nbsp;tvým kontaktem. Nepoužíváme cookies ani úložiště prohlížeče (identifikátor návštěvy je jen v&nbsp;paměti otevřené stránky) a&nbsp;nepoužíváme reklamní pixely ani analytické služby třetích stran. Základ: oprávněný zájem vyhodnotit, jak stránka
           funguje (písm. f); můžeš vznést námitku.
         </li>
         <li>
@@ -45,7 +45,7 @@ export default function Zasady() {
         Hosting Vercel Inc. (USA); serverové funkce běží v&nbsp;regionu Frankfurt, poskytovatel ale může údaje zpracovat i&nbsp;v&nbsp;USA.
         Předání do USA: Vercel je certifikován v&nbsp;rámci EU-US Data Privacy Framework (rozhodnutí Komise o&nbsp;odpovídající
         ochraně údajů).
-        Databáze Neon (region EU, Frankfurt). Technické logy hostingu mohou obsahovat IP adresu, prohlížeč, čas a&nbsp;adresu
+        Databáze Neon (Neon, Inc., USA; data jsou v&nbsp;regionu EU, Frankfurt). Technické logy hostingu mohou obsahovat IP adresu, prohlížeč, čas a&nbsp;adresu
         stránky; jejich rozsah a&nbsp;dobu uchování určuje poskytovatel.
       </p>
 

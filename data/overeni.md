@@ -14,7 +14,7 @@ Záznam toho, co je ověřené ze zdroje, s datem. Sem se zapisuje průběžně,
 | IVV náklady | expense ratio 0,03 % ("Fees as stated in the prospectus", bez data u poplatku) | tamtéž | 9. 10. 2026 |
 | IVV CUSIP | 464287200 | tamtéž | 9. 10. 2026 |
 | IVV ISIN | **neověřeno** (stránka ISIN neuvádí) | | |
-| IVV KID pro EU retail | **KID pro EU retail nenalezen k 9. 10. 2026.** Metoda: oficiální produktová stránka správce (sekce dokumentů) nabízí jen prospekt, finanční dokumenty a data, žádný KID/KIID/PRIIPs. Uložená kopie stránky obsahuje v datech stránky položku `"fundHeader.keyDocuments.EUPRIIP":""` (prázdná), zmínky "PRIIP" jinde jsou jen obecné texty šablony webu. Rozsah: jen tato stránka správce, ne distributoři. | https://www.ishares.com/us/products/239726/ishares-core-sp-500-etf, kopie `dukazy/2026-10-09-ivv-us-produktova-stranka.html` | 9. 10. 2026 |
+| IVV KID pro EU retail | **KID pro EU retail nenalezen k 9. 10. 2026.** Metoda: oficiální produktová stránka správce (sekce dokumentů) nabízí jen prospekt, finanční dokumenty a data, žádný KID/KIID/PRIIPs. Uložená kopie stránky obsahuje v datech stránky položku `"fundHeader.keyDocuments.EUPRIIP":""` (prázdná), zmínky "PRIIP" jinde jsou jen obecné texty šablony webu. Rozsah: jen tato stránka správce, ne distributoři. | https://www.ishares.com/us/products/239726/ishares-core-sp-500-etf, kopie `dukazy/2026-10-09-ivv-us-produktova-stranka.md` | 9. 10. 2026 |
 | UCITS název | iShares Core S&P 500 UCITS ETF, USD Accu | EU PRIIPs KID (`dukazy/2026-10-09-cspx-eu-priips-kid-de.pdf`) | 9. 10. 2026 |
 | UCITS ISIN | IE00B5BMR087 | tamtéž | 9. 10. 2026 |
 | UCITS index | S&P 500 Index (stejný index jako IVV, krok 1 algoritmu, stejný správce BlackRock) | tamtéž | 9. 10. 2026 |

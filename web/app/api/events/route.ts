@@ -17,6 +17,8 @@ export async function POST(request: Request) {
     return new Response(null, { status: 400 });
   }
 
+  if (!body || typeof body !== "object" || Array.isArray(body)) return new Response(null, { status: 400 });
+
   const { event, session_id } = body;
   if (!isClientEvent(event) || !isUuid(session_id)) return new Response(null, { status: 400 });
 

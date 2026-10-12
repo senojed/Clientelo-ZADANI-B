@@ -23,6 +23,11 @@ export async function POST(request: Request) {
     return Response.json({ error: "bad_request" }, { status: 400 });
   }
 
+  // Platné JSON může být i "null" nebo pole; potřebujeme objekt.
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return Response.json({ error: "bad_request" }, { status: 400 });
+  }
+
   // Honeypot: skryté pole, které člověk nevidí. Vyplní ho jen bot, tomu tváříme úspěch a nic neukládáme.
   if (typeof body.website === "string" && body.website.length > 0) {
     return Response.json({ ok: true });

@@ -32,7 +32,7 @@ function useSectionView(name: string) {
     if (!el) return;
     const obs = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
+        if (entries.some((e) => e.isIntersecting && e.intersectionRatio >= 0.3)) {
           track("section_view", { section: name });
           obs.disconnect();
         }
@@ -158,7 +158,7 @@ export default function Landing() {
               <li className="flex items-start gap-2.5">
                 <Image src="/icon-shield.svg" alt="" width={18} height={18} className="shrink-0" />
                 <p>
-                  <strong className="font-semibold text-foreground">Smí se nabízet v&nbsp;ČR.</strong> Všechny 4 alternativy
+                  <strong className="font-semibold text-foreground">Je v&nbsp;seznamu ČNB.</strong> Všechny 4 alternativy
                   jsou v&nbsp;seznamu ČNB fondů nabízených v&nbsp;ČR (k&nbsp;10.&nbsp;10.&nbsp;2026).
                 </p>
               </li>

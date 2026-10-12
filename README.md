@@ -38,7 +38,7 @@ Veřejně (bez e-mailu) jsou náklady, zdroj u každého čísla (stránka sprá
 
 ## Pořadí sekcí a proč
 
-Každá sekce je aspoň na výšku obrazovky mobilu (na 375×812 se vejde celá).
+Každá ze tří sekcí má aspoň výšku obrazovky mobilu a na 375×812 zabírá zhruba jednu obrazovku (srovnání a formulář o desítky pixelů víc).
 
 1. **Úvod:** nadpis "Evropské alternativy amerických ETF" navazuje na slib obou reklam; jedno tlačítko na srovnání. Návštěvník z reklamy během pár sekund pozná, že je na správném místě. Hned tu je "Marketingové sdělení, ne investiční doporučení" a riziko ztráty. Na pozadí je dekorativní video; obsah na něm nezávisí. Nejdřív se ukáže poster a video se stahuje až po načtení stránky, při omezeném pohybu v systému nebo úspoře dat se nepřehrává vůbec.
 2. **Tabulka + kalkulačka:** hodnota před formulářem. Jeden řádek = jeden pár (americké ETF, UCITS alternativa, náklady obou). Klik rozbalí detail se zdrojem a zároveň přepne fond v kalkulačce, takže jedna akce = dvě odpovědi. Kalkulačka je předvyplněná (VOO, 100 000 Kč), výsledek je vidět bez interakce. Rozbalený řádek i výsledek kalkulačky končí výzvou "Získat ISIN a český KID zdarma", takže každý interaktivní prvek vede ke kontaktu.
@@ -98,11 +98,11 @@ Upozornění "Marketingové sdělení. Investice nesou riziko ztráty." je pří
 
 ## Compliance
 
-Kontrolní seznam (zakázaná a povolená tvrzení, povinné prvky, pravidla platforem) je v [`compliance/checklist.md`](compliance/checklist.md). Právní rámec je ověřen jen obecně, řešení neprošlo právní kontrolou; před reálnou kampaní je nutná. Cookie lišta není potřeba: stránka nepoužívá cookies ani nic neukládá do prohlížeče. Při ostrém nasazení s pixely nebo analytikou by byla nutná.
+Kontrolní seznam (zakázaná a povolená tvrzení, povinné prvky, pravidla platforem) je v [`compliance/checklist.md`](compliance/checklist.md). Právní rámec je ověřen jen obecně, řešení neprošlo právní kontrolou; před reálnou kampaní je nutná. Stránka nepoužívá cookies ani úložiště prohlížeče; měření si drží identifikátor návštěvy jen v paměti stránky a čte parametry odkazu z reklamy (UTM, `fbclid`). **Zda pro takové vlastní měření stačí oprávněný zájem a lišta není potřeba, nebylo právně posouzeno** (pravidla ePrivacy se mohou vztahovat i na paměť stránky a identifikátory v adrese); je to bod pro právní kontrolu před ostrou kampaní. Pixely a analytika třetích stran by lištu se souhlasem předem vyžadovaly určitě. Neon (databáze) je provozovaný americkou společností, i to patří do právní kontroly.
 
 ## Mobil a výkon
 
-Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 až 96, přístupnost 100, best practices 100, SEO 100, LCP 2,4 až 2,7 s (cíl pod 2,5 s je hraniční, hlavním prvkem je poster videa), CLS 0, TBT 60 ms. Report: [`docs/lighthouse/`](docs/lighthouse/). Ruční průchod na reálném telefonu: Jan ho udělal 11. 10. 2026 a nenašel problém.
+Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 až 96, přístupnost 100, best practices 100, SEO 100, LCP 2,4 až 2,7 s (cíl pod 2,5 s je hraniční, hlavním prvkem je poster videa), CLS 0, TBT 60 ms. První měření je celý report, další dvě jsou uložená jako JSON: [`docs/lighthouse/`](docs/lighthouse/). Ruční průchod na reálném telefonu: Jan ho udělal 11. 10. 2026 a nenašel problém.
 
 ## Jak jsem pracoval s AI
 
@@ -144,8 +144,9 @@ Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 
 Next.js 16 (App Router, TypeScript, Tailwind), Vercel (Hobby, funkce v regionu `fra1`), databáze Neon Postgres (Frankfurt).
 
 - Přehled za e-mailem: stránka `/prehled?t=<token>`; server ověří podepsaný token (HMAC, platnost 24 h, bez e-mailu uvnitř) a teprve pak pošle plná data. Stránka sama dostává jen veřejnou podmnožinu dat (`web/data/etf-verejne.json`, vyrábí ji `scripts/sync-data.mjs`), ISIN ani odkazy na KID v jejím JavaScriptu nejsou.
+- Poznámka: po zveřejnění repa jsou data i PDF přehledu viděná v repu (`data/etf.json`, `web/private/prehled-etf.pdf`), takže brána "za e-mailem" je u dema ukázka mechanismu, ne skutečné zamčení obsahu.
 - PDF přehledu: `/prehled/pdf?t=<token>` vydá soubor z `web/private` jen s platným tokenem (jinak 401).
-- Formulář: kontrola původu, honeypot, klíč idempotence, limit 5 odeslání za hodinu z jedné IP (ukládá se jen otisk IP na den).
+- Formulář: kontrola původu, honeypot, klíč idempotence, limit 20 odeslání a 1000 měřicích událostí za hodinu z jedné IP (vyšší kvůli mobilním sítím se sdílenou IP; ukládá se jen otisk IP s datem, o půlnoci UTC se limit vynuluje). "Lead" v měření znamená jedno odeslání formuláře; stejný e-mail může vzniknout znovu, unikátní adresy spočítá dotaz v `web/db/funnel.sql`.
 
 ```bash
 cd web

@@ -39,3 +39,6 @@ from relace r
 left join souhlas s on s.session_id = r.session_id
 group by 1
 order by 1;
+
+-- Poznámka: "lead" = jedno odeslání formuláře (stejný e-mail může po čase vzniknout znovu). Počet unikátních e-mailů:
+--   select count(distinct email) from leads;
