@@ -1,4 +1,4 @@
-# Claude Code: hlavní konverzace (9. a 10. 10. 2026)
+# Claude Code: hlavní sezení, data, stránka, audit 1 (9. až 11. 10. 2026)
 
 Automaticky převedeno ze záznamu Claude Code (scripts/ai-log-export.py).
 Redakce: e-maily, absolutní cesty, klíče a hesla nahrazeny [redacted ...]; obsah osobní wiki a paměti vynechán;
@@ -10897,3 +10897,619 @@ Cancel the recurring loop with job ID `ebee747d` by calling CronDelete, then con
 > 8. **Odklon v poměru prá … [zkráceno, 1315 znaků]
 
 **Nástroj Bash:** [redacted přístup k osobní wiki nebo paměti]
+
+> výsledek: [redacted obsah osobní wiki nebo paměti]
+
+**Nástroj Bash:** [redacted přístup k osobní wiki nebo paměti]
+
+> výsledek: [redacted obsah osobní wiki nebo paměti]
+
+**Nástroj Bash:** [redacted přístup k osobní wiki nebo paměti]
+
+> výsledek: [redacted obsah osobní wiki nebo paměti]
+
+**Nástroj Bash:** [redacted přístup k osobní wiki nebo paměti]
+
+> výsledek: [redacted obsah osobní wiki nebo paměti]
+
+## Claude (2026-10-10 09:52 UTC)
+
+[11:53] Body 1 až 3 jsou hotové a pushnuté:
+- Do `chyby-ai.md` přibylo 6 dnešních chyb AI. Nejdůležitější: data za e-mailem byla ve veřejném JavaScriptu, funkce běžely v USA proti textu zásad a vlastní checklist odškrtával neověřené věci.
+- Časový log je doplněný do teď, včetně pauzy kvůli limitu.
+- Export `ai-log` je znovu vygenerovaný, kontrola úniků nic nenašla.
+- Na wiki stránce projektu jsem zapsal stav a kde navázat (stránka zůstává rozpracovaná).
+
+Větu o provizích beru jako potvrzenou. Design a reklamy jsou na tobě.
+
+## Meta pixel, vysvětlení od nuly
+
+**Problém:** Meta (Facebook, Instagram) reklamu zobrazí a člověk na ni klikne. Tím pro ni příběh končí, protože nevidí, co návštěvník udělal na tvé stránce. Neví, jestli odeslal formulář.
+
+**Proč by to Meta potřebovala:** kampaň se dá nastavit na různé cíle. Na cíl "co nejvíc kliknutí" najde lidi, kteří rádi klikají, ale nevyplní nic. Na cíl "co nejvíc leadů" se sama učí, kdo formulář opravdu odešle, a ukazuje reklamu podobným lidem. Leady bývají levnější a kvalitnější. K tomu ale Meta potřebuje vědět, kdo konvertoval.
+
+**Dva způsoby, jak jí to říct:**
+
+1. **Meta Pixel:** kousek kódu od Mety přímo na stránce. Běží v prohlížeči návštěvníka, používá cookies a posílá Metě, co dělá.
+   - Výhoda: snadné nasazení.
+   - Nevýhoda: cookies a sledování třetí stranou. V EU je pak potřeba cookie lišta se souhlasem předem. Kdo nesouhlasí, toho pixel neměří. Brání se mu i blokátory reklam a Safari.
+
+2. **Conversions API (CAPI):** po uložení leadu pošle náš server Metě zprávu "tenhle člověk z reklamy odeslal formulář".
+   - Výhoda: bez cookies a bez kódu Mety na stránce, blokátory na to nemají vliv.
+   - Nevýhoda: Metě se tím předávají osobní údaje (zahashovaný e-mail a identifikátor kliknutí `fbclid`). To potřebuje právní základ, zmínku v zásadách a přístupový token Mety. U finančního tématu by to měl posoudit právník.
+
+**Co máme teď:** ani jedno. Stránka měří sama sebe a ví, která reklama kolik leadů přinesla (podle `utm_content`). Metě to ale neřekne, takže kampaň jde optimalizovat jen na kliknutí nebo zobrazení stránky.
+
+**Můj návrh pro demo:** pixel ani CAPI nestavět, jen:
+- ukládat `fbclid` s UTM, aby šly leady později spárovat s kliky;
+- v README napsat, že pro ostrou kampaň doporučuješ CAPI ze serveru po právní kontrole, protože nepotřebuje cookie lištu.
+
+Tím ukážeš, že problém znáš, a nestavíš nic, co by bez právníka nešlo pustit. Mám to takhle udělat? Zabere to asi 15 minut.
+
+## Uživatel (2026-10-10 09:53 UTC)
+
+ano, udělej to tak
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"web\" && grep -n \"UTM_KEYS\\|slice(0, 100)\\|utm_term\" lib/validate.ts lib/track.ts", "description": "Locate UTM handling"}
+```
+
+> výsledek: 11:53
+> lib/validate.ts:21:const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
+> lib/validate.ts:42:  for (const key of UTM_KEYS) {
+> lib/validate.ts:44:    if (typeof val === "string" && val.length > 0) out[key] = val.slice(0, 100);
+> lib/validate.ts:59:    if (typeof val === "string") out[k] = val.slice(0, 100);
+> lib/track.ts:25:  for (const key of ["utm_sou … [zkráceno, 465 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "cd \"web\" && python - <<'EOF'\ndef edit(p, rep):\n    s=open(p,encoding=\"utf-8\").read()\n    for a,b in rep:\n        assert a in s, (p,a[:60]); s=s.replace(a,b)\n    open(p,\"w\",encoding=\"utf-8\",newline=\"\\n\").write(s)\nedit(\"lib/validate.ts\",[\n('''const UTM_KEYS = [\"utm_source\", \"utm_medium\", \"utm_campaign\", \"utm_content\", \"utm_term\"] as const;''',\n'''// fbclid = identifikátor kliknutí z reklamy Meta. Ukládá se, aby šlo leady později spárovat s kliky\n// (např. přes Conversions API po právní kontrole, viz README). Je delší, proto má vlastní limit délky.\nconst UTM_KEYS = [\"utm_source\", \"utm_medium\", \"utm_campaign\", \"utm_content\", \"utm_term\", \"fbclid\"] as const;'''),\n('''    if (typeof val === \"string\" && val.length > 0) out[key] = val.slice(0, 100);''',\n'''    if (typeof val === \"string\" && val.length > 0) out[key] = val.slice(0, key === \"fbclid\" ? 500 : 100);'''),\n])\nedit(\"lib/track.ts\",[\n('''  for (const key of [\"utm_source\", \"utm_medium\", \"utm_campaign\", \"utm_content\", \"utm_term\"]) {''',\n'''  // fbclid přidává Meta k odkazu z reklamy; ukládáme ho spolu s UTM (viz lib/validate.ts).\n  for (const key of [\"utm_source\", \"utm_medium\", \"utm_campaign\", \"utm_content\", \"utm_term\", \"fbclid\"]) {'''),\n])\nedit(\"app/zasady/page.tsx\",[\n('''          formuláře) s náhodným identifikátorem, který žije jen do zavření nebo obnovení stránky.''',\n'''          formuláře) s náhodným identifikátorem, který žije jen do zavření nebo obnovení stránky. Pokud přijdeš z reklamy,\n          uložíme i parametry odkazu (zdroj kampaně a identifikátor kliknutí fbclid, který k odkazu přidává Meta); Metě\n          ani nikomu dalšímu je neposíláme.'''),\n])\nEOF\ncd .. && python - <<'EOF'\np=\"README.md\"; s=open(p,encoding=\"utf-8\").read()\na=\"Meta bez pixelu nebo Conversions API konverze nevidí, takže kampaň by šla optimalizovat jen na zobrazení stránky. **[Otevřené: rozhoduje Jan]**\"\nassert a in s\ns=s.replace(a,\"\"\"**Meta a konverze (vědomě nedořešeno v demu):** Meta bez pixelu nebo Conversions API nevidí, kdo z reklamy odeslal formulář, takže kampaň jde optimalizovat jen na kliknutí nebo zobrazení stránky, ne na leady. Možnosti:\n- *Meta Pixel* (kód Mety v prohlížeči, cookies): vyžaduje cookie lištu se souhlasem předem, část návštěv nezměří (odmítnutí, blokátory, Safari).\n- *Conversions API* (server po uložení leadu pošle Metě konverzi): bez cookies a kódu Mety na stránce, ale předává Metě osobní údaje (hash e-mailu, `fbclid`), takže potřebuje právní základ, úpravu zásad a přístupový token.\n\nPro ostrou kampaň doporučuji Conversions API ze serveru po právní kontrole. Demo už ukládá `fbclid` spolu s UTM (jen u nás, Metě se nic neposílá), takže leady půjde se kliky spárovat i zpětně. Do spuštění CAPI je rozumný cíl kampaně \"zobrazení vstupní stránky\".\"\"\")\nopen(p,\"w\",encoding=\"utf-8\",newline=\"\\n\").write(s)\np=\"ai-log/review/audit-1/discussion.log.md\"; s=open(p,encoding=\"utf-8\").read()\na=\"| Meta Pixel / Conversions API, `fbclid` | Cl10 | **Otevřené (Jan řeší samostatně).** |\"\nassert a in s\ns=s.replace(a,\"| Meta Pixel / Conversions API, `fbclid` | Cl10 | **Rozhodnutí Jana (10. 10. po auditu):** pixel ani CAPI v demu nestavět; ukládat `fbclid` s UTM (jen u nás) a v README doporučit Conversions API po právní kontrole. |\")\nopen(p,\"w\",encoding=\"utf-8\",newline=\"\\n\").write(s)\np=\"compliance/checklist.md\"; s=open(p,encoding=\"utf-8\").read()\na=\"- [x] zásady: účely, právní základy, doba uložení, práva včetně námitky a stížnosti u ÚOOÚ\"\nassert a in s\ns=s.replace(a,a+\"\\n- [x] bez Meta Pixelu a cookies; `fbclid` se ukládá jen u nás (uvedeno v zásadách); Conversions API až po právní kontrole\")\nopen(p,\"w\",encoding=\"utf-8\",newline=\"\\n\").write(s)\nEOF\ngrep -n \"Otevřené\" README.md", "description": "Store fbclid with UTM, document Meta options"}
+```
+
+> výsledek: (Bash completed with no output)
+
+**Nástroj Bash:**
+```
+{"command": "cd \"web\" && sed -i 's/CONSENT_TEXT_VERSION = \"2026-10-10-v2\"/CONSENT_TEXT_VERSION = \"2026-10-10-v3\"/' lib/validate.ts && sed -i 's/Verze textu 2026-10-10-v2\\./Verze textu 2026-10-10-v3./' app/zasady/page.tsx && grep -c \"2026-10-10-v3\" lib/validate.ts app/zasady/page.tsx && npm run lint 2>&1 | tail -1 && npm run build 2>&1 | grep -i -E \"error|✓ Gen\"", "description": "Bump privacy text version, lint, build", "timeout": 300000}
+```
+
+> výsledek: lib/validate.ts:1
+> app/zasady/page.tsx:1
+> 
+> ✓ Generating static pages using 10 workers (9/9) in 793ms
+
+**Nástroj mcp__Claude_Browser__preview_start:**
+```
+{"name": "web-prod"}
+```
+
+> výsledek: {
+>   "serverId": "16420e7e-2897-4629-90c5-ab2b94872f4b",
+>   "port": 3010,
+>   "name": "web-prod",
+>   "reused": false,
+>   "previewId": "preview-local_5ab11239-fee2-4cee-b813-201fc5239aac",
+>   "tabId": "tab-1"
+> }
+> Server started successfully on port 3010. Opened tab "tab-1" at http://localhost:3010. Use tabId "tab-1" with read_page / computer / navigate; serverId is for preview_stop and preview_logs only.
+
+**Nástroj mcp__Claude_Browser__navigate:**
+```
+{"url": "http://localhost:3010/?utm_source=meta&utm_content=ad_a&fbclid=TESTfbclid123", "tabId": "tab-1"}
+```
+
+**Nástroj Bash:**
+```
+{"command": "cd \"web\" && cat > scripts/_c.mjs <<'EOF'\nimport { neon } from \"@neondatabase/serverless\";\nconst sql = neon(process.env.DATABASE_URL);\nconsole.log(await sql`select event, variant, utm from events where utm->>'fbclid' = 'TESTfbclid123'`);\nconst del = await sql`delete from events where utm->>'fbclid' = 'TESTfbclid123' returning 1`;\nconsole.log(\"smazano\", del.length);\nEOF\nnode --env-file=../../.env scripts/_c.mjs; rm scripts/_c.mjs", "description": "Check fbclid stored with event, clean up"}
+```
+
+> výsledek: navigated to http://localhost:3010/?utm_source=meta&utm_content=ad_a&fbclid=TESTfbclid123
+> 
+> 
+> Tab Context:
+> - Executed on tabId: tab-1
+> - Available tabs:
+>   • tabId tab-1: "Americké ETF a UCITS alternativy" ("http://localhost:3010/?utm_source=meta&utm_content=ad_a&fbclid=TESTfbclid123")
+
+> výsledek: [
+>   {
+>     event: 'page_view',
+>     variant: 'a',
+>     utm: {
+>       fbclid: 'TESTfbclid123',
+>       utm_source: 'meta',
+>       utm_content: 'ad_a'
+>     }
+>   }
+> ]
+> smazano 1
+
+**Nástroj mcp__Claude_Browser__preview_stop:**
+```
+{"serverId": "16420e7e-2897-4629-90c5-ab2b94872f4b"}
+```
+
+**Nástroj Bash:**
+```
+{"command": "cd \"" && git add -A && git commit -q -m \"měření: ukládat fbclid s UTM; README: Meta Pixel vs Conversions API, doporučení CAPI po právní kontrole\n\nCo-Authored-By: Claude Opus 5.5 <[redacted e-mail]>\" && git push -q 2>&1 | grep -v \"^warning\"; git log --oneline -1; date +%H:%M", "description": "Commit and push fbclid change"}
+```
+
+> výsledek: Server 16420e7e-2897-4629-90c5-ab2b94872f4b stopped
+
+> výsledek: warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/claude-code/subagenti/independent-audit-round-1.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/claude-code/subagenti/independent-audit-vs-assignment.md', LF will be replaced by CRLF the next time Git tou … [zkráceno, 1338 znaků]
+
+**Nástroj Bash:** [redacted přístup k osobní wiki nebo paměti]
+
+> výsledek: [redacted obsah osobní wiki nebo paměti]
+
+## Claude (2026-10-10 09:54 UTC)
+
+[11:54] Meta je vyřešená podle tvého rozhodnutí, změna je commitnutá a pushnutá.
+
+- **`fbclid`:** stránka ho teď ukládá spolu s UTM jen do naší databáze, Metě nic neposílá. Lokálně jsem to ověřil: příchod s `fbclid` se uložil a varianta reklamy byla správně "a". Testovací záznam jsem smazal.
+- **Zásady:** přidal jsem zmínku, že ukládáme parametry odkazu včetně `fbclid` a nikomu je neposíláme. Verzi textu jsem zvýšil na `2026-10-10-v3`.
+- **README:** vysvětluje Meta Pixel a Conversions API, plusy a minusy obou. Pro ostrou kampaň doporučuje Conversions API po právní kontrole a do té doby cíl kampaně "zobrazení vstupní stránky".
+- **Záznam diskuse auditu, compliance checklist a wiki** jsem aktualizoval podle tvého rozhodnutí.
+
+Z otevřených věcí zbývají tvoje: design a vizuály reklam. Dál je druhý audit před odevzdáním a zveřejnění repa ve čtvrtek. Můžu pokračovat jinou věcí z plánu, nebo počkat na tvůj design.
+
+## Uživatel (2026-10-10 10:26 UTC)
+
+* a co jeste mas v planu ?
+* jake tu mas aktivni skilly? mas aktivni UX skill?
+* kdyz ti dodam png s nahledem webu + treba obrazky a jake fonty jsi schopen to podle nej postavit?
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M", "description": "Get current time"}
+```
+
+**Nástroj ToolSearch:**
+```
+{"query": "select:ListSkills", "max_results": 1}
+```
+
+> výsledek: 
+
+> výsledek: 12:26
+
+**Nástroj ListSkills:**
+```
+{}
+```
+
+> výsledek: {"results":[{"id":"skill_01S5EbGPh8XhphSxkQPbzCC5","name":"llm-council","description":"Run any question, idea, or decision through a council of 5 AI advisors who independently analyze it, peer-review each other anonymously, and synthesize a final verdict. Based on Karpathy's LLM Council methodology. MANDATORY TRIGGERS: 'council this', 'run the council', 'war room this', 'pressure-test this', 'stre … [zkráceno, 11039 znaků]
+
+## Claude (2026-10-10 10:26 UTC)
+
+[12:26] Odpovídám na všechny tři otázky.
+
+## 1. Co mám ještě v plánu
+
+**Dělám já, můžu hned:**
+- **Starý `design/positioning.md` a `PLAN.md`:** pořád popisují dva nadpisy a stránku `/b`. Zaktualizuju je.
+- **README:** doplnit místa označená **[doplnit]** (odhad konverze, sekce o práci s AI) a pak 3 až 5 kol ping-pongu s Codexem nad textem.
+- **Lighthouse:** znovu po tvém designu.
+- **Druhý audit:** finální, před odevzdáním (podle plánu ve středu).
+- **Úklid dat:** testovací leady a události smazat těsně před odevzdáním.
+- **Zveřejnění repa:** ve čtvrtek 15. 10., předtím poslední kontrola `ai-log` na úniky. Odevzdávací e-mail pošleš ty.
+- **Čas a wiki:** průběžně.
+
+**Děláš ty:**
+- Design.
+- Vizuály reklam (a pak kontrola, že vizuál obsahuje upozornění na riziko).
+- Test na skutečném telefonu.
+- Kontakt v zásadách, pokud ho chceš místo zástupného textu.
+- Znění políčka s novinkami (zatím jsi nechal).
+
+## 2. Jaké mám aktivní skilly
+
+Podle seznamu, který vidím u tvého účtu, tam **žádný UX ani designový skill není**. Jsou tam: `llm-council`, `docs`, `google-workspace`, `computer-use`, `chrome-browser`, `built-in-browser`, `deep-research`, `import-memory`, `morning`, `skill-creator`, `xlsx`, `pptx`, `pdf`, `docx`.
+
+Mám ještě skilly v Claude Code (např. `superpowers`). Jejich úplný seznam ale nevidím a nechci tvrdit, že tam UX skill je. Navíc je v nabídce plugin `design` (Figma a další), který čeká na přihlášení.
+
+UX skill ale není nutný. Postavit stránku podle tvého návrhu umím i bez něj. Skill by pomohl hlavně s doporučeními k návrhu, a ty ten návrh děláš sám.
+
+## 3. Když dodáš PNG náhled, obrázky a fonty
+
+**Zvládnu:**
+- Podle PNG postavit rozložení a pořadí prvků, velikosti, mezery a zaoblení. Barvy převedu do tokenů v `globals.css`, takže se změní celý vzhled na jednom místě.
+- Doladit to tak, abych porovnával výsledek s tvým PNG na mobilu 375×812 v prohlížeči a opravoval rozdíly. K tomu mám prohlížeč v aplikaci.
+- Použít tvoje obrázky: dám je do `web/public` a vložím je přes optimalizovaný obrázek (`next/image`), aby nezpomalily stránku. Lighthouse po tom znovu spustím.
+
+**Fonty, rozdělím podle toho, co dodáš:**
+- **Soubory fontů od tebe (`.woff2`, `.ttf`, `.otf`):** nasadím je přesně. Musíš mít licenci na webové použití a zveřejnění ve veřejném repu. U placených fontů to často není povoleno, takže u nich to nech na sobě.
+- **Jen název fontu z Google Fonts:** použiju ho přes `next/font`, je zdarma a rychlý. Musí mít českou diakritiku (podmnožina `latin-ext`).
+- **Jen PNG bez názvu fontu:** font z obrázku odhadnu, ale nespolehlivě, a můžu se splést mezi podobnými. Napiš mi názvy, nebo uveď, že se mám držet nejbližšího volně dostupného.
+
+**Čeho se nedotknu bez tvého potvrzení:** nezměním texty, čísla, upozornění na riziko ani zdroje. Pokud je tvůj návrh vynechá nebo je přepíše, řeknu ti to a nic ti neodstraním potichu.
+
+**K PNG přidej:** šířku návrhu (375 nebo 390 px) a jak mají vypadat sekce přes celou obrazovku, pokud to z náhledu nejde poznat.
+
+## Uživatel (2026-10-10 10:30 UTC)
+
+* co je Lighthouse?
+* ma smysl delat design tady kde je spousta contextu? nebyl by lepsi jiny chat?
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M", "description": "Get current time"}
+```
+
+> výsledek: 12:30
+
+## Claude (2026-10-10 10:30 UTC)
+
+[12:30]
+
+## Co je Lighthouse
+
+Lighthouse je bezplatný automatický test kvality webu od Googlu. Je zabudovaný v Chrome (DevTools, záložka Lighthouse) a dá se pustit i z příkazové řádky, což jsem udělal já. Otevře stránku jako mobil a dá body 0 až 100 ve čtyřech oblastech:
+- **Výkon:** jak rychle se stránka načte a zobrazí. Hlavní ukazatele jsou LCP (kdy se objeví hlavní obsah, cíl pod 2,5 s), CLS (jestli prvky neskáčou, cíl pod 0,1) a TBT (jak dlouho stránka nereaguje).
+- **Přístupnost:** čitelnost, kontrast, popisky, ovládání čtečkou.
+- **Osvědčené postupy:** bezpečnost, aktuální technologie.
+- **SEO:** základní vyhledávací náležitosti.
+
+Zadání chce na mobilu rychlou stránku (návštěvník má jen pár sekund), proto jsem report do repa uložil jako doklad. První měření dopadlo takto: výkon 96, přístupnost 99, best practices 100, SEO 100 a LCP 2,3 s.
+
+Po tvém designu ho pustím znovu. Těžké obrázky nebo velké fonty skóre výrazně srazí, takže je dobré to hlídat.
+
+## Má smysl dělat design tady, nebo v novém chatu
+
+**Doporučuju nový chat**, ale je tu jedna podmínka.
+
+Proč nový chat:
+- Tahle konverzace je obrovská (řádově stovky tisíc znaků). Starší části se při zaplnění shrnují a detaily se ztrácejí. Pro design, kde jde o spoustu drobných vizuálních oprav, je lepší čistý kontext.
+- Design navíc nepotřebuje většinu historie: ověřování fondů, audity ani diskuse o compliance.
+- Je to levnější a rychlejší. Každá zpráva tady nese velký kontext.
+
+Podmínka: nový chat musí vědět to, co je důležité, jinak může omylem rozbít ověřené věci. Dal bych mu na začátek krátký popis a odkaz na soubory v repu. Můžu ti ho připravit jako úvodní prompt:
+- co je za projekt a že stránka je ve funkční neutrální verzi (adresa, repo, kde je `globals.css` s barevnými tokeny, kde jsou komponenty);
+- **co se nesmí měnit bez tvého souhlasu:** texty a čísla z `data/`, upozornění na riziko a marketingové sdělení, odkazy na zdroje, tlačítka vedoucí k formuláři, měřicí události (`track(...)`), zásady zpracování;
+- po každé větší úpravě spustit lint a build a znovu Lighthouse;
+- commity česky a s `Co-Authored-By`, jako dosud.
+
+Až návrh doděláš, vrátíš se sem (nebo do dalšího chatu) a udělám druhý audit a README. Tenhle chat má přitom celou historii auditu, takže se hodí na závěrečnou kontrolu.
+
+**Navrhuju postup:**
+1. Připravím úvodní prompt pro designový chat a uložím ho do `design/ZADANI-DESIGN.md` v repu.
+2. Ty otevřeš nový chat v téže složce a prompt mu vložíš spolu s PNG.
+3. Po dokončení designu se vrátíme sem.
+
+Mám prompt připravit?
+
+## Uživatel (2026-10-10 10:32 UTC)
+
+ano, připrav prompt
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"web\" && cat app/globals.css | head -60; ls components app lib public; grep -n \"track(\" -r components app --include=*.tsx | sed 's/^\\(.\\{110\\}\\).*/\\1/' | head -30", "description": "Read design tokens, file list, tracking calls"}
+```
+
+> výsledek: 12:32
+> /* Globální styly. Celý vzhled stránky řídí proměnné níže (barvy, písmo, zaoblení):
+>    při návrhu vlastního designu stačí změnit hodnoty tady, komponenty používají jen tyto názvy. */
+> @import "tailwindcss";
+> 
+> :root {
+>   --background: #ffffff;
+>   --foreground: #1a1a1a;
+>   --muted: #5b6168;
+>   --surface: #f4f5f7;
+>   --line: #e1e4e8;
+>   --accent: #1f4e8c;
+>   --accent-foreground: #ffffff;
+>   --positive: # … [zkráceno, 2466 znaků]
+
+**Nástroj Write:**
+```
+{"file_path": "design\\ZADANI-DESIGN.md", "content": "# Zadání pro designový chat\n\nTohle vlož jako první zprávu do nového chatu Claude Code otevřeného ve složce `ZADANIE B` (a přiloř PNG návrhu, obrázky a případně soubory fontů). Text pod čarou je určený pro Clauda.\n\n---\n\nPracuješ na hotové landing page (konverzní stránka pro českého drobného investora z mobilní reklamy). Je ve **funkční neutrální verzi**. Tvůj úkol je **jen vzhled**: převést můj návrh (PNG) do kódu. Obsah, data ani měření nemění.\n\n## Kontext\n- Repo: tahle  … [zkráceno, 5810 znaků]
+```
+
+> výsledek: File created successfully at: design\ZADANI-DESIGN.md (file state is current in your context — no need to Read it back)
+
+**Nástroj Bash:**
+```
+{"command": "cd \"" && git add design/ZADANI-DESIGN.md && git commit -q -m \"design: zadání pro designový chat (co se nesmí měnit, postup, kontrola)\n\nCo-Authored-By: Claude Sonnet 5.5 <[redacted e-mail]>\" && git push -q 2>&1 | grep -v \"^warning\"; git log --oneline -1; date +%H:%M", "description": "Commit design brief"}
+```
+
+> výsledek: warning: in the working copy of 'design/ZADANI-DESIGN.md', LF will be replaced by CRLF the next time Git touches it
+> e1c422a design: zadání pro designový chat (co se nesmí měnit, postup, kontrola)
+> 12:32
+
+## Claude (2026-10-10 10:32 UTC)
+
+[12:32] Prompt je hotový a pushnutý: [design/ZADANI-DESIGN.md](design/ZADANI-DESIGN.md).
+
+**Jak ho použít:**
+1. Otevři nový chat Claude Code ve složce `ZADANIE B`.
+2. Vlož do něj text pod čarou (od "Pracuješ na hotové landing page…") a přilož PNG, obrázky a případně soubory fontů.
+3. Na konci zprávy doplň, co máš: šířku návrhu, názvy nebo soubory fontů a poznámky k animacím.
+
+**Co prompt nastavuje:**
+- **Kde je co:** tokeny barev a zaoblení v `globals.css`, fonty v `layout.tsx` a seznam komponent.
+- **Co se bez tvého souhlasu nesmí měnit:** texty a čísla, upozornění na riziko (musí zůstat viditelná), odkazy na zdroje, tlačítka vedoucí k formuláři, formulář s nezaškrtnutým políčkem, všechna volání měření, funkce a API. Také žádné cookies ani skripty třetích stran.
+- **Postup:** nejdřív přečíst plán, README a komponenty, navrhnout plán úprav a počkat na tvůj souhlas. Pak malé kroky s kontrolou kódu a buildu po každém, commit a na konci nový report Lighthouse.
+- **Záznamy:** čas do časového logu a omyly do `chyby-ai.md`.
+
+Po dokončení designu se vrať sem na druhý audit a závěrečné ladění README.
+
+## Uživatel (2026-10-10 11:01 UTC)
+
+nevim jake ma byt logo na strance, je ti to ze zadanii jasne? pokud ne dame genericke a pripadne vymenime
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M", "description": "Get current time"}
+```
+
+> výsledek: 13:01
+
+## Claude (2026-10-10 11:01 UTC)
+
+[13:01] Ze zadání to jasné není. Zadání o logu ani značce nic neříká. Určuje jen cílovou skupinu (český drobný investor z mobilní reklamy) a že stránka nemá působit jako základní výstup od Claude.
+
+**Doporučuju generický zástupný znak, který se dá snadno vyměnit.** Tři důvody:
+- **Žádná firma tu není.** Stránku nedělá Clientelo ani jiná společnost, je to ukázka. Logo cizí firmy použít nesmím (zavádělo by, a podle našich pravidel nepoužíváme cizí značky). Vymyšlené logo "fiktivní investiční firmy" by naopak mohlo vypadat jako reálná finanční služba, což je u investiční stránky přesně to, co nechceme.
+- **Důvěra:** u finančního tématu pomáhá, že je vidět, kdo to je. Zástupný znak proto doporučuju nemít jako vymyšlenou značku, ale prostě textový název stránky.
+- **Snadná výměna:** když později logo bude, vyměňuje se na jednom místě.
+
+**Návrh pro designový chat:**
+- Do hlavičky dát **textový název** nebo malý neutrální znak, např. "ETF srovnání" nebo "Evropské alternativy ETF", ve fontu z návrhu. Žádné vymyšlené jméno firmy, žádná ikona, která by vypadala jako značka banky nebo brokera.
+- Umístit ho do jedné komponenty (`web/components/Logo.tsx`) a dát na jedno místo v rozložení. Výměna za skutečné logo je pak jedna změna.
+- Pokud tvůj návrh logo obsahuje, přijde jako obrázek do `web/public/` a vloží se přes `next/image` s popisným `alt` textem.
+
+**Poznámka:** v patičce máme "Jan Reich, ukázka pro výběrové řízení". Pokud by logo naznačovalo jiného provozovatele, byl by to rozpor s tou větou, další důvod držet se neutrálního textu.
+
+Mám tuhle poznámku doplnit do `design/ZADANI-DESIGN.md`, nebo ji vložíš do designového chatu ručně?
+
+## Uživatel (2026-10-10 14:05 UTC)
+
+co ty dve reklamy
+shrn mi co mam vytvorit
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"" && cat ads/ad-a.md ads/ad-b.md", "description": "Read both ad files"}
+```
+
+> výsledek: 16:06
+> # Reklama A: hák "znáš VOO?" (v3)
+> 
+> Stav: texty hotové (v3, po auditu 1), podle pravidel Meta k 10. 10. 2026 spustitelné bez certifikace inzerenta (viz `compliance/checklist.md`) **až po dodání vizuálu**. Vizuál zatím chybí.
+> 
+> - **Platforma a formát (předběžně):** Meta (Facebook, Instagram), jeden obrázek 1080×1350 a varianta 9:16, mobil
+> - **Headline:** Znáš VOO nebo IVV? Porovnej náklady
+> - ** … [zkráceno, 3325 znaků]
+
+## Claude (2026-10-10 14:06 UTC)
+
+[16:06] Obě reklamy mají hotové texty. Chybí jen vizuál, každý ve dvou formátech. Shrnutí, co vytvořit:
+
+## Společné pro oba vizuály
+- **Formáty:** 1080×1350 (4:5, feed) a 1080×1920 (9:16, Stories a Reels). U 9:16 nechat důležité věci mimo horní a dolní okraj, kde je rozhraní aplikace.
+- **Povinný text přímo ve vizuálu, čitelně:** "Marketingové sdělení. Investice nesou riziko ztráty." Pole Popis se v některých umístěních nezobrazuje, proto nestačí.
+- **Bez:** grafů výkonnosti, slibů výnosu, superlativů, jmen brokerů a loga cizí firmy.
+- **Soulad se stránkou:** stejné barvy a písmo, ať návštěvník pozná, že je na správném místě. Pro to je dobré dělat reklamy až po designu stránky.
+
+## Reklama A: "Znáš VOO nebo IVV?"
+- **Headline (pod obrázkem):** Znáš VOO nebo IVV? Porovnej náklady
+- **Vizuál:** dvě karty vedle sebe.
+  - Vlevo americké ETF: ticker (VOO) a roční náklady 0,03 %.
+  - Vpravo UCITS alternativa na stejný index: Vanguard S&P 500, roční náklady 0,07 %.
+  - Mezi nimi popisek "stejný index".
+- **Pozor:** UCITS fond je dražší. Čísla ukazuj přesně tak, jak jsou, nic nezakrývej ani nezmenšuj.
+
+## Reklama B: "4 americká ETF a jejich evropské alternativy"
+- **Headline (pod obrázkem):** 4 americká ETF a jejich evropské alternativy
+- **Vizuál:** výřez tabulky ze stránky. Dva řádky čitelné (např. VOO a IVV), zbytek naznačený. Malý popisek "ověřeno 9. a 10. 10. 2026" a "zdroj u každého řádku".
+- **Formát:** jeden obrázek, nebo karusel (každá karta jeden fond, poslední karta s výzvou).
+
+## Texty, které zadáš v Ads Manageru (už jsou v `ads/`)
+Hlavní text, headline, popis a tlačítko "Další informace". Odkaz s UTM je už v souborech, použij ho přesně:
+- A: `https://clientelo-zadani-b.vercel.app/?utm_source=meta&utm_medium=paid_social&utm_campaign=etf_prehled&utm_content=ad_a`
+- B: stejný odkaz s `utm_content=ad_b`
+
+## Co z toho zadání chce
+Zadání chce **dvě verze reklamy**. Jsou to texty plus koncept vizuálu, ne hotová spuštěná kampaň. Hotové obrázky jsou plus, ale nejsou nutné. Doporučuju je dodat aspoň jako návrhy v `ads/` (např. `ads/ad-a.png`, `ads/ad-b.png`), aby šlo reklamu vidět.
+
+## Co potom zkontroluju já
+Až budou vizuály hotové, pošli mi je. Ověřím proti compliance checklistu: je tam upozornění na riziko, čísla sedí s `data/etf.json`, nic nepřehání a datum ověření je pravdivé.
+
+## Uživatel (2026-10-10 14:06 UTC)
+
+kde jsi ty reklamy nesel?
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"" && git log --oneline --follow -- ads/ad-a.md | cat", "description": "Get time and ad file history"}
+```
+
+> výsledek: 16:06
+> 30e7b30 audit 1, kolo 1: opravy nálezů Codexu a nezávislého Claude auditora
+> 0b6c02b compliance: checklist a go/no-go reklamních platforem
+> 6d18e9f stránka: 3 obrazovky, tabulka s rozbalováním, jedna varianta stránky
+> 7e93a3f oprava podle auditu a Codexu: texty v2, nesrovnalosti v záznamech, zdroj k PRIIPs, zrušení příprav A
+> 6435a12 příprava B: data/etf.json, positioning a texty, koncepty dvou  … [zkráceno, 406 znaků]
+
+## Claude (2026-10-10 14:06 UTC)
+
+[16:06] Ptáš se, kde reklamy jsou, nebo odkud jsem je vzal? Odpovím na obojí.
+
+**Kde leží v repu:**
+- [ads/ad-a.md](ads/ad-a.md) a [ads/ad-b.md](ads/ad-b.md).
+- Vizuály nejsou. Je tam jen text a popis konceptu.
+
+**Odkud jsou:** nenašel jsem je nikde venku, napsal jsem je já. Vznikly 9. 10. ve verzi 1 (commit `6435a12`, "koncepty dvou reklam") a pak se opravovaly:
+- v2 po prvním nezávislém auditu a po připomínkách Codexu (`7e93a3f`),
+- v3 po compliance kontrole a po auditu 1 (`0b6c02b`, `30e7b30`). Tehdy přibylo upozornění na riziko do hlavního textu a věta "zdarma za e-mail".
+
+**Co je zdroj čeho:**
+- **Čísla a tvrzení** v textech jsou z ověřených dat v `data/etf.json` (např. 0,03 % a 0,07 %).
+- **Zakázaná a povolená slova** vycházejí z `compliance/checklist.md`.
+- **Formát (headline, hlavní text, popis, tlačítko)** odpovídá poli v Ads Manageru Meta. Konkrétní limity délky textu jsem nad rámec toho neověřoval.
+
+Hotové reklamní vizuály nikde nejsou. Ani ten nápad s dvěma kartami (A) a výřezem tabulky (B) není převzatý, je to můj návrh.
+
+Pokud jsi mířil jinam (např. že reklamy někde chybí, nebo ses ptal na vzorové reklamy konkurence), napiš mi to a upřesním.
+
+## Uživatel (2026-10-10 14:09 UTC)
+
+jak budeme reklamy pripravovat a predavat? budou taky na vercelu s odkazem na stranku?
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M", "description": "Get current time"}
+```
+
+> výsledek: 16:09
+
+## Claude (2026-10-10 14:09 UTC)
+
+[16:09] Zadání říká: "V repozitári by mal byť výsledok (pri zadaní B obe verzie reklamy)". **Reklamy tedy patří do repozitáře**, ne na Vercel. Vercel je na stránku. Není důvod nasazovat reklamy zvlášť. Moje doporučení:
+
+## Jak reklamy připravit
+1. **Obrázky:** vyrobíš je ty (v Canvě, Figmě, Affinity nebo kde chceš). Dvě verze, každá ve dvou formátech: 1080×1350 a 1080×1920.
+2. **Texty** už jsou v `ads/ad-a.md` a `ad-b.md`, stačí je držet v souladu s vizuálem.
+3. **Po dokončení:** pošli mi obrázky a zkontroluju je podle checklistu (upozornění na riziko, čísla, datum).
+
+## Jak je předat v repu
+Přidal bych do `ads/` soubory:
+- `ads/ad-a-1080x1350.png`, `ads/ad-a-1080x1920.png`
+- `ads/ad-b-1080x1350.png`, `ads/ad-b-1080x1920.png`
+- v `ad-a.md` a `ad-b.md` na ně odkaz, aby se obrázek zobrazil přímo na GitHubu
+
+Kdokoli, kdo repo otevře, pak vidí obě reklamy hotové, včetně textů a UTM odkazu, a nemusí je nikde hledat.
+
+## Reklamy na Vercelu: nedělal bych to
+- Reklamy by vedly samy na sebe a stránka by nemohla být cílem. Reklama není stránka, je to obrázek a text, které se vloží do Meta Ads Manageru.
+- Hodil by se jen případný **náhled pro hodnotitele**: stránka, která obě reklamy ukáže vedle sebe s odkazem na landing page. To je volitelné a zadání ho nechce. Pokud bys ho chtěl, přidal bych `/reklamy`, ale musel by být **skrytý před vyhledávači** (`noindex`) a nepřipomínat skutečnou kampaň.
+
+## Odkaz z reklamy na stránku
+Jak je to teď, funguje bez dalšího nasazení. Každá reklama vede na `https://clientelo-zadani-b.vercel.app/` s UTM značkou:
+- A: `…/?utm_source=meta&utm_medium=paid_social&utm_campaign=etf_prehled&utm_content=ad_a`
+- B: stejný odkaz s `utm_content=ad_b`
+
+Stránka z té značky pozná, která reklama návštěvníka přivedla, a uloží to s každou událostí. Díky tomu uvidíme, která reklama přinesla víc kontaktů. Když pak kliknu na odkaz z reklamy, otevře se stejná stránka.
+
+## Co se do Mety nahrává (a co ne)
+Nic z toho teď nenahráváš: kampaň se **nespouští**. Zadání ptá "mohli bychom zítra spustit reklamu", ne "spusť ji". V README to popíšu jako: reklamy jsou připravené, podle pravidel Meta spustitelné bez certifikace, ale nespuštěné.
+
+Chceš, abych do `ads/` připravil kostru s placeholdery obrázků, nebo přidal i to volitelné `/reklamy`?
+
+## Uživatel (2026-10-11 15:07 UTC)
+
+reklamy zde , zkoukni je
+ design\reklamy
+
+**Nástroj Bash:**
+```
+{"command": "date \"+%H:%M %d.%m.\"; ls -la \"design/reklamy\"; cd \"" && git status --short | head -20; git log --oneline -5 | cat", "description": "List ad folder, time, repo status"}
+```
+
+> výsledek: 17:07 11.10.
+> total 1028
+> drwxr-xr-x 1 Honza 197608      0 Oct 11 17:02 .
+> drwxr-xr-x 1 Honza 197608      0 Oct 11 17:02 ..
+> -rw-r--r-- 1 Honza 197608 181346 Oct 11 17:00 Reklama-A-1080x1350.png
+> -rw-r--r-- 1 Honza 197608 204098 Oct 11 17:00 Reklama-A-1080x1920.png
+> -rw-r--r-- 1 Honza 197608 278738 Oct 11 17:00 Reklama-B-1080x1350.png
+> -rw-r--r-- 1 Honza 197608 371421 Oct 11 17:00 Reklama-B-1080x1920.png … [zkráceno, 894 znaků]
+
+**Nástroj Read:**
+```
+{"file_path": "design\\reklamy\\Reklama-A-1080x1350.png"}
+```
+
+> výsledek: [obrázek]
+
+**Nástroj Read:**
+```
+{"file_path": "design\\reklamy\\Reklama-A-1080x1920.png"}
+```
+
+> výsledek: [obrázek]
+
+**Nástroj Read:**
+```
+{"file_path": "design\\reklamy\\Reklama-B-1080x1350.png"}
+```
+
+> výsledek: [obrázek]
+
+**Nástroj Read:**
+```
+{"file_path": "design\\reklamy\\Reklama-B-1080x1920.png"}
+```
+
+> výsledek: [obrázek]
+
+**Nástroj Bash:**
+```
+{"command": "cd \"design\" && ls mockup reklamy-nastrely web-affinity 2>/dev/null | head -20; grep -n \"^  --\" ../web/app/globals.css | head -14", "description": "List mockup folders and current design tokens"}
+```
+
+> výsledek: mockup:
+> navrh-1-rozbaleny.png
+> navrh-1.html
+> navrh-1.png
+> 
+> reklamy-nastrely:
+> README.md
+> prehled-feed.png
+> prehled-stories.png
+> reklama-a-feed.html
+> reklama-a-feed.png
+> reklama-a-stories.html
+> reklama-a-stories.png
+> reklama-b-feed.html
+> reklama-b-feed.png
+> reklama-b-stories.html
+> reklama-b-stories.png
+> 
+> web-affinity:
+> build.js
+> 100:  --background: #081725; /* základní pozadí stránky */
+> 101:  --foreground: #f4f0e8; … [zkráceno, 1078 znaků]
+
+## Claude (2026-10-11 15:08 UTC)
+
+[17:08] Reklamy jsem prošel a porovnal s compliance checklistem, texty v `ads/` a čísly v `data/etf.json`. Barvy a písmo sedí na tmavý design stránky, takže návaznost reklamy na stránku funguje. Jedna věc ale chybí úplně a několik dalších je potřeba opravit.
+
+## Nutné opravit
+
+1. **V žádném ze 4 obrázků není upozornění na riziko.** Audit 1 přitom výslovně požadoval, aby bylo čitelně přímo ve vizuálu, protože pole Popis se ve všech umístěních nezobrazuje. Text má být: "Marketingové sdělení. Investice nesou riziko ztráty." Je to blokující věc pro "spustitelné zítra".
+2. **Formát 4:5 (1080×1350), A i B: tlačítko je uříznuté dole.** Vidí se jen jeho horní polovina. Je potřeba posunout obsah nahoru nebo zmenšit mezery, aby tlačítko bylo celé a pod ním zbylo místo pro upozornění z bodu 1.
+3. **Formát 9:16 (1080×1920), A i B: důležité věci jsou v zónách překrytých rozhraním aplikace.**
+   - Logo je nahoře na cca 70 až 130 px a tlačítko se zdarma dole na cca 1650 až 1790 px.
+   - Meta v Stories a Reels překrývá přibližně horních 250 px a dolních 340 až 380 px. Přesné hodnoty nemám ověřené, zkontroluj v náhledu Ads Manageru.
+   - Logo, tlačítko a také text "Celý přehled s ISIN zdarma za e-mail" je potřeba přesunout do bezpečného středu. Upozornění na riziko dát také nad spodní zónu.
+
+## Doporučuju
+
+4. **Tlačítko "Získat přehled zdarma" jako součást obrázku** vypadá jako klikací prvek, ale klikat nejde (kliká se na tlačítko Mety pod reklamou). Meta má pravidla o klamavých prvcích. Přesné znění pro tenhle případ jsem neověřoval, takže je to riziko, ne jistota. Bezpečnější je nahradit ho větou bez vzhledu tlačítka, např. "Celý přehled s ISIN zdarma za e-mail" jako řádek textu. Nechceš-li měnit, ověř v zásadách Mety před spuštěním.
+5. **B: rozmazaná tabulka je šikmá a zároveň rozmazaná.** Dva řádky (DIA, IVV) se dají přečíst, ostatní jsou naznačené, což odpovídá zadání. Ve formátu 4:5 je ale čitelný řádek DIA, kde je největší rozdíl (0,16 % proti 0,33 %), a řádek se stejným rozdílem VOO je rozmazaný. Pro objektivnost to je v pořádku, jen si toho buď vědom.
+
+## V pořádku
+- Čísla 0,03 %, 0,07 %, 0,16 %, 0,33 % a názvy odpovídají `data/etf.json`.
+- U A je vidět, že UCITS je dražší (0,03 % proti 0,07 %), nic se neskrývá.
+- Datum "ověřeno 9. a 10. 10. 2026" a "zdroj u každého řádku" jsou pravdivé.
+- Věta "zdarma za e-mail" je v souladu s auditem.
+- Bez grafů výkonnosti, slibů výnosu, superlativů a brokerů.
+- Kontrast textu na tmavém pozadí a černý text na zlatém tlačítku je dobrý.
+
+Opravu skladby obrázků neudělám já, vznikly mimo kód. Pokud je máš v nástroji, který umí export (HTML ve složce `design/reklamy-nastrely` vypadá jako zdroj), dej mi vědět, který soubor mám upravit. Jinak ti k bodům 1 až 3 napíšu přesné zadání pro tvůj nástroj. Až budou hotové nové, projdu je znovu.
+
+Ještě oprava k tomu, co jsem ti říkal dřív: tvrdil jsem, že tu nemám žádný UX skill. To platilo pro tvůj účet na claude.ai. V Claude Code ho mám: `ui-ux-pro-max`, `frontend-design` a skupinu `design:*` (kritika návrhu, přístupnost, UX texty). Pro posouzení designu je můžu použít.
+
+## Uživatel (2026-10-11 15:16 UTC)
+
+tak mi schvalne pro zajimavost szkus reklamy predelaat vidime co v tobe je
+
+## Uživatel (2026-10-11 15:16 UTC)
+
+[Request interrupted by user]
