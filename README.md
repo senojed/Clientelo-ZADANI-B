@@ -94,7 +94,7 @@ Dvě verze pro Meta (Facebook, Instagram), mobil. Obě vedou na stejnou stránku
 | Obrázky | [`ads/ad-a-1080x1350.png`](ads/ad-a-1080x1350.png), [`ads/ad-a-1080x1920.png`](ads/ad-a-1080x1920.png) | [`ads/ad-b-1080x1350.png`](ads/ad-b-1080x1350.png), [`ads/ad-b-1080x1920.png`](ads/ad-b-1080x1920.png) |
 | Texty, cílení, UTM | [`ads/ad-a.md`](ads/ad-a.md) | [`ads/ad-b.md`](ads/ad-b.md) |
 
-Upozornění "Marketingové sdělení. Investice nesou riziko ztráty." je přímo v každém obrázku, protože pole Popis se ve všech umístěních nezobrazuje. Obrázky nemají falešné tlačítko (klikací je tlačítko Mety). U reklamy A je datum ověření jen na stránce, ne v obrázku (vědomé rozhodnutí).
+Upozornění "Marketingové sdělení. Investice nesou riziko ztráty." je přímo v každém obrázku, protože pole Popis se ve všech umístěních nezobrazuje. Obrázky nemají falešné tlačítko (klikací je tlačítko Mety). U reklamy A je datum ověření jen na stránce, ne v obrázku (vědomé rozhodnutí). Obrázky reklam používají krátké "Roční náklady"; stránka a PDF upřesňují "na správu a provoz, bez transakčních nákladů fondu" (u VT je v KID navíc 0,02 %), což je vědomé zjednodušení v reklamě.
 
 ## Compliance
 

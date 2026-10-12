@@ -31,9 +31,9 @@ Kolo 1 (12. 10. 2026, commit 192d7f6): Codex (`round-1-codex.md`, 9 nálezů) a 
 | Historie gitu obsahuje absolutní cesty ve smazaných souborech | Cx5 | Nepřepisuji historii (změnila by všechny hashe commitů uvedené v záznamech auditů); cesta obsahuje jen uživatelské jméno, které je ve veřejném profilu. Rozhodne Jan. |
 | Soukromé IP/limity: omezení událostí podle relace | Cl10 | Zjednodušeno na vyšší limity (viz výše). |
 
-## Čeká na rozhodnutí Jana (jeho design, reklamy a PDF)
+## Rozhodnutí Jana (12. 10. 2026) a oprava
 
-1. **PDF `web/private/prehled-etf.pdf` má 7 stran místo 5**, strany 6 a 7 jsou prázdné se zápatím "6 / 5" a "7 / 5" (Cl2). Smazat v InDesignu, znovu exportovat a nahradit soubor.
-2. **Reklamy mají jen "Roční náklady"** (Cx2 MAJOR): u VT je v obrázku 0,07 %, ale KID uvádí navíc transakční náklady 0,02 %. Návrh: v obrázcích "Roční náklady na správu a provoz". Reklama B navíc ukazuje jen řádky VOO a VT (nejmenší rozdíl) a neříká, že alternativa je dražší; návrh "alternativy bývají dražší" (Cl5).
-3. **Věta "Americká ETF jako VOO většinou nemají KID"** v úvodu a v PDF generalizuje z 4 fondů a starého zdroje (Cl3). Návrh: "U VOO, IVV, DIA ani VT jsme KID na stránce správce nenašli."
-4. **Drobná písma** (hlavička tabulky 10 px, náklady 11 px, "Údaje ověřeny" 11 px), Cl9.
+1. **PDF:** opraveno (5 stran, bez prázdných); nový soubor nasazen do `web/private/prehled-etf.pdf`.
+2. **Reklamy: "Roční náklady" bez upřesnění** (Cx2): ponecháno v obrázku. Důvod a riziko: stránka i PDF říkají přesně "na správu a provoz, bez transakčních nákladů fondu"; u VT je v KID navíc 0,02 %; reklama používá kratší označení. Zdokumentováno v README jako vědomé zjednodušení v reklamě.
+3. **Věta o KID v úvodu:** změněna na "U VOO, IVV, DIA ani VT jsme KID na stránce správce nenašli. Bez KID broker v EU fond drobnému investorovi obvykle nenabídne." (Cl3). Totéž je v PDF na první straně, pokud Jan chce, upraví i tam.
+4. **Drobná písma:** ponechána (design Jana).

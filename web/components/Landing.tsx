@@ -81,7 +81,7 @@ export default function Landing() {
             amerických ETF
           </h1>
           <p className="relative mt-6 text-pretty text-sm leading-[21px] text-muted">
-            Americká ETF jako VOO většinou nemají KID, bez kterého je broker v&nbsp;EU drobnému investorovi obvykle nenabídne.
+            U&nbsp;VOO, IVV, DIA ani VT jsme KID na stránce správce nenašli. Bez KID broker v&nbsp;EU fond drobnému investorovi obvykle nenabídne.
             <br />
             Tady je alternativa na stejný index a&nbsp;náklady obou.
           </p>
