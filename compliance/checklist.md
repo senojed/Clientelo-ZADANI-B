@@ -69,3 +69,11 @@ Princip převzatý z pokynů ESMA k marketingovým sdělením fondů [6] (formá
 4. Google, Introducing New Verification Requirements for Certain Financial Services Advertisers (June 2026): https://support.google.com/adspolicy/answer/17127726 (výňatek z vyhledávání: rolling enforcement od 23. 7. 2026, ČR v seznamu, kategorie Investment); tabulka regulátorů https://support.google.com/adspolicy/answer/12390454 uvádí podle výňatku z vyhledávání pro ČR datum 15. 9. 2026 (stránka se při stažení nevykreslila, neověřeno přímo)
 5. Google, Financial Services Verification, Czechia: https://support.google.com/adspolicy/answer/15332527?co=GENIE.CountryCode%3DCZ
 6. ESMA34-45-1272, Guidelines on marketing communications under the Regulation on cross-border distribution of funds: `compliance/dukazy/esma34-45-1272-guidelines-marketing-communications.pdf`
+
+## Meta a měření konverzí (vědomě nedořešeno v demu)
+
+Meta bez pixelu nebo Conversions API nevidí, kdo z reklamy odeslal formulář, takže kampaň jde optimalizovat jen na kliknutí nebo zobrazení stránky, ne na leady. Možnosti:
+- *Meta Pixel* (kód Mety v prohlížeči, cookies): vyžaduje cookie lištu se souhlasem předem, část návštěv nezměří (odmítnutí, blokátory, Safari).
+- *Conversions API* (server po uložení leadu pošle Metě konverzi): bez cookies a kódu Mety na stránce, ale předává Metě osobní údaje (hash e-mailu, `fbclid`), takže potřebuje právní základ, úpravu zásad a přístupový token.
+
+Doporučení pro ostrou kampaň: Conversions API ze serveru po právní kontrole. Do té doby je rozumný cíl kampaně "zobrazení vstupní stránky". Demo už ukládá `fbclid` spolu s UTM (jen u nás, Metě se nic neposílá), takže leady půjde s kliky spárovat i zpětně.
