@@ -136,7 +136,7 @@ Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 
 ## Zdroje obrazu a fontů
 
 - Písma: Lora, Inter a IBM Plex Mono (licence SIL Open Font License, Google Fonts), ořezané soubory ve `web/public/fonts`, bez externích požadavků.
-- Video na pozadí úvodu: Pixabay, "Market values stock exchange" (https://pixabay.com/videos/market-values-stock-exchange-204306/). Pixabay Content License umožňuje bezplatné použití i úpravy; video je oříznuté, zpomalené na polovinu a bez zvuku. Znění licence jsme při přípravě nemohli ověřit (stránka Pixabay blokuje automatické čtení), proto před ostrým nasazením zkontrolovat.
+- Video na pozadí úvodu: Pixabay, "Market values stock exchange" (https://pixabay.com/videos/market-values-stock-exchange-204306/). Podle Pixabay Content License (podle Janova ověření na stránce videa) je použití zdarma, bez uvedení autora a s právem úprav; zakázané je jen šíření samostatně v téměř původní podobě. Video v repu je upravené (oříznuté, zpomalené na polovinu, interpolované na 30 fps, bez zvuku) a slouží jako pozadí stránky, ne jako samostatně šířený soubor.
 - Logo, pixelová grafika, ikony, obrázky reklam a PDF přehledu: vlastní tvorba Jana (Affinity, InDesign).
 
 ## Technické řešení a spuštění
