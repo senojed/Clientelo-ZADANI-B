@@ -2,6 +2,16 @@
 
 Tento soubor je pracovní plán řešení zadání B (Clientelo, druhé kolo). Slouží jako jediný zdroj pravdy pro postup a ke kontrole Claude + Codex. Termín odevzdání: pátek 16. 10. 2026. Stav: revidováno (18 kol Claude + Codex, shoda 9. 10. 2026), od 9. 10. večer zmrazeno; mění se jen podle nálezů kontrol. Brána A/B splněna 9. 10. (4 ověřené dvojice), zadání A se nedělá.
 
+## Aktuální stav a odchylky od plánu (12. 10. 2026)
+
+Plán byl zmrazen 9. 10. a dál platí, jen s těmito změnami, které vznikly při realizaci a auditu (podrobnosti v README a `ai-log/review/audit-1/`):
+- **Jedna stránka pro obě reklamy** (`/`), ne dvě varianty `/` a `/b`. Reklamu rozliší `utm_content` (`ad_a`, `ad_b`).
+- **Přehled po odeslání se otevře hned** na adrese `/prehled?t=<token>`; PDF přehledu (návrh v InDesignu) se stahuje s týmž tokenem. **E-mailem se neposílá** (v demu vědomě, upozornění pro kontrolora v README).
+- **Měření:** `pdf_requested` přejmenováno na `overview_shown`, přibyly `row_expand`, `source_click`, `link_copied`; `fbclid` se ukládá s UTM; Meta Pixel ani Conversions API se nestaví.
+- **Zpracování dat:** funkce ve Frankfurtu (`fra1`), limit četnosti podle otisku IP, denní úklid otisků.
+- **Pořadí řádků tabulky:** abecedně podle tickeru.
+- Zadání A se nedělalo (příprava A zrušena 9. 10.).
+
 ## 1. Cíl a hodnocení
 
 Stránka pro českého drobného investora z mobilní reklamy. Hodnotí se hlavně: "mohli bychom na ni zítra spustit reklamu?" a postup práce s AI. Proto platí: **co nemá zdroj s datem, na stránce není.**

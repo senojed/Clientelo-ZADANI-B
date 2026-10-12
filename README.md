@@ -7,7 +7,7 @@
 - **Data a důkazy:** [`data/etf.json`](data/etf.json), [`data/overeni.md`](data/overeni.md), [`data/dukazy/`](data/dukazy/)
 - **Práce s AI:** [`ai-log/`](ai-log/)
 
-> Stav: rozpracováno (10. 10. 2026). Části označené **[doplnit]** se dopisují do odevzdání.
+> Stav k 12. 10. 2026: stránka, reklamy a PDF přehledu jsou hotové, probíhají poslední kontroly před odevzdáním.
 
 ## Klíčové zjištění, na kterém stránka stojí
 
@@ -25,12 +25,12 @@ Většina amerických ETF nemá KID (dokument podle nařízení PRIIPs, bez kter
 
 **Kdo:** člověk, který slyšel "kup VOO / S&P 500" (YouTube, podcast, kamarád), hledá to u svého brokera a má na stránku pár sekund na mobilu. Věk a zdroje jsou hypotéza, podstatná je situace.
 
-**Co dostane za e-mail:** hned po odeslání (bez čekání na e-mail) se otevře celý přehled na vlastní adrese, která platí 24 hodin (dá se zkopírovat, obnovit i uložit):
+**Co dostane za e-mail:** hned po odeslání (bez čekání na e-mail) se otevře celý přehled na vlastní adrese, která platí 24 hodin (dá se zkopírovat a obnovit):
 - ISIN UCITS alternativ ke zkopírování do vyhledávání u brokera,
 - odkazy na české KID s datem dokumentu a informaci o registraci v ČR,
 - kontrolní seznam "jak si ETF ověřit u svého brokera" (bez názvů brokerů),
 - KID, PRIIPs a UCITS vysvětlené lidsky,
-- tlačítko "Uložit jako PDF" (ve vestavěném prohlížeči Facebooku a Instagramu stránka poradí otevřít ji v prohlížeči).
+- hotové PDF přehledu ke stažení (tlačítko "Stáhnout PDF"; PDF vyšlo z designového nástroje, stahuje se jen s platným odkazem; ve vestavěném prohlížeči Facebooku a Instagramu stránka poradí otevřít ji v prohlížeči).
 
 Veřejně (bez e-mailu) jsou náklady, zdroj u každého čísla (stránka správce u US fondu, datum českého KID u alternativy) a výpočet. ISIN, odkazy na KID a kontrolní seznam jsou za e-mailem a do prohlížeče se pošlou až po ověření tokenu.
 
@@ -40,14 +40,14 @@ Veřejně (bez e-mailu) jsou náklady, zdroj u každého čísla (stránka sprá
 
 Každá sekce je aspoň na výšku obrazovky mobilu (na 375×812 se vejde celá).
 
-1. **Úvod:** nadpis "Evropské alternativy amerických ETF" navazuje na slib obou reklam; jedno tlačítko na srovnání. Návštěvník z reklamy během pár sekund pozná, že je na správném místě. Hned tu je "Marketingové sdělení, ne investiční doporučení" a riziko ztráty.
+1. **Úvod:** nadpis "Evropské alternativy amerických ETF" navazuje na slib obou reklam; jedno tlačítko na srovnání. Návštěvník z reklamy během pár sekund pozná, že je na správném místě. Hned tu je "Marketingové sdělení, ne investiční doporučení" a riziko ztráty. Na pozadí je dekorativní video; obsah na něm nezávisí. Nejdřív se ukáže poster a video se stahuje až po načtení stránky, při omezeném pohybu v systému nebo úspoře dat se nepřehrává vůbec.
 2. **Tabulka + kalkulačka:** hodnota před formulářem. Jeden řádek = jeden pár (americké ETF, UCITS alternativa, náklady obou). Klik rozbalí detail se zdrojem a zároveň přepne fond v kalkulačce, takže jedna akce = dvě odpovědi. Kalkulačka je předvyplněná (VOO, 100 000 Kč), výsledek je vidět bez interakce. Rozbalený řádek i výsledek kalkulačky končí výzvou "Získat ISIN a český KID zdarma", takže každý interaktivní prvek vede ke kontaktu.
 3. **Proč evropská alternativa + formulář:** tři krátké důvody (KID, srovnatelnost, registrace v ČR) pro ty, kdo váhají, hned nad formulářem. Po odeslání se otevře přehled.
 4. **Patička:** plná upozornění, zdroje, zásady zpracování.
 
 Proč tabulka a ne karty: první verze měla karty a stránka byla na mobilu dlouhá; tabulka ukáže všechny 4 páry naráz a detaily jen na požádání.
 
-## Očekávaná konverze **[doplnit / zpřesnit]**
+## Očekávaná konverze
 
 Vlastní odhad, ne benchmark (veřejné srovnatelné číslo pro tento typ stránky jsme nedohledali). Je to hypotéza k ověření měřením.
 
@@ -85,7 +85,16 @@ Omezení: relace žije jen v paměti stránky, po obnovení stránky vznikne nov
 
 ## Reklamy
 
-Dvě verze pro Meta (Facebook, Instagram), mobil. Obě vedou na stejnou stránku a slibují jen to, co stránka ukáže. Podle pravidel Meta k 10. 10. 2026 jsou bez certifikace inzerenta spustitelné; Google Ads by vyžadoval ověření finančního inzerenta. Podrobně v [`compliance/checklist.md`](compliance/checklist.md). **[doplnit vizuály]**
+Dvě verze pro Meta (Facebook, Instagram), mobil. Obě vedou na stejnou stránku a slibují jen to, co stránka ukáže. Podle pravidel Meta k 10. 10. 2026 jsou bez certifikace inzerenta spustitelné; Google Ads by vyžadoval ověření finančního inzerenta. Podrobně v [`compliance/checklist.md`](compliance/checklist.md). Reklamy nebyly spuštěny, jsou připravené.
+
+| | Reklama A | Reklama B |
+|---|---|---|
+| Hák | "Znáš VOO nebo IVV? Porovnej náklady" | "4 americká ETF a jejich evropské alternativy" |
+| Vizuál | dvě karty vedle sebe, VOO a jeho UCITS alternativa, náklady 0,03 % a 0,07 %, popisek "stejný index" | výřez tabulky ze stránky (VOO a VT), zbytek rozmazaný, datum ověření |
+| Obrázky | [`ads/ad-a-1080x1350.png`](ads/ad-a-1080x1350.png), [`ads/ad-a-1080x1920.png`](ads/ad-a-1080x1920.png) | [`ads/ad-b-1080x1350.png`](ads/ad-b-1080x1350.png), [`ads/ad-b-1080x1920.png`](ads/ad-b-1080x1920.png) |
+| Texty, cílení, UTM | [`ads/ad-a.md`](ads/ad-a.md) | [`ads/ad-b.md`](ads/ad-b.md) |
+
+Upozornění "Marketingové sdělení. Investice nesou riziko ztráty." je přímo v každém obrázku, protože pole Popis se ve všech umístěních nezobrazuje. Obrázky nemají falešné tlačítko (klikací je tlačítko Mety). U reklamy A je datum ověření jen na stránce, ne v obrázku (vědomé rozhodnutí).
 
 ## Compliance
 
@@ -93,21 +102,30 @@ Kontrolní seznam (zakázaná a povolená tvrzení, povinné prvky, pravidla pla
 
 ## Mobil a výkon
 
-Lighthouse na mobilu (produkční URL, 10. 10. 2026): výkon 96, přístupnost 99 (opraveno na 100 **[ověřit]**), best practices 100, SEO 100; LCP 2,3 s, CLS 0. Report: [`docs/lighthouse/`](docs/lighthouse/). Ruční průchod na reálném telefonu: **[doplnit]**.
+Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 až 96, přístupnost 100, best practices 100, SEO 100, LCP 2,4 až 2,7 s (cíl pod 2,5 s je hraniční, hlavním prvkem je poster videa), CLS 0, TBT 60 ms. Report: [`docs/lighthouse/`](docs/lighthouse/). Ruční průchod na reálném telefonu: Jan ho udělal 11. 10. 2026 a nenašel problém.
 
 ## Jak jsem pracoval s AI
 
-**[doplnit podrobněji]**
+**Role:** Jan zadával směr a rozhodoval (výběr zadání, fondů, kompromisy), ručně ověřoval každý údaj ve zdrojích, opsal CAPTCHA v registru ČNB (Claude CAPTCHA řešit nesmí) a sám navrhl design stránky, reklamy a PDF přehledu. Claude Code hledal a ověřoval data, psal kód a texty, dělal rešerši pravidel a kontroloval výstupy ostatních.
+
+**Pokyny agentům:** plán psaný jako ověřitelné cíle, pravidlo "co nemá zdroj s datem, na stránce není", pravidlo "nevymýšlet příčiny, doložit je daty", u designového chatu seznam věcí, které se bez souhlasu nesmí měnit (texty, upozornění, měření). Subagenti pro audit dostali jen zadání a repozitář, ne naši konverzaci.
+
+**Jak jsem výstup kontroloval:**
+- Každý údaj o fondu ručně (Jan) a pak nezávislou druhou session Claude Code ("double check jako při lezení").
+- 18 kol revize plánu Claude a Codex do shody; Codex jako druhý názor na texty a na pravidla.
+- Nezávislý audit celku proti zadání: Codex a Claude subagent bez kontextu, 4 kola ping-pongu do shody (`ai-log/review/audit-1/`).
+- Po každé větší úpravě build, lint a test v prohlížeči; produkční testy s úklidem testovacích dat.
 
 - **Nástroje:** Claude Code (plánování, ověřování dat, kód, nasazení), Codex (druhý názor, revize plánu a textů), LLM council (5 poradců a 5 recenzentů jako subagenti), nezávislý audit (subagent bez kontextu konverzace, jen zadání a repozitář).
 - **Postup:** plán → 18 kol revize Claude a Codex do shody → ověření dat ze zdrojů s uložením důkazů → stránka → nezávislé kontroly. Každý údaj ručně zkontroloval Jan a pak ještě nezávislá druhá session Claude Code ("double check jako při lezení").
-- **Kde se AI mýlila:** 10+ zaznamenaných případů v [`ai-log/chyby-ai.md`](ai-log/chyby-ai.md). Nejdůležitější: první doporučení přehlédlo, že americká ETF nemají KID; pravidlo výběru UCITS vybralo syntetický fond a pak fond neregistrovaný v ČR; datum KID z anglické verze místo české; texty slibovaly víc, než data kryla. Většinu chyb zachytila nezávislá druhá kontrola, ne první session.
+- **Kde se AI mýlila:** 23 zaznamenaných případů v [`ai-log/chyby-ai.md`](ai-log/chyby-ai.md). Nejdůležitější: první doporučení přehlédlo, že americká ETF nemají KID; pravidlo výběru UCITS vybralo syntetický fond a pak fond neregistrovaný v ČR; datum KID z anglické verze místo české; texty slibovaly víc, než data kryla. Další: data "za e-mailem" byla ve veřejném JavaScriptu stránky, serverové funkce běžely v USA proti textu zásad, vlastní compliance checklist odškrtával neověřené věci, nepřesné časy místo času z příkazové řádky. Většinu chyb zachytila nezávislá druhá kontrola, ne první session.
 - **Čas:** [`ai-log/casovy-log.md`](ai-log/casovy-log.md).
 - **Záznamy konverzací:** redigované exporty v [`ai-log/`](ai-log/), metodika redakce v [`ai-log/README.md`](ai-log/README.md).
 
 ## Co chybí
 
-- PDF z designového nástroje (teď tisk stránky do PDF z prohlížeče).
+- Hotové PDF se jen stahuje z webu, neposílá se e-mailem (viz další bod). Při změně dat se musí PDF vyrobit znovu ručně.
+- LCP na mobilu je kolem hranice cíle (2,4 až 2,7 s); video a poster jsou nejdražší prvek úvodu.
 - **Odeslání odkazu na přehled e-mailem (upozornění pro kontrolu).** Teď se přehled otevře hned a e-mail se jen uloží. Audit (Codex) správně upozornil, že bez odeslání není doložené, proč e-mail ukládat (GDPR, minimalizace údajů). Pro ostrý provoz doporučuji posílat odkaz e-mailem: účel uložení je pak jasný a půjde sledovat nedoručitelné adresy (úplné ověření schránky by vyžadovalo potvrzovací klik). Vyžaduje vlastní doménu a službu na odesílání e-mailů; v demu vědomě není.
 - Měření pro Meta (pixel nebo Conversions API), viz Měření.
 - Potvrzení souhlasu s novinkami e-mailem (double opt-in) před prvním newsletterem.
@@ -115,11 +133,17 @@ Lighthouse na mobilu (produkční URL, 10. 10. 2026): výkon 96, přístupnost 9
 - Právní kontrola textů a zásad; kontakt správce údajů v zásadách (u dema zástupný text, před kampaní nutný).
 - Ověření dostupnosti fondů u konkrétních brokerů.
 
+## Zdroje obrazu a fontů
+
+- Písma: Lora, Inter a IBM Plex Mono (licence SIL Open Font License, Google Fonts), ořezané soubory ve `web/public/fonts`, bez externích požadavků.
+- Video na pozadí úvodu a pixelová grafika: **[doplní Jan: původ a licence]**.
+
 ## Technické řešení a spuštění
 
 Next.js 16 (App Router, TypeScript, Tailwind), Vercel (Hobby, funkce v regionu `fra1`), databáze Neon Postgres (Frankfurt).
 
 - Přehled za e-mailem: stránka `/prehled?t=<token>`; server ověří podepsaný token (HMAC, platnost 24 h, bez e-mailu uvnitř) a teprve pak pošle plná data. Stránka sama dostává jen veřejnou podmnožinu dat (`web/data/etf-verejne.json`, vyrábí ji `scripts/sync-data.mjs`), ISIN ani odkazy na KID v jejím JavaScriptu nejsou.
+- PDF přehledu: `/prehled/pdf?t=<token>` vydá soubor z `web/private` jen s platným tokenem (jinak 401).
 - Formulář: kontrola původu, honeypot, klíč idempotence, limit 5 odeslání za hodinu z jedné IP (ukládá se jen otisk IP na den).
 
 ```bash

@@ -1,5 +1,7 @@
 # Positioning, tón a texty (koncept v2 po kontrolách)
 
+> **Zastaralé v detailech (12. 10. 2026):** platná jsou finální znění v kódu (`web/components`) a v `ads/`. Hlavně: stránka je jedna (nadpis "Evropské alternativy amerických ETF"), ne dvě varianty A a B; přehled se otevře hned a PDF se stahuje; formulář je "Celý přehled zdarma za e-mail". Soubor je ponechán jako záznam úvah.
+
 Pracovní podklad pro stránku a reklamy. Čísla jsou z `data/etf.json` (ověřeno 9. 10. 2026). Nic tu není investiční doporučení.
 
 Verze 2 (9. 10. večer) zapracovává nezávislý audit (subagent) a připomínky Codexu: "UCITS alternativa" místo "evropská verze", srovnání amerických ETF mezi sebou jako hlavní tabulka, jasnější nabídka za e-mail, přesnější pojmenování nákladů, sliby jen v rozsahu ověřených dat.
