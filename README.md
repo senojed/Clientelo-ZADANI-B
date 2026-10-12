@@ -9,7 +9,7 @@
 - **Reklamy** (texty a obrázky): [`ads/ad-a.md`](ads/ad-a.md), [`ads/ad-b.md`](ads/ad-b.md)
 - **Data a důkazy:** [`data/etf.json`](data/etf.json), [`data/overeni.md`](data/overeni.md), [`data/dukazy/`](data/dukazy/)
 - **Práce s AI:** [`ai-log/`](ai-log/), shrnutí v části Jak jsem pracoval s AI
-- **Stav k 12. 10. 2026:** stránka, reklamy a PDF přehledu jsou hotové, proběhly dva nezávislé audity celku. Repozitář je zatím soukromý; zveřejním ho po závěrečné kontrole redakce `ai-log`, před odevzdáním (čtvrtek 15. 10. 2026).
+- **Stav k 12. 10. 2026:** stránka, reklamy a PDF přehledu jsou hotové, proběhly dva nezávislé audity celku. Repozitář je veřejný od 12. 10. 2026.
 
 ## Klíčové zjištění, na kterém stránka stojí
 
