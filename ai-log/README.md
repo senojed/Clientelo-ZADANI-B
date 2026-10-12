@@ -5,7 +5,8 @@
 | `claude-code/01` až `06` | Hlavní konverzace s Claude Code po sezeních (Claude Code ji kvůli délce několikrát shrnul do nového sezení): 01 výběr zadání, 02 rada a návrh plánu, 03 revize plánu s Codexem, 04 data, stránka a audit 1, 05 a 06 reklamy, PDF, README a audit 2 | Převod záznamu Claude Code (JSONL) skriptem `scripts/ai-log-export.py` |
 | `claude-code/07-designovy-chat.md` | Samostatné sezení, ve kterém se tmavý design Jana převáděl do kódu (podle `design/ZADANI-DESIGN.md`) | Totéž |
 | `claude-code/subagenti/` | Pomocní agenti spuštění z hlavních sezení: LLM council (5 poradců, 5 recenzentů) a nezávislé audity proti zadání; název souboru začíná zkratkou sezení | Totéž, každý agent zvlášť |
-| (v hlavní konverzaci) | Dotazy na Codex v aplikaci Codex (druhý názor, review textů): Jan je kopíroval do konverzace s Claude Code, proto jsou v `hlavni-session.md` jako vložený text | Ruční kopírování, samostatný export z Codexu není |
+| (v hlavní konverzaci) | Dotazy na Codex v aplikaci Codex (druhý názor, review textů): Jan je kopíroval do konverzace s Claude Code, proto jsou v exportech konverzace (`claude-code/`) jako vložený text | Ruční kopírování, samostatný export z Codexu není |
+| `review/audit-1/`, `review/audit-2/` | Dva nezávislé audity celku proti zadání (Codex a Claude subagent bez kontextu), kola, záznam diskuse a rozhodnutí | Výstupy auditorů a diskuse |
 | `review/plan-consensus/` | 18 kol revize plánu Claude a Codex (Codex CLI přes `codex exec`) a závěrečný verdikt | Výstupy skriptu plan-consensus |
 | `chyby-ai.md` | Kde se AI mýlila a jak se to zjistilo | Psáno průběžně |
 | `casovy-log.md` | Kolik co trvalo | Psáno průběžně |
@@ -21,5 +22,7 @@ Zadání chce export příkazem `/export`. Ten v desktopové aplikaci Claude Cod
 - výsledky nástrojů jsou zkrácené na 400 znaků (plné výstupy by měly desítky MB), odpovědi subagentů jsou celé;
 - obsah souborů zapisovaných nástroji Write a Edit je zkrácený na 600 znaků (výsledný soubor je v repozitáři a v historii commitů); příkazy, dotazy a prompty jsou celé;
 - interní úvahy modelu (thinking) a systémové zprávy aplikace nejsou součástí.
+
+Soubory 02 až 06 vznikly z postupných sezení, která Claude Code kvůli délce shrnul do nového sezení; každé pokračující sezení proto na začátku nese i přenesenou historii. Nový obsah začíná: 02 v 9. 10. 11:29 UTC, 03 v 15:14, 04 v 15:48, 05 v 11. 10. 15:17, 06 v 15:45 (časy UTC); 01 je první část 9. 10. 11:01 až 11:28. Designový chat (07) je samostatný od 10. 10. 10:33 UTC.
 
 Prompty, odpovědi, chyby AI, příkazy a časová posloupnost zůstávají beze změny. Časy jsou v UTC (místní čas = UTC + 2 h). Export posledního sezení (06) je stav k datu odevzdání; sezení trvalo i po něm, finální export se obnovuje těsně před zveřejněním.

@@ -1,5 +1,5 @@
 // Zkopíruje ověřená data z kořene repozitáře (../data/etf.json) do aplikace a vyrobí z nich dvě verze:
-// - web/data/etf.json: plná data, importuje je JEN server (api/prehled), do prohlížeče se nedostanou,
+// - web/data/etf.json: plná data, importuje je JEN server (app/prehled), do prohlížeče se nedostanou,
 // - web/data/etf-verejne.json: veřejná podmnožina pro stránku (bez ISIN a odkazů na KID, ty jsou za e-mailem).
 // Běží automaticky před buildem (npm "prebuild"). Když zdroj chybí (build mimo repo), nechá stávající soubory.
 import { readFile, writeFile, access } from "node:fs/promises";

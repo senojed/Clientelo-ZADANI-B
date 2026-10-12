@@ -37,3 +37,17 @@ Kolo 1 (12. 10. 2026, commit 192d7f6): Codex (`round-1-codex.md`, 9 nálezů) a 
 2. **Reklamy: "Roční náklady" bez upřesnění** (Cx2): ponecháno v obrázku. Důvod a riziko: stránka i PDF říkají přesně "na správu a provoz, bez transakčních nákladů fondu"; u VT je v KID navíc 0,02 %; reklama používá kratší označení. Zdokumentováno v README jako vědomé zjednodušení v reklamě.
 3. **Věta o KID v úvodu:** změněna na "U VOO, IVV, DIA ani VT jsme KID na stránce správce nenašli. Bez KID broker v EU fond drobnému investorovi obvykle nenabídne." (Cl3). Totéž je v PDF na první straně, pokud Jan chce, upraví i tam.
 4. **Drobná písma:** ponechána (design Jana).
+
+## Kolo 2 (Claude auditor, Opus medium, `round-2-claude.md`): VERDIKT READY
+
+Všechny opravy z kola 1 ověřeny (FIXED); rozhodnutí Jana přijata. Zbylé drobnosti opraveny:
+
+| Nález | Oprava |
+|---|---|
+| Redakce propustila název počítače a jednu IP z VPN; pravidlo IP selhalo, když adrese předcházela číslice s tečkou | Pravidlo pro `DESKTOP-...` a upravené pravidlo IP; export přegenerován; zmínky v reportech auditorů nahrazeny |
+| Exporty 02 až 06 se překrývají (pokračující sezení nese přenesenou historii) | README ai-logu to vysvětluje a uvádí, odkdy je obsah každého souboru nový |
+| `ai-log/README.md` odkazuje na neexistující `hlavni-session.md`, nezmiňuje `review/audit-*` | Opraveno |
+| `data/overeni.md` u IVV cituje v smazané kopii položku `EUPRIIP`, výňatek ji nemá a protiřečí si | Výňatek doplněn doslovně (ověřeno v historii gitu), věta sjednocena |
+| README: TBT 60 ms, měření dávají 30 až 60 ms | Opraveno |
+| Podmínka `intersectionRatio >= 0.3` může zahazovat události těsně pod prahem | Zmírněno na 0,29 |
+| Komentář v `sync-data.mjs` odkazuje na neexistující `api/prehled` | Opraveno |

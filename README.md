@@ -102,7 +102,7 @@ Kontrolní seznam (zakázaná a povolená tvrzení, povinné prvky, pravidla pla
 
 ## Mobil a výkon
 
-Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 až 96, přístupnost 100, best practices 100, SEO 100, LCP 2,4 až 2,7 s (cíl pod 2,5 s je hraniční, hlavním prvkem je poster videa), CLS 0, TBT 60 ms. První měření je celý report, další dvě jsou uložená jako JSON: [`docs/lighthouse/`](docs/lighthouse/). Ruční průchod na reálném telefonu: Jan ho udělal 11. 10. 2026 a nenašel problém.
+Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 až 96, přístupnost 100, best practices 100, SEO 100, LCP 2,4 až 2,7 s (cíl pod 2,5 s je hraniční, hlavním prvkem je poster videa), CLS 0, TBT 30 až 60 ms. První měření je celý report, další dvě jsou uložená jako JSON: [`docs/lighthouse/`](docs/lighthouse/). Ruční průchod na reálném telefonu: Jan ho udělal 11. 10. 2026 a nenašel problém.
 
 ## Jak jsem pracoval s AI
 

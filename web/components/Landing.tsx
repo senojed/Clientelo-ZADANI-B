@@ -32,7 +32,7 @@ function useSectionView(name: string) {
     if (!el) return;
     const obs = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting && e.intersectionRatio >= 0.3)) {
+        if (entries.some((e) => e.isIntersecting && e.intersectionRatio >= 0.29)) {
           track("section_view", { section: name });
           obs.disconnect();
         }

@@ -4196,7 +4196,7 @@ Doporučuju **1, začít daty**. Data jsou brána A/B, takže když dnes zjistí
 > to set your account's default identity.
 > Omit --global to set the identity only in this repository.
 > 
-> fatal: unable to auto-detect email address (got 'Honza@DESKTOP-VG93J6H.(none)')
+> fatal: unable to auto-detect email address (got '[redacted počítač].(none)')
 
 **Nástroj Bash:**
 ```

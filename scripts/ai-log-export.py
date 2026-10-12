@@ -22,8 +22,10 @@ REDAKCE = [
     (re.compile(r"\b(?:DATABASE_URL\w*|DOWNLOAD_TOKEN_SECRET|VERCEL_TOKEN|\w*API_KEY)\s*=\s*\S+"), r"[redacted proměnná]"),
     (re.compile(r"\b[A-Fa-f0-9]{48,}\b"), "[redacted dlouhý hex]"),
     (re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"), "[redacted e-mail]"),
+    # Název počítače (např. "Honza@DESKTOP-ABC123").
+    (re.compile(r"\w+@DESKTOP-[A-Z0-9]+|DESKTOP-[A-Z0-9]{6,}"), "[redacted počítač]"),
     # Adresy z privátních sítí a z VPN (Tailscale 100.64.0.0/10, 192.168.x.x, 10.x.x.x).
-    (re.compile(r"(?<![\d.])(?:100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])|192\.168|10\.\d{1,3})\.\d{1,3}\.\d{1,3}(?![\d.])"), "[redacted IP]"),
+    (re.compile(r"(?<!\d)(?:100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])|192\.168|10\.\d{1,3})\.\d{1,3}\.\d{1,3}(?!\d)"), "[redacted IP]"),
     # Absolutní cesty k projektu nahradíme relativními, ostatní osobní cesty skryjeme.
     (re.compile(r"(?i)[A-Z]:[\\/]+Users[\\/]+[^\\/\s]+[\\/]+Nextcloud[\\/]+Jan[\\/]+Work[\\/]+Clientelo[\\/]+ZADANIE B[\\/]*"), ""),
     (re.compile(r"(?i)/?[a-z]/Users/[^/\s]+/Nextcloud/Jan/Work/Clientelo/ZADANIE B/?"), ""),
