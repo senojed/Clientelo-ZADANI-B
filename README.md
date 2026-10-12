@@ -21,6 +21,7 @@ Americká ETF obvykle nemají KID pro evropské drobné investory (obecný zdroj
 - **Proč i UCITS alternativy:** drobný investor v EU americká ETF bez KID obvykle nekoupí. Srovnání jen amerických fondů by tedy slibovalo něco, co nejspíš nedostane. Ke každému fondu proto ukazuji UCITS alternativu s českým KID a registrací v ČR. Dostupnost u konkrétního brokera jsem neověřoval.
 - **Proč 4 fondy:** raději méně a každý údaj ověřený ze zdroje (náklady, KID, registrace v ČR) než dlouhý seznam. IVV a VOO sledují stejný index; zařadil jsem oba, abych pokryl návštěvníky, kteří hledají konkrétně jeden z nich.
 - **Proč jedna stránka pro obě reklamy:** obě reklamy slibují totéž (srovnání a alternativy); reklamu rozliší `utm_content`. Nadpis podle reklamy je hypotéza k A/B testu.
+- **Design a značka:** zadání nedává žádnou značku ani designový manuál a stránku nedělám pro konkrétní firmu, proto je celý vzhled (barvy, písma, logo, grafika) navržený od nuly, bez předlohy. Logo "ETF přehled" je zástupné: slouží jen jako identita ukázky a nevychází z žádné skutečné značky. Při nasazení pro konkrétního zadavatele se vzhled i logo vymění podle jeho manuálu; barvy a písma jsou v tokenech v `web/app/globals.css`, logo je v `web/public/logo-symbol.svg` a v textu v hlavičce.
 - **Export konverzací:** `/export` nebyl v desktopové aplikaci k dispozici a surový záznam obsahuje osobní údaje, proto je v `ai-log` redigovaný převod záznamu (metodika v [`ai-log/README.md`](ai-log/README.md)).
 
 ## Cílová skupina a nabídka za kontakt
@@ -128,6 +129,7 @@ Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 
 **Před ostrou kampaní:**
 - právní kontrola textů, zásad a měření (účel a právní základ ukládání e-mailů, ePrivacy pro měření, Neon jako americký zpracovatel, otázka investičního doporučení);
 - kontakt správce údajů v zásadách (u dema zástupný text);
+- vzhled a logo podle skutečné značky zadavatele (teď zástupné logo a design od nuly, viz Rozhodnutí);
 - hosting pro komerční provoz: Vercel Hobby je podle podmínek Vercelu jen pro nekomerční použití, firemní kampaň by potřebovala Vercel Pro nebo hosting zadavatele;
 - **odeslání odkazu na přehled e-mailem:** teď se přehled otevře hned a e-mail se jen uloží. Audit správně upozornil, že bez odeslání není doložené, proč e-mail ukládat (GDPR, minimalizace údajů). Odeslání odkazu e-mailem by účel ukládání doložilo a umožnilo sledovat nedoručitelné adresy; vyžaduje vlastní doménu a službu na odesílání e-mailů, v demu vědomě není;
 - potvrzení souhlasu s novinkami e-mailem (double opt-in) před prvním newsletterem;

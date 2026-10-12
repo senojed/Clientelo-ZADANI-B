@@ -2,6 +2,8 @@
 // Návštěvník si může zkopírovat odkaz (platí 24 h) nebo stáhnout hotové PDF přehledu (/prehled/pdf, vydá se s tokenem z adresy).
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import type { EtfData } from "@/lib/etf-plna";
@@ -40,8 +42,15 @@ export default function Prehled({ data }: { data: EtfData }) {
   return (
     <article className="flex flex-col gap-6">
       <div>
+        <div className="mb-6 flex items-center gap-[9px] font-serif text-[17px] font-medium leading-5">
+          <Image src="/logo-symbol.svg" alt="" width={22} height={20} />
+          <span>ETF přehled</span>
+        </div>
         <h1 className="text-2xl font-medium">Hotovo. Tady je celý přehled.</h1>
         <p className="mt-2 text-sm text-muted">Odkaz na tuto stránku platí 24 hodin.</p>
+        <p className="mt-1 text-xs text-subtle">
+          Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty.
+        </p>
         <div className="no-print mt-3 flex flex-wrap gap-2">
           <button
             type="button"
@@ -69,22 +78,19 @@ export default function Prehled({ data }: { data: EtfData }) {
         )}
       </div>
 
-      {data.pary.map((p) => (
-        <section key={p.us.ticker} className="rounded-box border border-line p-4">
-          <h2 className="text-xl font-medium">
-            {p.us.ticker}: {zamereni[p.us.ticker]}
-          </h2>
-          <p className="mt-1 text-sm text-muted">
-            {p.us.nazev} · {p.us.burza} · roční náklady {pct(p.us.naklady_pct)} · KID pro EU retail jsme na stránce správce
-            nenašli k&nbsp;{datum(p.us.kid_overeno)} ·{" "}
-            <a href={p.us.zdroj} className="underline" target="_blank" rel="noopener noreferrer">
-              zdroj
-            </a>
-          </p>
-          <div className="mt-3 rounded-box bg-surface p-3">
-            <p className="font-medium">{p.ucits.nazev}</p>
-            <p className="mt-1 flex flex-wrap items-center gap-2">
-              ISIN <span className="font-mono">{p.ucits.isin}</span>
+      {/* Rychlý seznam: to hlavní, co přehled slibuje (ISIN alternativ ke zkopírování do vyhledávání u brokera). */}
+      <section className="rounded-box border border-line p-4">
+        <h2 className="text-xl font-medium">ISIN ke zkopírování</h2>
+        <p className="mt-1 text-sm text-muted">Vyhledej fond u brokera podle ISIN, ne podle zkratky.</p>
+        <ul className="mt-3 flex flex-col divide-y divide-line">
+          {data.pary.map((p) => (
+            <li key={p.us.ticker} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 py-2">
+              <div className="min-w-0">
+                <p className="text-sm font-medium">
+                  {p.us.ticker}: {p.ucits.kratky_nazev}
+                </p>
+                <p className="font-mono text-sm text-muted">{p.ucits.isin}</p>
+              </div>
               <button
                 type="button"
                 onClick={() => kopiruj(p.ucits.isin, p.ucits.isin)}
@@ -92,19 +98,49 @@ export default function Prehled({ data }: { data: EtfData }) {
               >
                 {zkopirovano === p.ucits.isin ? "Zkopírováno" : "Kopírovat"}
               </button>
-            </p>
-            <p className="mt-1 text-sm">
-              Index: {p.ucits.index}
-              {"index_poznamka" in p.ucits && p.ucits.index_poznamka ? ` (${tvrdaMezera(p.ucits.index_poznamka)})` : ""} · replikace:{" "}
-              {p.ucits.replikace} · roční náklady {pct(p.ucits.naklady_pct)} (správa a&nbsp;provoz podle KID, bez transakčních
-              nákladů)
-            </p>
-            <p className="mt-1 text-sm">
-              <a href={p.ucits.kid_url} className="underline" target="_blank" rel="noopener noreferrer">
-                Český KID ze dne {datum(p.ucits.kid_datum)}
-              </a>{" "}
-              · v&nbsp;seznamu ČNB fondů nabízených v&nbsp;ČR (ověřeno 10.&nbsp;10.&nbsp;2026)
-            </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {data.pary.map((p) => (
+        <section key={p.us.ticker} className="rounded-box border border-line p-4">
+          <h2 className="text-xl font-medium">
+            {p.us.ticker}: {zamereni[p.us.ticker]}
+          </h2>
+          <p className="mt-2 text-sm text-muted">
+            Americký fond: {p.us.nazev} · {p.us.burza}. Roční náklady {pct(p.us.naklady_pct)}. KID pro EU retail jsme na
+            stránce správce nenašli k&nbsp;{datum(p.us.kid_overeno)} ·{" "}
+            <a href={p.us.zdroj} className="underline" target="_blank" rel="noopener noreferrer">
+              zdroj
+            </a>
+          </p>
+          <div className="mt-3 rounded-box bg-surface p-3">
+            <p className="font-medium">{p.ucits.nazev}</p>
+            <dl className="mt-3 grid grid-cols-[5.5rem_1fr] gap-x-3 gap-y-2 text-sm">
+              <dt className="text-subtle">ISIN</dt>
+              <dd className="font-mono">{p.ucits.isin}</dd>
+              <dt className="text-subtle">Roční náklady</dt>
+              <dd>
+                <span className="font-medium text-accent">{pct(p.ucits.naklady_pct)}</span> (správa a&nbsp;provoz podle KID, bez
+                transakčních nákladů)
+              </dd>
+              <dt className="text-subtle">Index</dt>
+              <dd>
+                {p.ucits.index}
+                {"index_poznamka" in p.ucits && p.ucits.index_poznamka ? ` (${tvrdaMezera(p.ucits.index_poznamka)})` : ""}
+              </dd>
+              <dt className="text-subtle">Replikace</dt>
+              <dd>{p.ucits.replikace}</dd>
+              <dt className="text-subtle">Český KID</dt>
+              <dd>
+                <a href={p.ucits.kid_url} className="underline" target="_blank" rel="noopener noreferrer">
+                  KID ze dne {datum(p.ucits.kid_datum)}
+                </a>
+              </dd>
+              <dt className="text-subtle">V ČR</dt>
+              <dd>v&nbsp;seznamu ČNB fondů nabízených v&nbsp;ČR (ověřeno 10.&nbsp;10.&nbsp;2026)</dd>
+            </dl>
           </div>
         </section>
       ))}
@@ -144,6 +180,12 @@ export default function Prehled({ data }: { data: EtfData }) {
           </li>
         </ul>
       </section>
+
+      <p className="no-print">
+        <Link href="/" className="text-sm text-accent underline">
+          Zpět na srovnání
+        </Link>
+      </p>
 
       <p className="text-sm text-muted">
         Marketingové sdělení, ne investiční doporučení. Investice nesou riziko ztráty. Údaje ověřeny 9. a&nbsp;10.&nbsp;10.&nbsp;2026,
