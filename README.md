@@ -111,7 +111,7 @@ Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 
 **Pokyny agentům** (konkrétně v repu):
 - plán psaný jako ověřitelné cíle s prioritami [`PLAN.md`](PLAN.md); pravidla "co nemá zdroj s datem, na stránce není" a "nevymýšlet příčiny, doložit je daty";
 - zadání pro designové sezení se seznamem věcí, které se bez mého souhlasu nesmí měnit (texty, upozornění, měření): [`design/ZADANI-DESIGN.md`](design/ZADANI-DESIGN.md);
-- auditoři (Claude subagent a Codex) dostali jen text zadání a repozitář, ne naši konverzaci; jejich pokyny jsou na začátku záznamů v [`ai-log/claude-code/subagenti/`](ai-log/claude-code/subagenti/).
+- auditoři (Claude subagent a Codex) dostali jen text zadání a repozitář, ne naši konverzaci. Záznamy Claude auditorů včetně jejich pokynů jsou v [`ai-log/claude-code/subagenti/`](ai-log/claude-code/subagenti/); výstupy obou auditorů (včetně Codexu), nálezy a rozhodnutí jsou v [`ai-log/review/audit-1/`](ai-log/review/audit-1/) a [`audit-2/`](ai-log/review/audit-2/).
 
 **Jak jsem výstup kontroloval:**
 - každý údaj o fondu ručně a pak nezávislou kontrolou v druhém sezení;
@@ -132,7 +132,8 @@ Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 
 - **odeslání odkazu na přehled e-mailem:** teď se přehled otevře hned a e-mail se jen uloží. Audit správně upozornil, že bez odeslání není doložené, proč e-mail ukládat (GDPR, minimalizace údajů). Odeslání odkazu e-mailem by účel ukládání doložilo a umožnilo sledovat nedoručitelné adresy; vyžaduje vlastní doménu a službu na odesílání e-mailů, v demu vědomě není;
 - potvrzení souhlasu s novinkami e-mailem (double opt-in) před prvním newsletterem;
 - měření pro Meta (Conversions API), viz Měření;
-- ověření dostupnosti fondů u konkrétních brokerů.
+- ověření dostupnosti fondů u konkrétních brokerů;
+- ověřit soulad ořezaných písem s licencí (viz Zdroje obrazu a fontů).
 
 **Omezení dema:**
 - hotové PDF se jen stahuje z webu a při změně dat se musí vyrobit znovu ručně;
@@ -140,15 +141,15 @@ Lighthouse na mobilu (produkční URL, 12. 10. 2026, tři měření): výkon 94 
 
 ## Zdroje obrazu a fontů
 
-- Písma: Lora, Inter a IBM Plex Mono (SIL Open Font License, Google Fonts), ořezané soubory ve `web/public/fonts`, bez externích požadavků.
-- Video na pozadí úvodu: "The Increase and Decrease of Stock Market Values", autor Natures_Embrace, Pixabay (https://pixabay.com/videos/market-values-stock-exchange-204306/). Stránka videa uvádí "Free for use under the Pixabay Content License" (ověřeno 12. 10. 2026); podle [shrnutí licence](https://pixabay.com/service/license-summary/) je použití zdarma, bez povinnosti uvést autora a s právem úprav, zakázané je jen šíření samostatně v podstatě v původní podobě a zavádějící použití (právně závazné je jen plné znění). Video v repu je upravené (oříznuté, zpomalené na polovinu, interpolované na 30 fps, bez zvuku) a je jen pozadím stránky.
+- Písma: Lora, Inter a IBM Plex Mono (SIL Open Font License, Google Fonts), ořezané podmnožiny ve `web/public/fonts`, bez externích požadavků. Copyright a úplné znění licence jsou v [`web/public/fonts/LICENSES.md`](web/public/fonts/LICENSES.md). Lora a IBM Plex mají "Reserved Font Name", takže před ostrým nasazením je potřeba ověřit, že ořezání na podmnožinu licenci neporušuje (jinak použít neupravené soubory přes `next/font/google`).
+- Video na pozadí úvodu: "The Increase and Decrease of Stock Market Values", autor Natures_Embrace, Pixabay (https://pixabay.com/videos/market-values-stock-exchange-204306/). Stránka videa uvádí "Free for use under the Pixabay Content License" (ověřeno 12. 10. 2026); [licence](https://pixabay.com/service/license-summary/) umožňuje bezplatné použití a úpravy bez povinného uvedení autora, za podmínek Pixabay Content License (právně závazné je jen plné znění). Video v repu je upravené (oříznuté, zpomalené na polovinu, interpolované na 30 fps, bez zvuku) a je jen pozadím stránky.
 - Logo, pixelová grafika, ikony, obrázky reklam a PDF přehledu: moje vlastní tvorba (Affinity, InDesign).
 
 ## Technické řešení a spuštění
 
 Next.js 16 (App Router, TypeScript, Tailwind), Vercel (Hobby, funkce v regionu `fra1`), databáze Neon Postgres (Frankfurt).
 
-- **Přehled za e-mailem:** stránka `/prehled?t=<token>`; server ověří podepsaný token (HMAC, platnost 24 h, bez e-mailu uvnitř) a teprve pak pošle plná data. Stránka sama dostává jen veřejnou podmnožinu dat (`web/data/etf-verejne.json`, vyrábí ji `scripts/sync-data.mjs`), ISIN ani odkazy na KID v jejím JavaScriptu nejsou. PDF přehledu vydá `/prehled/pdf?t=<token>` ze složky `web/private` jen s platným tokenem (jinak 401). Po zveřejnění repa jsou data i PDF v repu vidět, takže brána "za e-mailem" je u dema ukázka mechanismu, ne skutečné zamčení obsahu.
+- **Přehled za e-mailem:** stránka `/prehled?t=<token>`; server ověří podepsaný token (HMAC, platnost 24 h, bez e-mailu uvnitř) a teprve pak pošle plná data. Stránka sama dostává jen veřejnou podmnožinu dat (`web/data/etf-verejne.json`, vyrábí ji `web/scripts/sync-data.mjs`), ISIN ani odkazy na KID v jejím JavaScriptu nejsou. PDF přehledu vydá `/prehled/pdf?t=<token>` ze složky `web/private` jen s platným tokenem (jinak 401). Po zveřejnění repa jsou data i PDF v repu vidět, takže brána "za e-mailem" je u dema ukázka mechanismu, ne skutečné zamčení obsahu.
 - **Formulář:** kontrola původu, honeypot, klíč idempotence, limit 20 odeslání a 1000 měřicích událostí za hodinu z jedné IP (vyšší kvůli mobilním sítím se sdílenou IP; ukládá se jen otisk IP s datem, o půlnoci UTC se limit vynuluje).
 
 **Spuštění:**
