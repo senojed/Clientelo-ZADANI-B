@@ -85,22 +85,20 @@ export default function Landing() {
             <br />
             Tady je alternativa na stejný index a&nbsp;náklady obou.
           </p>
-          {/* Nabídka přehledu je zároveň odkaz na formulář (dřív zvlášť věta a zvlášť odkaz "Co obsahuje přehled" na totéž místo). */}
-          <a
-            href="#formular"
-            onClick={() => track("cta_click", { cta: "hero_prehled" })}
-            className="relative mt-6 flex min-h-11 items-center font-serif text-[18.8px] leading-[26px] text-accent underline decoration-accent/60 underline-offset-4 min-[375px]:whitespace-nowrap max-[374px]:text-base"
-          >
-            <span>
-              Celý přehled s&nbsp;ISIN zdarma za <span className="whitespace-nowrap">e-mail</span>.
-            </span>
-          </a>
+          {/* Dvě akce: hlavní je srovnání (to slibují reklamy), vedlejší nabídka přehledu za e-mail (vede na formulář). */}
           <a
             href="#srovnani"
             onClick={() => track("cta_click", { cta: "hero_srovnani" })}
-            className={`relative mt-3 ${TLACITKO}`}
+            className={`relative mt-6 ${TLACITKO}`}
           >
             Zobrazit srovnání
+          </a>
+          <a
+            href="#formular"
+            onClick={() => track("cta_click", { cta: "hero_prehled" })}
+            className="relative mt-3 flex h-[52px] items-center justify-center rounded-[5px] border border-accent px-3 text-center text-sm font-semibold text-accent"
+          >
+            Celý přehled s&nbsp;ISIN zdarma za&nbsp;<span className="whitespace-nowrap">e-mail</span>
           </a>
           <div className="relative mt-2 text-muted">
             <div className="h-px bg-line" />
