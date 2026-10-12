@@ -22,7 +22,7 @@ Ne, reklamu bych zítra nespouštěl. Zůstává nepodložené tvrzení o měře
 
 5. **Závažnost:** MINOR  
    **Kde:** `design/texty/texty-komplet.html:2`, `design/texty/pdf-prehled-text.html:2`; historie commitu `0142a890`.  
-   **Problém:** HTML obsahují absolutní cesty začínající `file:///C:/Users/Honza/Nextcloud/Jan/Work/Clientelo/`. Zveřejňují osobní strukturu složek a odkazy na fonty fungují pouze na autorově počítači. Stejné cesty zůstávají v historii smazané složky `design/reklamy-v2/`. To odporuje pravidlu v `PLAN.md:112`.  
+   **Problém:** HTML obsahují absolutní cesty začínající `[redacted cesta]/`. Zveřejňují osobní strukturu složek a odkazy na fonty fungují pouze na autorově počítači. Stejné cesty zůstávají v historii smazané složky `design/reklamy-v2/`. To odporuje pravidlu v `PLAN.md:112`.  
    **Návrh:** Generovat relativní odkazy. Před zveřejněním opravit současné soubory a redigovat dotčené historické verze; pouhé smazání nebo `.gitignore` historii nevyčistí.
 
 6. **Závažnost:** MINOR  

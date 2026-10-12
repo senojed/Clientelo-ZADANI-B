@@ -36,3 +36,4 @@ Celkem zhruba 5,5 hodiny od přečtení zadání. Velkou část času zabraly re
 | 16:19 až 16:57 | ~40 min | Telefon (pád `crypto.randomUUID`, snap), záloha tagem, rozbor LCP (8 experimentů, příčina = webová písma), ořezání písem na české znaky |
 | 17:07 až 18:42 | ~1 h 35 min | Kontrola reklam v1, vlastní reklamy v2 (skript), změna pořadí řádků tabulky a návrat, kontrola reklam v3, kompletní texty stránky a PDF přehledu |
 | 22:40 až 23:10 | ~30 min | Kontrola PDF přehledu (InDesign), tlačítko Stáhnout PDF s tokenem, reklamy v3 do repa, zápis do wiki |
+| 12. 10. 07:07 až 11:15 | ~4 h | Lighthouse po designu, README (doplnění a přepis), licence zdrojů, audit 2 (2 kola, Claude Opus medium a Codex), opravy z auditu, export `ai-log` všech sezení, ping-pong nad README (3 kola do shody), smazání testovacích dat |

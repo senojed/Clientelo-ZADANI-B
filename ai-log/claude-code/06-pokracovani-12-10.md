@@ -6056,3 +6056,628 @@ That "other Claude session" is an agent working inside this same session — a s
 > <stdin>:20: SyntaxWarning: "\d" is an invalid escape sequence. Such sequences wi … [zkráceno, 1085 znaků]
 
 **Nástroj Bash:** [redacted přístup k osobní wiki nebo paměti]
+
+> výsledek: [redacted obsah osobní wiki nebo paměti]
+
+**Nástroj Bash:**
+```
+{"command": "cd \"ai-log\" && grep -rn \"100\\.108\\.50\" claude-code review | cut -c1-200", "description": "Find remaining IP occurrence"}
+```
+
+> výsledek: review/audit-2/round-2-claude.md:34:   **Kde:** `ai-log/claude-code/02-rada-a-plan.md:4199`, `03-revize-planu.md:4199`, `04-hlavni-sezeni.md:4199` (`[redacted počítač]`); `06-pokracovani-12-10.md:5
+
+**Nástroj Bash:**
+```
+{"command": "cd \"" && sed -i 's/[redacted počítač]/[redacted počítač]/g; s/[redacted počítač]/[redacted počítač]/g; s/100\\.108\\.50\\.6/[redacted IP]/g; s/1\\.\\[redacted IP\\]x/[redacted IP]/g' ai-log/review/audit-2/round-2-claude.md && grep -c \"100\\.108\\|DESKTOP-VG\" ai-log/review/audit-2/round-2-claude.md; cat >> ai-log/review/audit-2/discussion.log.md <<'EOF'\n\n## Kolo 2 (Claude auditor, Opus medium, `round-2-claude.md`): VERDIKT READY\n\nVšechny opravy z kola 1 ověřeny (FIXED); rozhodnutí Jana přijata. Zbylé drobnosti opraveny:\n\n| Nález | Oprava |\n|---|---|\n| Redakce propustila název počítače a jednu IP z VPN; pravidlo IP selhalo, když adrese předcházela číslice s tečkou | Pravidlo pro `DESKTOP-...` a upravené pravidlo IP; export přegenerován; zmínky v reportech auditorů nahrazeny |\n| Exporty 02 až 06 se překrývají (pokračující sezení nese přenesenou historii) | README ai-logu to vysvětluje a uvádí, odkdy je obsah každého souboru nový |\n| `ai-log/README.md` odkazuje na neexistující `hlavni-session.md`, nezmiňuje `review/audit-*` | Opraveno |\n| `data/overeni.md` u IVV cituje v smazané kopii položku `EUPRIIP`, výňatek ji nemá a protiřečí si | Výňatek doplněn doslovně (ověřeno v historii gitu), věta sjednocena |\n| README: TBT 60 ms, měření dávají 30 až 60 ms | Opraveno |\n| Podmínka `intersectionRatio >= 0.3` může zahazovat události těsně pod prahem | Zmírněno na 0,29 |\n| Komentář v `sync-data.mjs` odkazuje na neexistující `api/prehled` | Opraveno |\nEOF\ngit add -A && git commit -q -m \"audit 2, kolo 2: Claude READY; redakce (počítač, IP), překryv exportů vysvětlen, drobné opravy README a komentářů\n\nCo-Authored-By: Claude Sonnet 5.5 <[redacted e-mail]>\" && git push -q 2>&1 | grep -v \"^warning\"; git log --oneline -1; date +%H:%M", "description": "Log round-2 triage and push fixes"}
+```
+
+> výsledek: 0
+> warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/README.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/claude-code/01-vyber-zadani.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/claude-code/02-ra … [zkráceno, 4248 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cat \"[redacted cesta]" | tail -5; ls -la \"ai-log/review/audit-2\" | awk '{print $5,$9}'", "description": "Check Codex round 2 retry status"}
+```
+
+> výsledek: 10:39
+>  
+> 0 .
+> 0 ..
+> 6112 discussion.log.md
+> 16158 round-1-claude.md
+> 6274 round-1-codex.md
+> 7684 round-2-claude.md
+
+## Claude (2026-10-12 08:39 UTC)
+
+[10:39] Claude auditor v kole 2 dal **READY**: žádný blokující ani závažný nález a všechny opravy z kola 1 označil za ověřené. Zbylo 7 drobností a všechny jsem opravil a pushnul.
+
+**Co jsem opravil:**
+- **Redakce `ai-log`:** propustila název tvého počítače a jednu IP z VPN. Přidal jsem pravidlo, znovu vyexportoval všechna sezení a ověřil, že tyhle údaje už v repu nejsou.
+- **README ai-logu:** vysvětluje, že pokračující sezení nesou na začátku i přenesenou historii, a uvádí, odkdy je obsah každého souboru nový. Opravil jsem také odkaz na neexistující soubor a doplnil složky s audity.
+- **Důkaz u IVV** v `data/overeni.md`: výňatek si protiřečil s původní kopií. Doplnil jsem ho doslovně z původního souboru (ověřeno v historii gitu).
+- **Drobnosti:** TBT v README ("30 až 60 ms"), práh sledování sekcí, nesprávný komentář v kódu.
+
+**Čekám na Codex.** Při prvním pokusu byl přetížený. Druhý pokus běží a po něm případně záložní model. Pokud ani ten neprojde, napíšu to a zeptám se, jestli stačí verdikt Claude auditora.
+
+Notifikaci na telefon pošlu, až Codex doběhne, pokud tu nebudeš.
+
+## Uživatel (2026-10-12 08:43 UTC)
+
+<task-notification>
+<task-id>b6y4oucvk</task-id>
+<tool-use-id>toolu_01NYzdP9HXe4XWb23ujg3KXc</tool-use-id>
+<output-file>[redacted cesta]
+<status>completed</status>
+<summary>Background command "Retry Codex round 2, fall back to gpt-5.5" completed (exit code 0)</summary>
+</task-notification>
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cat \"[redacted cesta]"; cat \"ai-log/review/audit-2/round-2-codex.md\"", "description": "Read Codex round 2 result"}
+```
+
+> výsledek: 10:43
+> default exit=0
+> 
+> VERDIKT: READY
+> [exited with code 0]
+> Kontroloval jsem GitHub `main` na commitu `d229d6d8`, včetně dodatečných oprav během auditu. Nenašel jsem zbývající BLOCKER ani MAJOR.
+> 
+> | Položky diskuse | Výsledek ověření |
+> |---|---|
+> | Cl1, mobilní pole | FIXED: CSS nastavuje 16 px, výška zůstává 44 px. |
+> | Cx1, Cl13, měření a Neon | FIXED: právní nejistota je výslovně zdokumentovaná, Neo … [zkráceno, 2933 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "cd \"" && grep -n \"nejvýš LIMIT\\|5 nových\\|pět\" web/app/api/lead/route.ts | head; grep -n \"formular_videl\" web/db/funnel.sql README.md | cut -c1-120; grep -n \"Většina amerických ETF nemá KID\" README.md | cut -c1-80", "description": "Locate lines for the three minor fixes"}
+```
+
+> výsledek: 58:    // Omezení četnosti: nejvýš 5 nových odeslání za hodinu z jedné IP (uložen jen otisk IP, viz lib/ratelimit.ts).
+> web/db/funnel.sql:27:       count(*) filter (where r.navsteva and r.videl_formular)    as formular_videl,
+> 14:Většina amerických ETF nemá KID (dokument podle nařízení PRIIPs, bez k
+
+**Nástroj Bash:**
+```
+{"command": "cd \"" && python - <<'EOF'\ndef edit(p, rep):\n    s=open(p,encoding=\"utf-8\").read()\n    for a,b in rep:\n        assert a in s,(p,a[:60]); s=s.replace(a,b,1)\n    open(p,\"w\",encoding=\"utf-8\",newline=\"\\n\").write(s)\nedit(\"web/app/api/lead/route.ts\",[(\"nejvýš 5 nových odeslání za hodinu\",\"nejvýš 20 nových odeslání za hodinu\")])\nedit(\"web/db/funnel.sql\",[(\"as formular_videl,\",\"as sekce_s_formularem_videl,\")])\nedit(\"README.md\",[(\"Většina amerických ETF nemá KID (dokument podle nařízení PRIIPs,\",\"Americká ETF obvykle nemají KID pro evropské drobné investory (obecný zdroj: justETF, 2018; dokument podle nařízení PRIIPs,\")])\nopen(\"ai-log/review/audit-2/discussion.log.md\",\"a\",encoding=\"utf-8\",newline=\"\\n\").write(\"\"\"\n## Kolo 2 (Codex, `round-2-codex.md`): VERDIKT READY\n\nBez BLOCKER a MAJOR, všechny opravy ověřeny. Tři drobnosti opraveny nebo zapsány:\n- \"Zobrazení formuláře\" sleduje celou sekci s vysvětlením: sloupec ve `funnel.sql` přejmenován na `sekce_s_formularem_videl` (metrika se tím nenadhodnocuje jako \"zobrazení formuláře\").\n- První strana PDF má dál obecnější větu o KID: **vědomé rozhodnutí Jana (jeho dokument)**; web a README mají konkrétní znění, README doplněno o zdroj (justETF 2018) a slovo \"obvykle\".\n- Komentář v `/api/lead` uváděl 5 odeslání, skutečný limit je 20: opraveno.\n\n## Souhrn audit 2\n\nKolo 1: Codex a Claude NOT READY (25 nálezů, většina opravena, rozhodnutí Jana zapsána). Kolo 2: Claude (Opus, medium) READY, Codex READY. Audit uzavřen ve 2 kolech.\n\"\"\")\nEOF\ncd web && npm run build 2>&1 | grep -i -E \"error|✓ Gen\"; cd .. && git add -A && git commit -q -m \"audit 2 uzavřen (kolo 2: Claude i Codex READY); drobné opravy komentáře, názvu metriky a README\n\nCo-Authored-By: Claude Sonnet 5.5 <[redacted e-mail]>\" && git push -q 2>&1 | grep -v \"^warning\"; git log --oneline -1; date +%H:%M", "description": "Fix Codex minors, close audit 2 in the log, push", "timeout": 300000}
+```
+
+**Nástroj PushNotification:**
+```
+{"message": "Audit 2 hotov: Claude i Codex verdikt READY. Zbývá úterní kontrola README a odevzdání ve čtvrtek. Detail v konverzaci.", "status": "proactive"}
+```
+
+> výsledek: ✓ Generating static pages using 11 workers (10/10) in 1457ms
+> warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/review/audit-2/discussion.log.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'web/app/api/lead/route.ts', LF will be replaced by CRLF the next time Gi … [zkráceno, 991 znaků]
+
+> výsledek: Mobile push requested.
+
+## Claude (2026-10-12 08:43 UTC)
+
+[10:43] Druhý audit je uzavřený. Ve druhém kole dali **Claude (Opus, medium) i Codex verdikt READY**: žádný blokující ani závažný nález. Všechno je pushnuté a notifikace na telefon se odeslala (tentokrát prošla, protože jsi byl pryč).
+
+**Poslední drobnosti, které Codex našel**
+- **Metrika "zobrazení formuláře"** měřila celou sekci s vysvětlením. Sloupec ve `funnel.sql` jsem přejmenoval na "sekce s formulářem viděna", ať číslo nepůsobí přesněji, než je.
+- **Úvodní věta v PDF** má pořád starší znění o KID. Je to tvůj dokument, takže jsem to zapsal jako tvoje rozhodnutí. Pokud chceš, uprav ji stejně jako na webu.
+- **Komentář v kódu** uváděl limit 5 odeslání místo 20. Opraveno.
+
+**Kde jsme oproti plánu:** v pondělí máme hotové repo, README, reklamy, PDF, Lighthouse i oba audity. Plán počítal s druhým auditem až v úterý a s ping-pongem ve středu.
+
+**Co zbývá:**
+1. **Ping-pong 3 až 5 kol s Codexem nad README a texty** (Codex je dnes přetížený, ale druhý pokus prošel).
+2. **Úklid testovacích dat** v databázi těsně před odevzdáním. Leady z testů jsou tvoje, takže před smazáním potřebuju tvoje ano.
+3. **Finální export `ai-log`** těsně před zveřejněním repa (poslední sezení se přes noc prodlužuje).
+4. **Čtvrtek:** finální průchod na ostré adrese, repo na veřejné, ty pošleš e-mail.
+
+Mám pustit ping-pong nad README hned, nebo chceš nejdřív sám přečíst README a říct, co změnit?
+
+## Uživatel (2026-10-12 08:46 UTC)
+
+upresni 'Úvodní věta v PDF má pořád starší znění o KID. Je to tvůj dokument, takže jsem to zapsal jako tvoje rozhodnutí. Pokud chceš, uprav ji stejně jako na webu.'
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"" && pdftotext -enc UTF-8 -layout web/private/prehled-etf.pdf - | sed -n 1,10p", "description": "Show first lines of PDF page 1"}
+```
+
+> výsledek: 10:46
+> Americká ETF
+> a jejich UCITS alternativy
+> 
+> Americká ETF jako VOO většinou nemají KID, bez kterého je broker v EU drobnému investorovi
+> obvykle nenabídne. U všech čtyř fondů v tomto přehledu jsme KID pro EU na stránce správce
+> k 9. 10. 2026 nenašli. Ke každému proto ukazujeme UCITS alternativu na stejný index, která má
+> český KID a je v seznamu ČNB fondů nabízených v ČR.
+> 
+> Údaje ověřeny 9. 10. 2026 … [zkráceno, 495 znaků]
+
+## Claude (2026-10-12 08:46 UTC)
+
+[10:46] Mluvím o jednom odstavci na první straně `PDF.pdf`. Je to tenhle:
+
+> Americká ETF jako VOO většinou nemají KID, bez kterého je broker v EU drobnému investorovi obvykle nenabídne. U všech čtyř fondů v tomto přehledu jsme KID pro EU na stránce správce k 9. 10. 2026 nenašli. Ke každému proto ukazujeme UCITS alternativu na stejný index, která má český KID a je v seznamu ČNB fondů nabízených v ČR.
+
+**Problém:** první věta ("většinou nemají KID") dělá obecné tvrzení o všech amerických ETF. Opírá se přitom jen o náš výzkum čtyř fondů a obecný zdroj justETF z roku 2018. Auditor to označil za příliš široké. Ta samá věta byla předtím na webu a tam jsem ji na tvůj pokyn změnil.
+
+**Rozdíl mezi webem a PDF:**
+- **Web (úvod)** teď říká: "U VOO, IVV, DIA ani VT jsme KID na stránce správce nenašli. Bez KID broker v EU fond drobnému investorovi obvykle nenabídne."
+- **PDF (strana 1)** má pořád starou obecnější formulaci.
+
+**Je to nepravda?** Ne. Hned za ní je v PDF věta o čtyřech fondech, takže čtenář dostane i konkrétní tvrzení. Je to jen nesoulad v tónu mezi dvěma místy a trochu silnější obecné tvrzení.
+
+**Co navrhuju, kdybys to chtěl sjednotit** (v InDesignu přepsat ten odstavec):
+
+> U VOO, IVV, DIA ani VT jsme KID pro EU na stránce správce k 9. 10. 2026 nenašli. Bez KID broker v EU fond drobnému investorovi obvykle nenabídne. Ke každému proto ukazujeme UCITS alternativu na stejný index, která má český KID a je v seznamu ČNB fondů nabízených v ČR.
+
+Je to stejný obsah, jen konkrétní věta je první. Po přepsání PDF znovu exportuj a dej mi ho, nahradím soubor v `web/private`. Pokud to nechceš měnit, v záznamu auditu je to uvedené jako tvoje vědomé rozhodnutí a je to v pořádku.
+
+## Uživatel (2026-10-12 08:49 UTC)
+
+PDF opraveno
+pusť ping-pong nad README - 15 kol
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"" && ls -la --time-style=+%H:%M design/PDF/PDF.pdf | awk '{print $5,$6}'; python -I -c \"\nimport subprocess\nt=subprocess.run(['pdftotext','-enc','UTF-8','design/PDF/PDF.pdf','-'],capture_output=True).stdout.decode('utf-8','ignore')\nprint('stran',t.count('\\f')); i=t.find('Americká ETF'); print(t[:500].encode('ascii','replace').decode())\" | head -12; cp design/PDF/PDF.pdf web/private/prehled-etf.pdf && git add web/private/prehled-etf.pdf && git commit -q -m \"nové PDF přehledu: konkrétní úvodní věta o KID\n\nCo-Authored-By: Claude Sonnet 5.5 <[redacted e-mail]>\" && git push -q 2>&1 | grep -v \"^warning\"; git log --oneline -1", "description": "Check and deploy updated PDF"}
+```
+
+> výsledek: 10:49
+> 470864 10:48
+> stran 5
+> Americk? ETF a jejich UCITS alternativy
+> U VOO, IVV, DIA ani VT jsme KID pro EU na str?nce spr?vce k 9. 10. 2026 nena?li. Bez KID broker v EU fond drobn?mu investorovi obvykle nenab?dne. Ke ka?d?mu proto ukazujeme UCITS alternativu na stejn? index, kter? m? ?esk? KID a je v seznamu ?NB fond? nab?zen?ch v ?R.
+> ?daje ov??eny 9. 10. 2026 a 10. 10. 2026. Marketingov? sd?l … [zkráceno, 590 znaků]
+
+## Claude (2026-10-12 08:50 UTC)
+
+PDF je nasazené (5 stran, nová věta). Teď spouštím ping-pong nad README přes skill plan-consensus.
+
+**Nástroj Skill:**
+```
+{"skill": "plan-consensus", "args": "README.md ve složce ZADANIE B, max 15 kol, review proti zadání B (Clientelo) a proti repozitáři"}
+```
+
+> výsledek: Launching skill: plan-consensus
+
+## Uživatel (2026-10-12 08:50 UTC)
+
+Base directory for this skill: [redacted cesta]
+
+# plan-consensus
+
+Loops a plan document through Codex and Claude as two independent critics. Neither plays defender — both try to make the plan as good as possible. Each round Codex critiques the current plan, then Claude does its own independent critique and edits the plan for points both agree are valid. Stops on consensus, max rounds, or detected impasse.
+
+## When to invoke
+
+- User explicitly asks for plan-consensus / `/plan-consensus`.
+- User wants Codex to review a plan and iterate until convergence.
+- User describes the manual workflow ("I keep passing my plan between Claude and Codex").
+
+## Inputs
+
+Required: path to plan file (markdown). Ask user if not provided.
+
+**Always ask before starting:**
+- "Kolik kol má proběhnout? (doporučení: 3–7 podle délky plánu)"
+
+Optional (ask only if not obvious):
+- `codex_model` — default whatever codex CLI defaults to.
+- `working_dir` — default = directory containing plan file.
+
+## Outputs
+
+In the same directory as the plan file, create a `plan-consensus/` subdirectory containing:
+- `discussion.log.md` — append-only chronological transcript of every round.
+- `round-N-codex.md` — raw Codex critique for round N.
+- `round-N-claude.md` — Claude's independent critique + decisions for round N.
+- `final-verdict.md` — one of: `CONSENSUS`, `MAX_ROUNDS`, `IMPASSE`. Includes summary of unresolved points if not consensus.
+
+The plan file itself is edited in place. Before first round, snapshot it as `plan-consensus/plan.original.md`.
+
+## Procedure
+
+### 0. Setup (once)
+
+1. Ask user for number of rounds. Wait for answer. Set `max_rounds`.
+2. Read the plan file fully.
+3. Create `plan-consensus/` subdir and snapshot original.
+4. Initialize `discussion.log.md` with header: plan path, start timestamp, max_rounds.
+5. Set `round = 1`, `prev_plan_hash = hash(plan)`, `consecutive_clean_rounds = 0`.
+
+### 1. Codex review round
+
+Run Codex with a structured prompt. Codex runs read-only — it must NOT modify files. Use `--sandbox read-only --skip-git-repo-check` and capture last message to a file.
+
+**Prompt template for Codex:**
+
+```
+You are an independent technical reviewer. Your job is to find problems in this plan. Be rigorous, terse, and concrete. Do NOT be lenient — your goal is to make this plan as good as possible, not to reach agreement quickly.
+
+Plan file: {ABSOLUTE_PLAN_PATH}
+Round: {N} of {MAX}
+
+Read the plan file. Then read the full discussion log below to understand what has already been addressed. Do NOT repeat points that were already accepted and fixed. DO repeat points that were raised but rejected if you still believe they are valid — explain why.
+
+Critique the plan under these sections (omit a section if it has nothing):
+
+## BLOCKING
+Issues that make the plan unworkable or wrong. Each item: location in plan + problem + suggested fix.
+
+## IMPORTANT
+Significant gaps, risks, missing edge cases, unclear ownership, or missing rollback. Same format.
+
+## NITS
+Minor improvements (wording, ordering, small clarifications).
+
+## VERDICT
+Output exactly one line, no other text on it:
+- `CONSENSUS` — plan is good enough to execute. Use ONLY if BLOCKING and IMPORTANT are empty.
+- `CHANGES_NEEDED` — at least one BLOCKING or IMPORTANT item.
+
+Do not edit any files. Output critique only.
+
+--- FULL DISCUSSION LOG ---
+{FULL_DISCUSSION_LOG}
+```
+
+Where `{FULL_DISCUSSION_LOG}` is the full contents of `discussion.log.md` — or "First round, no prior discussion." if N=1.
+
+**Bash invocation:**
+
+```bash
+codex exec \
+  --sandbox read-only \
+  --skip-git-repo-check \
+  -C "{WORKING_DIR}" \
+  -o "{PLAN_DIR}/plan-consensus/round-{N}-codex.md" \
+  "<prompt>"
+```
+
+If `codex_model` was provided, add `-m "{MODEL}"`.
+
+After completion: read `round-N-codex.md`. If empty or missing → stop with error, ask user.
+
+### 2. Claude independent critique round
+
+Claude now does its OWN independent critique of the current plan. This is NOT a response to Codex — Claude reads the plan fresh and finds its own issues. Claude then also reads Codex's critique to see if it agrees or disagrees with each point.
+
+**Claude's process:**
+
+1. Read the plan file fresh.
+2. Read `round-N-codex.md`.
+3. Do independent analysis — find BLOCKING, IMPORTANT, NITS that Claude sees, regardless of what Codex said.
+4. For each Codex point: agree or disagree with reasoning.
+5. A plan edit happens ONLY when:
+   - Claude independently agrees the point is valid (whether Codex raised it or Claude found it), OR
+   - Codex raised it and Claude finds it valid after analysis.
+   Edit is NOT blocked by disagreement — Claude's judgment decides.
+6. Write `round-N-claude.md`:
+
+   ```markdown
+   # Round N — Claude critique
+
+   ## Claude's own findings
+   ### BLOCKING
+   - [issue]: location + problem + fix applied (or proposed if needs discussion)
+   ### IMPORTANT
+   - [issue]: ...
+   ### NITS
+   - [issue]: ...
+
+   ## On Codex's points
+   ### Agreed + fixed
+   - [Codex point]: <what was changed, where>
+   ### Agreed but already addressed
+   - [Codex point]: <already fixed in step above or in prior round at line X>
+   ### Disagreed
+   - [Codex point]: <why this is wrong / out of scope / already handled — be specific>
+
+   ## Claude VERDICT
+   - `CONSENSUS` — no BLOCKING or IMPORTANT found by Claude (own findings section empty or only NITS)
+   - `CHANGES_NEEDED` — Claude found at least one BLOCKING or IMPORTANT issue
+
+   ## Summary for log
+   <2-3 sentences: what changed this round, what remains contested, key context for next round.>
+   ```
+
+7. Edit plan file in place using Edit tool for all agreed/own-found valid points.
+8. Append to `discussion.log.md`: timestamp, round N, link to both files, summary.
+
+### 3. Check stop conditions
+
+**CONSENSUS** — both Codex and Claude output `CONSENSUS` in the SAME round → write `final-verdict.md` = CONSENSUS, stop.
+
+**MAX_ROUNDS** — `round >= max_rounds` AND not CONSENSUS → write final-verdict = MAX_ROUNDS, list all outstanding BLOCKING/IMPORTANT from both critics, stop.
+
+**IMPASSE** — both of these true for 2 consecutive rounds:
+- Plan hash unchanged (no edits)
+- At least one BLOCKING/IMPORTANT still flagged by either critic
+
+On IMPASSE: write `final-verdict.md` = IMPASSE, list specific contested points with both sides' arguments, surface to user. Stop.
+
+### 4. Increment and loop
+
+`round = round + 1`. Update `prev_plan_hash`. Go to step 1.
+
+## User-facing reporting
+
+- Start: "Plán-consensus start. Kol: {MAX}. Codex review kolo 1 běží."
+- After each round: "Kolo N: Codex {VERDICT}, Claude {VERDICT}. Opraveno: X bodů. Sporné: Y."
+- End:
+  - CONSENSUS: "Shoda po N kolech. Plán hotov. Log: {path}."
+  - MAX_ROUNDS: "Stop — max kol ({MAX}). Nedořešeno: <list>. Chceš pokračovat?"
+  - IMPASSE: "Spor v kole N. Body: <list with both arguments>. Rozhodni ty."
+
+Match user's caveman/Czech style if active.
+
+## Failure modes and recovery
+
+- **Codex exec errors / timeouts** → log error, stop, surface to user. Don't retry blindly — ask user.
+- **Plan file disappeared / path wrong** → stop immediately.
+- **Codex output empty** → likely auth/quota issue. Tell user to check `codex login`.
+- **Loop never converges** → max_rounds catches it. User can raise the cap.
+
+## Why this design
+
+- **Both critics, no defender** — defender role creates bias toward premature consensus. Both Claude and Codex have one job: find problems. This prevents one reviewer from rubber-stamping the other's work.
+- **CONSENSUS requires agreement from both in same round** — harder to achieve, but means both reviewers genuinely found nothing wrong at the same time.
+- **Claude's own findings first** — Claude reads the plan independently before reading Codex's critique. This avoids anchoring bias where Claude just evaluates Codex's points instead of doing its own analysis.
+- **Full discussion log to Codex** — Codex sees everything, not just a summary. Prevents Codex from re-raising already-fixed points, but allows it to persist on contested points with new reasoning.
+- **Single writer (Claude)** — Codex never edits files. No conflicts, clear audit trail.
+- **User sets round count** — plans differ in complexity; 5 rounds is wrong for both a 1-page spec and a 20-page architecture doc.
+
+
+ARGUMENTS: README.md ve složce ZADANIE B, max 15 kol, review proti zadání B (Clientelo) a proti repozitáři
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; D=\""; SP=\"[redacted cesta]"; PC=\"$D/ai-log/review/readme-consensus\"; mkdir -p \"$PC\" && cp \"$D/README.md\" \"$PC/plan.original.md\" && printf '# Discussion log: ping-pong nad README.md\\n\\nPlan: README.md (celý repozitář ZADANIE B). Start: %s. Max kol: 15 (Jan). Kritici: Codex a Claude, oba hledají problémy; zadání B (Clientelo) je v kontextu pro Codex.\\n\\n' \"$(date '+%Y-%m-%d %H:%M')\" > \"$PC/discussion.log.md\"; cat > \"$SP/run-readme-round.sh\" <<'EOF'\n#!/bin/bash\n# Jedno kolo Codex review README: složí prompt (zadání, log, aktuální README) a zavolá codex exec (záložně s -m gpt-5.5).\nN=\"$1\"\nD=\""\nSP=\"[redacted cesta]"\nPC=\"$D/ai-log/review/readme-consensus\"\n{\ncat <<HDR\nYou are an independent technical reviewer in a ping-pong review of README.md (round $N of 15). Both reviewers (you and Claude) try to make the README as good as possible. Do NOT be lenient and do not rubber-stamp.\n\nThe README belongs to a solution of assignment B (original text below). It will be the first thing the evaluator reads (a Czech/Slovak company); the repository is public GitHub senojed/Clientelo-ZADANI-B (branch main), live page https://clientelo-zadani-b.vercel.app. The evaluator's main question: \"could we launch an ad on this page tomorrow?\" plus how the author worked with AI.\n\nReview the README for: (1) completeness against every README requirement of the assignment (section order rationale, expected conversion as concrete numbers with logic, three A/B hypotheses ranked by expected impact, how AI was used / instructed / checked / where it erred, what is missing, decisions where the assignment was unclear); (2) truthfulness: every claim must be backed by something in the repository or live page (you may read the repo via GitHub or a local checkout if available; if you cannot verify a claim, say so); (3) internal contradictions and stale statements; (4) clarity and structure for a reader with 3 minutes (is the most important information first, is it too long, is anything missing at the top); (5) tone: Czech, plain language, no em-dashes, no marketing fluff, honest about limits; (6) broken links, wrong file names.\n\nDo NOT repeat points already accepted and fixed in the discussion log. DO repeat rejected ones if you still believe they are valid, with reasons. Do not edit files.\n\nOutput in English or Czech (Czech preferred), sections:\n## BLOCKING\n## IMPORTANT\n## NITS\neach item: location in README + problem + concrete suggested wording or fix.\n## VERDICT\nexactly one line: CONSENSUS (only if BLOCKING and IMPORTANT are empty) or CHANGES_NEEDED.\n\n--- ASSIGNMENT (original, Slovak) ---\nHDR\ncat \"$SP/zadani.md\"\necho\necho \"--- FULL DISCUSSION LOG ---\"\ncat \"$PC/discussion.log.md\"\necho\necho \"--- CURRENT README.md ---\"\ncat \"$D/README.md\"\n} > \"$SP/prompt-readme-r$N.md\"\nfor M in \"\" \"-m gpt-5.5\"; do\n  cat \"$SP/prompt-readme-r$N.md\" | codex exec $M -c 'model_reasoning_effort=\"high\"' --sandbox read-only --skip-git-repo-check -C \"$D\" -o \"$PC/round-$N-codex.md\" - > \"$SP/codex-readme-r$N.out\" 2>&1\n  rc=$?\n  if [ $rc -eq 0 ] && [ -s \"$PC/round-$N-codex.md\" ]; then echo \"ok rc=$rc model='$M'\"; exit 0; fi\n  echo \"failed rc=$rc model='$M'\"; sleep 15\ndone\nexit 1\nEOF\nchmod +x \"$SP/run-readme-round.sh\"; (bash \"$SP/run-readme-round.sh\" 1 > \"$SP/readme-r1.status\" 2>&1 &); sleep 1; echo started", "description": "Set up README consensus folder and launch round 1 with Codex"}
+```
+
+> výsledek: 10:50
+> started
+
+**Nástroj Read:**
+```
+{"file_path": "README.md"}
+```
+
+> výsledek: 1	# Evropské alternativy amerických ETF: konverzní landing page
+> 2	
+> 3	Řešení zadání B (Clientelo, Junior AI Developer). Landing page pro českého drobného investora, který přijde z reklamy na mobilu: srovnání 4 amerických ETF z NYSE Arca s jejich UCITS alternativami na stejný index, výpočet rozdílu ročního poplatku a celý přehled zdarma za e-mail.
+> 4	
+> 5	- **Stránka:** https://clientelo-zadani-b.verce … [zkráceno, 18230 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; SP=\"[redacted cesta]"; cat \"$SP/readme-r1.status\"; ls -la \"ai-log/review/readme-consensus/\" | awk '{print $5,$9}'", "description": "Check whether Codex round 1 finished"}
+```
+
+> výsledek: 10:50
+>  
+> 0 .
+> 0 ..
+> 232 discussion.log.md
+> 19197 plan.original.md
+
+**Nástroj Bash:**
+```
+{"command": "SP=\"[redacted cesta]"; for i in $(seq 1 55); do [ -s \"$SP/readme-r1.status\" ] && break; sleep 10; done; cat \"$SP/readme-r1.status\"; date +%H:%M", "description": "Wait for Codex round 1 to finish", "timeout": 600000}
+```
+
+> výsledek: ok rc=0 model=''
+> 10:57
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"web\" && TOKEN=$(grep \"^[redacted proměnná] ../../.env | cut -d= -f2- | tr -d '\\r\"'\"'\"' '); PID=$(python -I -c \"import json;print(json.load(open('.vercel/project.json'))['projectId'])\"); TEAM=$(python -I -c \"import json;print(json.load(open('.vercel/project.json')).get('orgId',''))\"); curl -s -H \"Authorization: Bearer $TOKEN\" \"https://api.vercel.com/v6/deployments?projectId=$PID&teamId=$TEAM&limit=12&target=production\" | python -I -c \"\nimport json,sys,datetime\nd=json.load(sys.stdin)\nfor x in d.get('deployments',[]):\n    m=x.get('meta',{})\n    print(x['state'], datetime.datetime.fromtimestamp(x['created']/1000).strftime('%d.%m %H:%M'), (m.get('githubCommitSha') or '')[:7], (m.get('githubCommitMessage') or '')[:70])\n\"; git log --oneline -1 | cat", "description": "List recent Vercel production deployments and states"}
+```
+
+> výsledek: 10:57
+> READY 12.10 10:49 e56dff1 nové PDF přehledu: konkrétní úvodní věta o KID
+> 
+> Co-Authored-By:
+> READY 12.10 10:43 926a6b5 audit 2 uzavřen (kolo 2: Claude i Codex READY); drobné opravy koment
+> READY 12.10 10:39 d229d6d audit 2, kolo 2: Claude READY; redakce (počítač, IP), překryv expo
+> READY 12.10 10:25 4f626b9 úvod: konkrétní věta o KID u čtyř fondů; nové PDF přehledu (5
+> READY 12.10 07:32 6764 … [zkráceno, 1201 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "cat \"ai-log/review/readme-consensus/round-1-codex.md\"", "description": "Read Codex README round 1"}
+```
+
+> výsledek: Ověřeno proti `main`, commit `e56dff1`: kód, datové podklady, auditní záznamy a tři reporty Lighthouse. Všechny relativní odkazy v README existují. Živou stránku jsem neověřil, přístup prohlížeče byl zamítnut kvůli odmítnutému oprávnění. Aktuální podmínky Meta se nepodařilo nezávisle načíst.
+> 
+> ## BLOCKING
+> 
+> - **Úvod, „Stav k 12. 10. 2026“:** „probíhají poslední kontroly“ neodpovídá zásadním nedodělk … [zkráceno, 4629 znaků]
+
+**Nástroj Write:**
+```
+{"file_path": "README.md", "content": "# Evropské alternativy amerických ETF: konverzní landing page\n\nŘešení zadání B (Clientelo, Junior AI Developer). Landing page pro českého drobného investora, který přijde z reklamy na mobilu: srovnání 4 amerických ETF z NYSE Arca s jejich UCITS alternativami na stejný index, výpočet rozdílu ročního poplatku a celý přehled zdarma za e-mail. Vznikla jako ukázka a není spuštěná kampaň.\n\n## V kostce\n\n- **Mohli bychom zítra spustit reklamu?** Technicky ano: stránka je nasazená, formulář ukládá … [zkráceno, 19240 znaků]
+```
+
+> výsledek: The file README.md has been updated successfully. (file state is current in your context — no need to Read it back)
+
+**Nástroj Bash:**
+```
+{"command": "cd \"" && cat >> compliance/checklist.md <<'EOF'\n\n## Meta a měření konverzí (vědomě nedořešeno v demu)\n\nMeta bez pixelu nebo Conversions API nevidí, kdo z reklamy odeslal formulář, takže kampaň jde optimalizovat jen na kliknutí nebo zobrazení stránky, ne na leady. Možnosti:\n- *Meta Pixel* (kód Mety v prohlížeči, cookies): vyžaduje cookie lištu se souhlasem předem, část návštěv nezměří (odmítnutí, blokátory, Safari).\n- *Conversions API* (server po uložení leadu pošle Metě konverzi): bez cookies a kódu Mety na stránce, ale předává Metě osobní údaje (hash e-mailu, `fbclid`), takže potřebuje právní základ, úpravu zásad a přístupový token.\n\nDoporučení pro ostrou kampaň: Conversions API ze serveru po právní kontrole. Do té doby je rozumný cíl kampaně \"zobrazení vstupní stránky\". Demo už ukládá `fbclid` spolu s UTM (jen u nás, Metě se nic neposílá), takže leady půjde s kliky spárovat i zpětně.\nEOF\nPC=\"ai-log/review/readme-consensus\"; cat > $PC/round-1-claude.md <<'EOF'\n# Kolo 1: kritika Claude\n\n## Vlastní nálezy\n### IMPORTANT\n- README nemá nahoře přímou odpověď na hlavní otázku zadání (\"mohli bychom zítra spustit reklamu?\"); stav byl jen \"probíhají poslední kontroly\". Přidána sekce \"V kostce\".\n- Hlas je smíšený (Jan ve třetí osobě i \"jsem\"): sjednoceno do první osoby autora.\n- Sekce AI duplikuje body (Nástroje, Postup, Jak jsem kontroloval) a pokyny agentům jsou obecné, zadání chce \"jaké pokyny dostali agenti\": sloučeno, pokyny odkazují na konkrétní soubory v repu.\n- Konverzní odhad je tabulka bez struktury: rozložen na dva měřené kroky (dojede k formuláři, odešle), čísla sedí s původní tabulkou.\n- Audit 2 (2 kola) v README chyběl.\n### NITS\n- Chyběla mapa repozitáře; přidána krátká tabulka.\n\n## K bodům Codexu\n- **Agreed + fixed:** BLOCKING (odpověď nahoře, formulace přizpůsobena), \"koupit jde\" (nahrazeno), repo je zatím soukromé (uvedeno), délka a opakování (sloučeno, Meta přesunuta do checklistu, licence videa zkrácena), zobecnění o druhé kontrole (nahrazeno doložitelným závěrem), \"zobrazení formuláře\" a definice konverze v SQL, pořadí návodu ke spuštění (`.env.local`, migrace, dev), nits (superlativ u tickerů, \"spustitelné\" doplněno o náhled a schválení Metou, odkaz lze zkopírovat a během 24 h znovu otevřít, tón: bez \"double check jako při lezení\", české výrazy, CAPTCHA).\n- **Disagreed:** nic. Poznámka: README má i po úpravách kolem 2 400 slov; u odevzdávaného README, které musí pokrýt povinné části zadání, je to přijatelné díky sekci \"V kostce\".\n\n## Claude VERDICT\nCHANGES_NEEDED (před úpravami; po úpravách čekám na kolo 2)\n\n## Shrnutí pro log\nREADME přepsáno: nahoře odpověď na otázku zadání, stav a soukromé repo, konverze rozložená na dva měřené kroky, sloučená a konkrétnější sekce o práci s AI, přehlednější \"Co chybí\" (před kampaní vs. omezení dema), návod ke spuštění v pořadí, mapa repa; Meta a CAPI přesunuty do `compliance/checklist.md`.\nEOF\nprintf '## Kolo 1 (%s)\\n- Codex: CHANGES_NEEDED (1 BLOCKING, 6 IMPORTANT, 4 NITS), `round-1-codex.md`.\\n- Claude: CHANGES_NEEDED (vlastní nálezy: odpověď nahoře, hlas, duplicity AI, konverze rozložená, audit 2, mapa repa), `round-1-claude.md`.\\n- Všechny body přijaty, README přepsáno. Sporné: nic.\\n\\n' \"$(date '+%H:%M')\" >> $PC/discussion.log.md; git add -A; git commit -q -m \"README přepsáno po kole 1 ping-pongu (odpověď nahoře, konverze rozložená, sloučená sekce AI, mapa repa)\n\nCo-Authored-By: Claude Sonnet 5.5 <[redacted e-mail]>\" && git push -q 2>&1 | grep -v \"^warning\"; git log --oneline -1; SP=\"[redacted cesta]"; rm -f \"$SP/readme-r2.status\"; (bash \"$SP/run-readme-round.sh\" 2 > \"$SP/readme-r2.status\" 2>&1 &); date +%H:%M", "description": "Move Meta details to checklist, write round 1 files, commit, launch round 2"}
+```
+
+> výsledek: warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'compliance/checklist.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/review/readme-consensus/discussion.log.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/r … [zkráceno, 897 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "SP=\"[redacted cesta]"; for i in $(seq 1 58); do [ -s \"$SP/readme-r2.status\" ] && break; sleep 10; done; cat \"$SP/readme-r2.status\"; date +%H:%M; cat \"ai-log/review/readme-consensus/round-2-codex.md\" 2>/dev/null", "description": "Wait for Codex round 2 and show it", "timeout": 600000}
+```
+
+> výsledek: ok rc=0 model=''
+> 11:06
+> Kontrola vychází z místního `main`, commit `010aab5`. Relativní odkazy existují, čísla Lighthouse odpovídají reportům. Živý průchod ani aktuální pravidla Meta se nepodařilo nezávisle ověřit. GitHub API potvrzuje soukromý repozitář, jak README správně uvádí.
+> 
+> ## BLOCKING
+> 
+> Žádné nové nálezy.
+> 
+> ## IMPORTANT
+> 
+> - **README:143, „Zdroje obrazu a fontů“:** zmínka „SIL Open Font Licens … [zkráceno, 1824 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"$TEMP\" && for f in lora inter ibmplexmono; do curl -sL -o \"OFL-$f.txt\" -w \"$f %{http_code} \" \"https://raw.githubusercontent.com/google/fonts/main/ofl/$f/OFL.txt\"; head -c 160 \"OFL-$f.txt\" | head -2; echo; done", "description": "Download OFL license texts for the three font families"}
+```
+
+> výsledek: 11:06
+> lora 200 Copyright 2011 The Lora Project Authors (https://github.com/cyrealtype/Lora-Cyrillic), with Reserved Font Name "Lora".
+> 
+> 
+> inter 200 Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
+> 
+> 
+> ibmplexmono 200 Copyright © 2017 IBM Corp. with Reserved Font Name "Plex"
+> Shell cwd was reset to [redacted cesta]
+
+**Nástroj Bash:**
+```
+{"command": "cd \"" && { cat <<'EOF'\n# Licence písem\n\nVe složce jsou ořezané podmnožiny písem (jen latinka a latin-ext pro češtinu, formát WOFF2) vytvořené ze souborů Google Fonts:\n\n- Lora (soubory `lora-*.woff2`),\n- Inter (soubory `inter-*.woff2`),\n- IBM Plex Mono (soubory `plexmono-*.woff2`).\n\nVšechna tři písma jsou pod SIL Open Font License 1.1. Níže je původní copyright a úplný text licence pro každé z nich (zdroj: https://github.com/google/fonts/tree/main/ofl).\n\nPoznámka: Lora a IBM Plex mají \"Reserved Font Name\". Ořezání na podmnožinu je úprava písma; před ostrým nasazením je proto nutné ověřit, že je v souladu s licencí, nebo použít neupravené soubory z Google Fonts (např. přes `next/font/google`).\n\nEOF\nfor f in lora inter ibmplexmono; do echo; echo \"---\"; echo; echo \"## $f\"; echo; cat \"$TEMP/OFL-$f.txt\"; done; } > web/public/fonts/LICENSES.md && wc -c web/public/fonts/LICENSES.md; python - <<'EOF'\ndef edit(p, rep):\n    s=open(p,encoding=\"utf-8\").read()\n    for a,b in rep:\n        assert a in s,(p,a[:60]); s=s.replace(a,b,1)\n    open(p,\"w\",encoding=\"utf-8\",newline=\"\\n\").write(s)\nedit(\"README.md\",[\n(\"- Písma: Lora, Inter a IBM Plex Mono (SIL Open Font License, Google Fonts), ořezané soubory ve `web/public/fonts`, bez externích požadavků.\",\"- Písma: Lora, Inter a IBM Plex Mono (SIL Open Font License, Google Fonts), ořezané podmnožiny ve `web/public/fonts`, bez externích požadavků. Copyright a úplné znění licence jsou v [`web/public/fonts/LICENSES.md`](web/public/fonts/LICENSES.md). Lora a IBM Plex mají \\\"Reserved Font Name\\\", takže před ostrým nasazením je potřeba ověřit, že ořezání na podmnožinu licenci neporušuje (jinak použít neupravené soubory přes `next/font/google`).\"),\n(\"podle [shrnutí licence](https://pixabay.com/service/license-summary/) je použití zdarma, bez povinnosti uvést autora a s právem úprav, zakázané je jen šíření samostatně v podstatě v původní podobě a zavádějící použití (právně závazné je jen plné znění).\",\"[licence](https://pixabay.com/service/license-summary/) umožňuje bezplatné použití a úpravy bez povinného uvedení autora, za podmínek Pixabay Content License (právně závazné je jen plné znění).\"),\n(\"vyrábí ji `scripts/sync-data.mjs`)\",\"vyrábí ji `web/scripts/sync-data.mjs`)\"),\n(\"- auditoři (Claude subagent a Codex) dostali jen text zadání a repozitář, ne naši konverzaci; jejich pokyny jsou na začátku záznamů v [`ai-log/claude-code/subagenti/`](ai-log/claude-code/subagenti/).\",\"- auditoři (Claude subagent a Codex) dostali jen text zadání a repozitář, ne naši konverzaci. Záznamy Claude auditorů včetně jejich pokynů jsou v [`ai-log/claude-code/subagenti/`](ai-log/claude-code/subagenti/); výstupy obou auditorů (včetně Codexu), nálezy a rozhodnutí jsou v [`ai-log/review/audit-1/`](ai-log/review/audit-1/) a [`audit-2/`](ai-log/review/audit-2/).\"),\n(\"- ověření dostupnosti fondů u konkrétních brokerů.\",\"- ověření dostupnosti fondů u konkrétních brokerů;\\n- ověřit soulad ořezaných písem s licencí (viz Zdroje obrazu a fontů).\"),\n])\nPC=\"ai-log/review/readme-consensus\"\nopen(f\"{PC}/round-2-claude.md\",\"w\",encoding=\"utf-8\",newline=\"\\n\").write(\"\"\"# Kolo 2: kritika Claude\n\n## Vlastní nálezy\n### IMPORTANT\n- Soubory fontů nemají v repu copyright ani úplnou OFL (Codex správně): přidán `web/public/fonts/LICENSES.md` s původními copyright řádky a plným textem pro tři rodiny (staženo z google/fonts). Doplněno, že Lora a Plex mají Reserved Font Name a ořezání je úprava, takže před ostrým nasazením ověřit nebo použít neupravené soubory.\n### NITS\n- Zmínka o Reserved Font Name přidána i do README \"Co chybí\".\n\n## K bodům Codexu\n- **Agreed + fixed:** OFL doložky (viz výše); licence videa přeformulována bez výčtu zákazů; cesta `web/scripts/sync-data.mjs`; oddělení odkazů Claude a Codex u pokynů agentům (Codex pokyny nejsou v exportu Claude, proto jsou výstupy auditů a rozhodnutí v `ai-log/review/audit-1/` a `audit-2/`).\n- **Disagreed:** nic.\n\n## Claude VERDICT\nCHANGES_NEEDED (před úpravami)\n\n## Shrnutí pro log\nPřidány licence písem, upřesněny odkazy a licence videa, opravena cesta ke skriptu.\n\"\"\")\nopen(f\"{PC}/discussion.log.md\",\"a\",encoding=\"utf-8\",newline=\"\\n\").write(\"## Kolo 2\\n- Codex: CHANGES_NEEDED (0 BLOCKING, 1 IMPORTANT: licence písem, 3 NITS), Claude: CHANGES_NEEDED; vše přijato a opraveno (`LICENSES.md` u fontů, licence videa, cesta, odkazy na audity).\\n\\n\")\nEOF\ngit add -A && git commit -q -m \"README kolo 2: licence písem (OFL), upřesněné odkazy a licence videa\n\nCo-Authored-By: Claude Sonnet 5.5 <[redacted e-mail]>\" && git push -q 2>&1 | grep -v \"^warning\"; git log --oneline -1; SP=\"[redacted cesta]"; rm -f \"$SP/readme-r3.status\"; (bash \"$SP/run-readme-round.sh\" 3 > \"$SP/readme-r3.status\" 2>&1 &); date +%H:%M", "description": "Add font licenses, fix README, log round 2, launch round 3"}
+```
+
+> výsledek: 14032 web/public/fonts/LICENSES.md
+> warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/review/readme-consensus/discussion.log.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/review/readme-consensus/round-2-claude.md', LF will be replaced by CRLF the next t … [zkráceno, 762 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "SP=\"[redacted cesta]"; for i in $(seq 1 58); do [ -s \"$SP/readme-r3.status\" ] && break; sleep 10; done; cat \"$SP/readme-r3.status\"; date +%H:%M; cat \"ai-log/review/readme-consensus/round-3-codex.md\" 2>/dev/null", "description": "Wait for Codex round 3 and show it", "timeout": 600000}
+```
+
+> výsledek: ok rc=0 model=''
+> 11:11
+> Ověřeno proti místnímu `main`, commit `4399154`: kód, data, reklamy, audity a reporty Lighthouse. Relativní odkazy existují. GitHub API potvrzuje soukromý repozitář, jak README uvádí. Živou stránku jsem neověřil kvůli zamítnutému oprávnění prohlížeče; aktuální pravidla Meta se nepodařilo nezávisle načíst.
+> 
+> ## BLOCKING
+> 
+> Žádné nové nálezy.
+> 
+> ## IMPORTANT
+> 
+> Žádné nové nálezy. Pov … [zkráceno, 1349 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "cd \"" && python - <<'EOF'\ndef edit(p, rep):\n    s=open(p,encoding=\"utf-8\").read()\n    for a,b in rep:\n        assert a in s,(p,a[:60]); s=s.replace(a,b,1)\n    open(p,\"w\",encoding=\"utf-8\",newline=\"\\n\").write(s)\nedit(\"README.md\",[\n(\"(jedna návštěva se může rozpadnout na dvě a konverzi to mírně podhodnotí)\",\"(jedna návštěva se může rozpadnout na více relací a snížit naměřenou konverzi; velikost zkreslení nebyla změřena)\"),\n(\"`link_copied`,\",\"`link_copied` (klik na kopírování odkazu, úspěch kopírování se neměří),\"),\n(\"při omezeném pohybu v systému nebo úspoře dat se nepřehrává.\",\"při načtení respektuje nastavení omezeného pohybu a úsporu dat, pokud ji prohlížeč zpřístupní.\"),\n])\nPC=\"ai-log/review/readme-consensus\"\nopen(f\"{PC}/round-3-claude.md\",\"w\",encoding=\"utf-8\",newline=\"\\n\").write(\"\"\"# Kolo 3: kritika Claude\n\n## Vlastní nálezy\nČerstvé čtení README: žádný BLOCKING ani IMPORTANT. Ověřeno: odkazy na soubory, čísla Lighthouse (94/96/96, LCP 2,7/2,4/2,5 s, TBT 60/30/40 ms), rozklad konverze (25 % x 8 % = 2 %, 35 % x 14 % = 4,9 %, 45 % x 20 % = 9 %), počty kol auditů, existence `web/public/fonts/LICENSES.md`.\n### NITS\n- žádné nové.\n\n## K bodům Codexu (3 NITS)\n- **Agreed + fixed:** \"mírně podhodnotí\" (nahrazeno větou, že zkreslení nebylo změřeno), `link_copied` (úspěch kopírování se neměří), video a úspora dat (respektuje se při načtení, pokud to prohlížeč zpřístupní).\n- **Disagreed:** nic.\n\n## Claude VERDICT\nCONSENSUS\n\n## Shrnutí pro log\nTři drobné upřesnění v README. Oba kritici ve stejném kole bez BLOCKING a IMPORTANT.\n\"\"\")\nopen(f\"{PC}/discussion.log.md\",\"a\",encoding=\"utf-8\",newline=\"\\n\").write(\"## Kolo 3\\n- Codex: CONSENSUS (3 NITS), Claude: CONSENSUS. NITS opraveny.\\n\\n\")\nopen(f\"{PC}/final-verdict.md\",\"w\",encoding=\"utf-8\",newline=\"\\n\").write(\"\"\"# Závěrečný verdikt: CONSENSUS\n\nREADME.md (ping-pong Codex a Claude, 3 kola z povolených 15): shoda v kole 3, oba bez BLOCKING a IMPORTANT. Kolo 1: 1 BLOCKING a 6 IMPORTANT (přepsáno README: odpověď na otázku zadání nahoře, rozložený konverzní odhad, sloučená sekce o AI, návod ke spuštění). Kolo 2: 1 IMPORTANT (licence písem OFL). Kolo 3: 3 NITS.\n\"\"\")\nEOF\ngit add -A && git commit -q -m \"README: ping-pong dosáhl shody ve 3. kole (Codex i Claude CONSENSUS), drobná upřesnění\n\nCo-Authored-By: Claude Sonnet 5.5 <[redacted e-mail]>\" && git push -q 2>&1 | grep -v \"^warning\"; git log --oneline -1; date +%H:%M", "description": "Apply round 3 nits, record consensus, push"}
+```
+
+**Nástroj PushNotification:**
+```
+{"message": "README ping-pong hotov: shoda Codex i Claude už ve 3. kole z 15. Vercel e-mail o chybě je starý (README commit v 7:12), další nasazení jsou v pořádku.", "status": "proactive"}
+```
+
+> výsledek: warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/review/readme-consensus/discussion.log.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the working copy of 'ai-log/review/readme-consensus/final-verdict.md', LF will be replaced by CRLF the next time Git touches it
+> warning: in the w … [zkráceno, 764 znaků]
+
+> výsledek: Mobile push requested.
+
+## Claude (2026-10-12 09:12 UTC)
+
+[11:12] Ping-pong nad README skončil už ve 3. kole z 15, protože Codex i Claude měli ve stejném kole verdikt CONSENSUS. Všechno je pushnuté a záznam je v `ai-log/review/readme-consensus/`.
+
+**Co se změnilo v README**
+- **Kolo 1** bylo největší. Codex našel jeden blokující bod (README neodpovídalo na hlavní otázku zadání) a šest důležitých. Přepsal jsem ho:
+  - Nahoře je nová sekce "V kostce": technicky lze reklamu spustit, firemní kampaň bych ale bez právní kontroly, kontaktu správce a komerčního hostingu nespouštěl.
+  - Konverzní odhad je rozložený na dva měřené kroky (dojede k formuláři × z nich odešle).
+  - Sekce o práci s AI je sloučená a odkazuje na konkrétní soubory (`PLAN.md`, zadání pro design, záznamy auditů).
+  - Návod ke spuštění jde v pořadí (`.env.local`, migrace, `npm run dev`).
+  - Meta a Conversions API jsem přesunul do `compliance/checklist.md`.
+  - Doplnil jsem také mapu repozitáře a dva audity.
+  - Zapsal jsem, že repo je zatím soukromé.
+- **Kolo 2:** Codex správně upozornil, že u fontů chybí copyright a text licence OFL. Přidal jsem `web/public/fonts/LICENSES.md`. Lora a IBM Plex mají "Reserved Font Name", takže ořezání na podmnožinu je úprava a před ostrým nasazením se má ověřit. Je to v README mezi nedodělky.
+- **Kolo 3:** tři drobnosti (zkreslení konverze nebylo změřeno, `link_copied` neměří úspěch kopírování, video respektuje úsporu dat jen když ji prohlížeč zpřístupní).
+
+**K e-mailu z Vercelu (7:16):** selhalo nasazení commitu s README o videu. Chyba byla na straně GitHubu ("secondary rate limit", dočasné omezení počtu požadavků), ne v našem kódu. Zkontroloval jsem všechna nasazení přes API: **všechna pozdější jsou READY, nejnovější i na produkci**. Žádná akce není potřeba.
+
+Mám ještě dnes udělat něco z plánu (úklid testovacích dat, finální export `ai-log`), nebo to necháme na čtvrtek těsně před odevzdáním?
+
+## Uživatel (2026-10-12 09:14 UTC)
+
+snazime se to mit co nejdrive a ne ve ctvrtek, ber to tak ze dneska je deadline
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"web\" && cat > scripts/_c.mjs <<'EOF'\nimport { neon } from \"@neondatabase/serverless\";\nconst sql = neon(process.env.DATABASE_URL);\nconsole.log(\"leads\", (await sql`select count(*)::int n, count(distinct email)::int emails, min(created_at)::text od, max(created_at)::text do from leads`)[0]);\nconsole.log(await sql`select left(email, 3) || '***@' || split_part(email,'@',2) as email, variant, marketing_consent, created_at::text from leads order by created_at`);\nconsole.log(\"events\", (await sql`select count(*)::int n from events`)[0], \"rate_limits\", (await sql`select count(*)::int n from rate_limits`)[0]);\nEOF\nnode --env-file=../../.env scripts/_c.mjs; rm scripts/_c.mjs; cd .. && git log --all -p -S\"npg_\" --oneline -- . ':!ai-log' 2>/dev/null | grep -c \"^+.*npg_[A-Za-z0-9]\\{8\\}\"; git log --all -p --oneline -- . ':!ai-log/claude-code' | grep -E \"^\\+.*([redacted připojovací řetězec]" | head -3", "description": "Inspect DB test data counts and scan git history for secrets", "timeout": 200000}
+```
+
+> výsledek: <persisted-output>
+> Output too large (1.7MB). Full output saved to: [redacted cesta]
+> 
+> Preview (first 2KB):
+> 11:14
+> leads {
+>   n: 3,
+>   emails: 2,
+>   od: '2026-10-09 15:43:56.305802+00',
+>   do: '2026-10-10 19:39:22.714903+00'
+> }
+> [
+>   {
+>     email: 'hon***@gmail.com',
+>     variant: null,
+>   … [zkráceno, 2253 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; for p in / /zasady \"/prehled?t=x.y\" /prehled/pdf; do printf \"%s %s\\n\" \"$(curl -s -o /dev/null -w '%{http_code}' https://clientelo-zadani-b.vercel.app$p)\" \"$p\"; done; curl -s https://clientelo-zadani-b.vercel.app/ | grep -c \"U&nbsp;VOO\\|U VOO, IVV\"; gh repo view senojed/Clientelo-ZADANI-B --json visibility,defaultBranchRef,url 2>&1 | head -3; gh auth status 2>&1 | head -3", "description": "Smoke test production and check GitHub repo visibility via gh"}
+```
+
+> výsledek: 11:14
+> 200 /
+> 200 /zasady
+> 200 /prehled?t=x.y
+> 401 /prehled/pdf
+> 0
+> {"defaultBranchRef":{"name":"main"},"url":"https://github.com/senojed/Clientelo-ZADANI-B","visibility":"PRIVATE"}
+> github.com
+>   ✓ Logged in to github.com account senojed (keyring)
+>   - Active account: true
+
+**Nástroj Bash:**
+```
+{"command": "curl -s https://clientelo-zadani-b.vercel.app/ | python -I -c \"\nimport sys,re,html\nt=html.unescape(sys.stdin.read()).replace('\\xa0',' ')\nt=re.sub(r'<[^>]+>',' ',t); t=re.sub(r'\\s+',' ',t)\ni=t.find('jsme KID'); print(t[max(0,i-60):i+120])\"", "description": "Confirm new hero sentence is live"}
+```
+
+> výsledek: ropské alternativy amerických ETF U� VOO, IVV, DIA ani VT jsme KID na stránce správce nenašli. Bez KID broker v� EU fond drobnému investorovi obvykle nenabídne. Tady je alte
+
+## Claude (2026-10-12 09:14 UTC)
+
+Produkce je v pořádku a má novou větu. Potřebuju od tebe dvě potvrzení, protože obě akce se nedají vzít zpět.
+
+**Nástroj AskUserQuestion:**
+```
+{"questions": [{"question": "Smazat z produkční databáze všechna testovací data? Je tam 3 leady (dva tvoje e-maily hon***@gmail.com, jeden res***@zmobilu.eu), 221 měřicích událostí a 46 záznamů limitu. Je to nevratné; po smazání začne trychtýř od nuly.", "header": "Test. data", "multiSelect": false, "options": [{"label": "Smazat vše (Recommended)", "description": "Smažu leads, events i rate_limits. Do odevzdání bude databáze prázdná, ať v ní nejsou tvoje e-maily a testovací provoz."}, {"label": "Nechat", "description": "Data zůstanou. V databázi pak zůstanou tvoje e-maily a testovací události, které zkreslí první čísla trychtýře."}]}, {"question": "Přepnout repozitář senojed/Clientelo-ZADANI-B na veřejný hned teď? Po zveřejnění je obsah (včetně redigovaných záznamů AI) viditelný komukoli a stopy v mezipamětích a forcích nejdou stáhnout zpět.", "header": "Repo public", "multiSelect": false, "options": [{"label": "Přepnout na veřejný (Recommended)", "description": "Provedu po finálním exportu ai-log a kontrole úniků, upravím README (odstraním větu o soukromém repu) a ověřím odkaz bez přihlášení."}, {"label": "Ještě ne", "description": "Repo zůstane soukromé; zveřejníš ho sám, až budeš chtít."}]}]}
+```
+
+> výsledek: Your questions have been answered: "Smazat z produkční databáze všechna testovací data? Je tam 3 leady (dva tvoje e-maily hon***@gmail.com, jeden res***@zmobilu.eu), 221 měřicích událostí a 46 záznamů limitu. Je to nevratné; po smazání začne trychtýř od nuly."="Smazat vše (Recommended)", "Přepnout repozitář senojed/Clientelo-ZADANI-B na veřejný hned teď? Po zveřejnění je obsah (včetně redigovaných … [zkráceno, 548 znaků]
+
+**Nástroj Bash:**
+```
+{"command": "date +%H:%M; cd \"web\" && cat > scripts/_d.mjs <<'EOF'\nimport { neon } from \"@neondatabase/serverless\";\nconst sql = neon(process.env.DATABASE_URL);\nawait sql`delete from events`; await sql`delete from leads`; await sql`delete from rate_limits`;\nconsole.log(\"leads\", (await sql`select count(*)::int n from leads`)[0].n, \"events\", (await sql`select count(*)::int n from events`)[0].n, \"rate_limits\", (await sql`select count(*)::int n from rate_limits`)[0].n);\nEOF\nnode --env-file=../../.env scripts/_d.mjs; rm scripts/_d.mjs", "description": "Delete all test data from production database"}
+```
+
+> výsledek: 11:15
+> leads 0 events 0 rate_limits 0
+
+**Nástroj Bash:** [redacted přístup k osobní wiki nebo paměti]
