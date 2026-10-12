@@ -10,3 +10,6 @@ Plan: README.md (celý repozitář ZADANIE B). Start: 2026-10-12 10:50. Max kol:
 ## Kolo 2
 - Codex: CHANGES_NEEDED (0 BLOCKING, 1 IMPORTANT: licence písem, 3 NITS), Claude: CHANGES_NEEDED; vše přijato a opraveno (`LICENSES.md` u fontů, licence videa, cesta, odkazy na audity).
 
+## Kolo 3
+- Codex: CONSENSUS (3 NITS), Claude: CONSENSUS. NITS opraveny.
+

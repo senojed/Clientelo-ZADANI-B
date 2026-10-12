@@ -42,7 +42,7 @@ Veřejně (bez e-mailu) jsou náklady, zdroj u každého čísla (stránka sprá
 
 Každá ze tří sekcí má aspoň výšku obrazovky mobilu a na 375×812 zabírá zhruba jednu obrazovku (srovnání a formulář o desítky pixelů víc).
 
-1. **Úvod:** nadpis "Evropské alternativy amerických ETF" navazuje na slib obou reklam; jedno tlačítko na srovnání. Návštěvník z reklamy během pár sekund pozná, že je na správném místě. Hned tu je "Marketingové sdělení, ne investiční doporučení" a riziko ztráty. Na pozadí je dekorativní video, obsah na něm nezávisí: nejdřív se ukáže poster, video se stahuje až po načtení stránky a při omezeném pohybu v systému nebo úspoře dat se nepřehrává.
+1. **Úvod:** nadpis "Evropské alternativy amerických ETF" navazuje na slib obou reklam; jedno tlačítko na srovnání. Návštěvník z reklamy během pár sekund pozná, že je na správném místě. Hned tu je "Marketingové sdělení, ne investiční doporučení" a riziko ztráty. Na pozadí je dekorativní video, obsah na něm nezávisí: nejdřív se ukáže poster, video se stahuje až po načtení stránky a při načtení respektuje nastavení omezeného pohybu a úsporu dat, pokud ji prohlížeč zpřístupní.
 2. **Tabulka + kalkulačka:** hodnota před formulářem. Jeden řádek = jeden pár (americké ETF, UCITS alternativa, náklady obou). Klik rozbalí detail se zdrojem a zároveň přepne fond v kalkulačce, takže jedna akce = dvě odpovědi. Kalkulačka je předvyplněná (VOO, 100 000 Kč), výsledek je vidět bez interakce. Rozbalený řádek i výsledek kalkulačky končí výzvou "Získat ISIN a český KID zdarma", takže každý interaktivní prvek vede ke kontaktu.
 3. **Proč evropská alternativa + formulář:** tři krátké důvody (KID, srovnatelnost, registrace v ČR) pro ty, kdo váhají, hned nad formulářem. Po odeslání se otevře přehled.
 4. **Patička:** plná upozornění, zdroje, zásady zpracování.
@@ -73,13 +73,13 @@ Při malém provozu by test trval dlouho; u dema je to návrh, ne spuštěný te
 
 Vlastní měření bez cookies a bez analytiky třetích stran. Prohlížeč posílá události na `/api/events` (seznam povolených názvů, kontrola původu a délek), odeslání formuláře zapisuje server (`lead_created` je konverze, klíč idempotence brání dvojímu započtení).
 
-Události: `page_view` (s UTM a variantou reklamy), `section_view` (srovnání, sekce s formulářem), `row_expand`, `interaction_used`, `source_click`, `cta_click` (s místem a fondem), `form_start`, `form_submit_attempt`, `lead_created` (server, v jedné transakci s uložením leadu, nejvýš jednou na lead), `overview_shown`, `link_copied`, `pdf_download_clicked`. UTM se zachytí jednou při příchodu, takže atribuce přežije přechod na zásady nebo přehled. Událost se k leadu připíše, jen když lead patří ke stejné relaci.
+Události: `page_view` (s UTM a variantou reklamy), `section_view` (srovnání, sekce s formulářem), `row_expand`, `interaction_used`, `source_click`, `cta_click` (s místem a fondem), `form_start`, `form_submit_attempt`, `lead_created` (server, v jedné transakci s uložením leadu, nejvýš jednou na lead), `overview_shown`, `link_copied` (klik na kopírování odkazu, úspěch kopírování se neměří), `pdf_download_clicked`. UTM se zachytí jednou při příchodu, takže atribuce přežije přechod na zásady nebo přehled. Událost se k leadu připíše, jen když lead patří ke stejné relaci.
 
 Reklamu A a B rozliší `utm_content=ad_a` / `ad_b` (uloží se jako varianta). Trychtýř podle varianty včetně obou konverzí: [`web/db/funnel.sql`](web/db/funnel.sql). **Konverze v SQL** je podíl relací se zaznamenaným `page_view`, ve kterých vznikl aspoň jeden `lead_created`; "lead" je jedno odeslání formuláře, takže stejný e-mail se může započítat víckrát (počet unikátních adres je dotaz na konci souboru).
 
 **Meta a konverze (vědomě nedořešeno):** Meta bez pixelu nebo Conversions API nevidí, kdo z reklamy odeslal formulář, takže kampaň jde optimalizovat jen na kliknutí nebo zobrazení stránky, ne na leady. Pro ostrou kampaň doporučuji Conversions API ze serveru po právní kontrole; do té doby cíl "zobrazení vstupní stránky". Demo ukládá `fbclid` spolu s UTM (jen u nás, Metě se nic neposílá). Porovnání pixelu a Conversions API je v [`compliance/checklist.md`](compliance/checklist.md).
 
-Omezení: relace žije jen v paměti stránky, po obnovení stránky vznikne nová (jedna návštěva se může rozpadnout na dvě a konverzi to mírně podhodnotí); skutečné stažení PDF změřit nejde (jen klik); události z prohlížeče lze podvrhnout (kontrola původu chrání jen proti cizím webům).
+Omezení: relace žije jen v paměti stránky, po obnovení stránky vznikne nová (jedna návštěva se může rozpadnout na více relací a snížit naměřenou konverzi; velikost zkreslení nebyla změřena); skutečné stažení PDF změřit nejde (jen klik); události z prohlížeče lze podvrhnout (kontrola původu chrání jen proti cizím webům).
 
 ## Reklamy
 
