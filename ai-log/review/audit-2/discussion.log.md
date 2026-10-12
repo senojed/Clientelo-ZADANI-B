@@ -51,3 +51,14 @@ Všechny opravy z kola 1 ověřeny (FIXED); rozhodnutí Jana přijata. Zbylé dr
 | README: TBT 60 ms, měření dávají 30 až 60 ms | Opraveno |
 | Podmínka `intersectionRatio >= 0.3` může zahazovat události těsně pod prahem | Zmírněno na 0,29 |
 | Komentář v `sync-data.mjs` odkazuje na neexistující `api/prehled` | Opraveno |
+
+## Kolo 2 (Codex, `round-2-codex.md`): VERDIKT READY
+
+Bez BLOCKER a MAJOR, všechny opravy ověřeny. Tři drobnosti opraveny nebo zapsány:
+- "Zobrazení formuláře" sleduje celou sekci s vysvětlením: sloupec ve `funnel.sql` přejmenován na `sekce_s_formularem_videl` (metrika se tím nenadhodnocuje jako "zobrazení formuláře").
+- První strana PDF má dál obecnější větu o KID: **vědomé rozhodnutí Jana (jeho dokument)**; web a README mají konkrétní znění, README doplněno o zdroj (justETF 2018) a slovo "obvykle".
+- Komentář v `/api/lead` uváděl 5 odeslání, skutečný limit je 20: opraveno.
+
+## Souhrn audit 2
+
+Kolo 1: Codex a Claude NOT READY (25 nálezů, většina opravena, rozhodnutí Jana zapsána). Kolo 2: Claude (Opus, medium) READY, Codex READY. Audit uzavřen ve 2 kolech.

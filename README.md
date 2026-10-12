@@ -11,7 +11,7 @@
 
 ## Klíčové zjištění, na kterém stránka stojí
 
-Většina amerických ETF nemá KID (dokument podle nařízení PRIIPs, bez kterého je broker v EU drobnému investorovi obvykle nenabídne). U všech 4 vybraných ETF (DIA, IVV, VOO, VT) jsme ho k 9. 10. 2026 na stránkách správců nenašli. Stránka proto neříká "kup VOO", ale ukazuje, jakou UCITS alternativu na stejný index s českým KID a registrací v ČR (seznam ČNB, 10. 10. 2026) porovnat, a otevřeně, že je dražší.
+Americká ETF obvykle nemají KID pro evropské drobné investory (obecný zdroj: justETF, 2018; dokument podle nařízení PRIIPs, bez kterého je broker v EU drobnému investorovi obvykle nenabídne). U všech 4 vybraných ETF (DIA, IVV, VOO, VT) jsme ho k 9. 10. 2026 na stránkách správců nenašli. Stránka proto neříká "kup VOO", ale ukazuje, jakou UCITS alternativu na stejný index s českým KID a registrací v ČR (seznam ČNB, 10. 10. 2026) porovnat, a otevřeně, že je dražší.
 
 ## Rozhodnutí tam, kde zadání nebylo jednoznačné
 

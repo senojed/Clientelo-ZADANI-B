@@ -55,7 +55,7 @@ export async function POST(request: Request) {
       values ('lead_created', ${l.session_id}, ${leadId}, ${JSON.stringify(l.utm)}::jsonb, ${l.variant})
       on conflict (lead_public_id) where event = 'lead_created' do nothing`;
   } else {
-    // Omezení četnosti: nejvýš 5 nových odeslání za hodinu z jedné IP (uložen jen otisk IP, viz lib/ratelimit.ts).
+    // Omezení četnosti: nejvýš 20 nových odeslání za hodinu z jedné IP (uložen jen otisk IP, viz lib/ratelimit.ts).
     if (await prekrocenLimit(sql, request, "lead")) return Response.json({ error: "too_many" }, { status: 429 });
 
     // Lead i konverze "lead_created" v jednom příkazu (CTE), takže se uloží buď oba, nebo nic.
